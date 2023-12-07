@@ -1,0 +1,56 @@
+﻿@page "/ranking"
+
+@using PokerVideoGame.Models;
+@using Web_Poker_Video_Game.Services;
+@using Web_Poker_Video_Game.Interfaces;
+@inject NavigationManager NavigationManager
+
+<h2>Players</h2>
+
+@if (ListOfPlayers != null)
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Account Balance</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var player in ListOfPlayers)
+            {
+                <tr style="cursor: pointer;" @onclick="() => NavigateToPlayerDetails(player.Id)">
+                    <td>@player.Name</td>
+                    <td>@player.Surname</td>
+                    <td>@player.AccountBalance</td>
+                    <td>@player.Email</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="spinner"></div>
+}
+
+@code {
+
+    [Inject]
+    public IPlayerService PlayerService { get; set; }
+
+    public IEnumerable<Player> ListOfPlayers { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        ListOfPlayers = (await PlayerService.GetPlayersAsync()).ToList();
+    }
+
+    private void NavigateToPlayerDetails(int playerId)
+    {
+        NavigationManager.NavigateTo($"/playerdetails/{playerId}");
+    }
+}

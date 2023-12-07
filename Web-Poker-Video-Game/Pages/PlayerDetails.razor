@@ -1,0 +1,105 @@
+﻿@page "/playerdetails/{id}"
+@using PokerVideoGame.Models;
+@using Web_Poker_Video_Game.Interfaces;
+@using Web_Poker_Video_Game.Services;
+
+<h3>PlayerDetails</h3>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Information</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    @if (_Player != null)
+    {
+        <div class="container mt-5">
+            <h4>Player Information</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table">
+                        <tr>
+                            <th>ID</th>
+                            <td> @_Player.Id</td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <td>@_Player.Name</td>
+                        </tr>
+                        <tr>
+                            <th>Surname</th>
+                            <td>@_Player.Surname</td>
+                        </tr>
+                        <tr>
+                            <th>Account Balance</th>
+                            <td>@_Player.AccountBalance</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>@_Player.Email</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mt-5">
+            <h4>Game history</h4>
+            <div class="row">
+                <div class="col-md-6">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Cards</th>
+                                <th>Prize</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                @foreach (var history in _Player.PlayerGameHistory)
+                                {
+                                    <td>@history.Id;</td
+                                    <td>@history.Prize</td
+                                    <td>@history.PokerHandsHistory</td>
+                                }
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="spinner"></div>
+    }
+
+    <!-- Bootstrap JS and Popper.js (optional) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+@code {
+
+    public Player _Player { get; set; }
+
+    [Inject]
+    public IPlayerService playerService { get; set; }
+
+    // this value 'Id' will be automatically populated from url request
+    [Parameter]
+    public string Id { get; set; }  
+
+    protected override async Task OnInitializedAsync()
+    {
+        _Player = await playerService.GetPlayerByIdAsync(Int32.Parse(Id));
+
+    }
+}
