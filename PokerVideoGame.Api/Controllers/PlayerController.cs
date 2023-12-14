@@ -106,7 +106,7 @@ namespace PokerVideoGame.Api.Controllers
 
         // to do: write function for adding and taking money from player's account1
 
-        [HttpPut()]
+        [HttpPut]
         public async Task<ActionResult<Player>> PutPlayerAsync(Player player)
         {
             try

@@ -8,6 +8,7 @@
 @inject CardService cardService;
 @inject RankingService rankingService;
 @inject GameHistoryService gameHistoryService;
+@inject IPlayerService playerService;
 
 <p> Selected wage: @SelectedWage</p>
 
@@ -146,8 +147,8 @@
 
                         <td>@gameHistory.Id</td>
                         <td>@gameHistory.Prize</td>
-                        <td>
-                            @if (gameHistory.PokerHandsHistory != null)
+                        <td>Here will be images of cards
+                            @* @if (gameHistory.PokerHandsHistory != null)
                             {
                                 int counter = 0;
                                 @foreach (var card in gameHistory.PokerHandsHistory)
@@ -164,7 +165,7 @@
                                         <div class="spinner"></div>
                                     }
                                 }
-                            }
+                            } *@
                         </td>
                     </tr>
                 }
@@ -178,7 +179,6 @@
 
 </div>
 
-
 @* to do: implement displaying poker rankings *@
 
 @code
@@ -187,14 +187,11 @@
 
     // to do: we need to add an ability to choose player and work on its account
 
-    [Inject]
-    public IPlayerService playerService { get; set; }
-
     public int Money { get; set; }
 
     public Player Player { get; set; }
 
-    public List<GameHistory> ListOfGames { get; set; }
+    public List<GameHistory>? ListOfGames { get; set; }
 
     public int[] Wages = new int[6] { 10, 20, 50, 100, 200, 500 };
     public int SelectedWage;
@@ -266,13 +263,12 @@
 
         PokerHand = gameService.CurrentPokerHand;
 
-        Money = rankingService.Ranking(Table, SelectedWage);
-
         Prize = rankingService.Ranking(Table, SelectedWage) - Money;
+        Money += rankingService.Ranking(Table, SelectedWage);
 
         gameHistoryService.AddGameHistory(Table, Prize);
 
-        ListOfGames = gameHistoryService.GetAllGamesHistory();
+        ListOfGames = gameHistoryService.gameHistoryList;
 
         // update of current player
         this.Player.AccountBalance = Money;

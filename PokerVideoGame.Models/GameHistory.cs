@@ -11,7 +11,10 @@ namespace PokerVideoGame.Models
         public int Id { get; set; }
         public int Prize { get; set; }
 
-        public Card[] PokerHandsHistory { get; set; }  
-        //public Card[] PokerHandsHistory = new Card[5];
+        // to do: idea of saving image paths
+        public string[] ImagePath = new string[5];
+
+        //public Card[] PokerHandsHistory { get; set; }  // using this line provoked PUT to do not work
+        public Card[] PokerHandsHistory = new Card[5];
     }
 }

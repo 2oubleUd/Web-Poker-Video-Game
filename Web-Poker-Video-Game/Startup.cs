@@ -15,6 +15,11 @@ namespace Web_Poker_Video_Game
                 client.BaseAddress = new Uri("https://localhost:7116/");
             });
 
+            services.AddHttpClient<IGameHistoryService, GameHistoryService>(client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:7116/");
+            });
+
             services.AddTransient<GameService>();
             services.AddTransient<CardService>();
             services.AddTransient<RankingService>();
