@@ -22,6 +22,27 @@ namespace PokerVideoGame.Api.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("PokerVideoGame.Models.Card", b =>
+                {
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("CardSuit")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CardValue")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("GameHistoryId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ImagePath");
+
+                    b.HasIndex("GameHistoryId");
+
+                    b.ToTable("Card");
+                });
+
             modelBuilder.Entity("PokerVideoGame.Models.GameHistory", b =>
                 {
                     b.Property<int>("Id")
@@ -113,11 +134,23 @@ namespace PokerVideoGame.Api.Migrations
                         });
                 });
 
+            modelBuilder.Entity("PokerVideoGame.Models.Card", b =>
+                {
+                    b.HasOne("PokerVideoGame.Models.GameHistory", null)
+                        .WithMany("PokerHandsHistory")
+                        .HasForeignKey("GameHistoryId");
+                });
+
             modelBuilder.Entity("PokerVideoGame.Models.GameHistory", b =>
                 {
                     b.HasOne("PokerVideoGame.Models.Player", null)
                         .WithMany("PlayerGameHistory")
                         .HasForeignKey("PlayerId");
+                });
+
+            modelBuilder.Entity("PokerVideoGame.Models.GameHistory", b =>
+                {
+                    b.Navigation("PokerHandsHistory");
                 });
 
             modelBuilder.Entity("PokerVideoGame.Models.Player", b =>

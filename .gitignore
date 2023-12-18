@@ -202,6 +202,3 @@ $RECYCLE.BIN/
 *.msi
 *.msm
 *.msp
-*.bin
-*.wsuo
-*.sqlite

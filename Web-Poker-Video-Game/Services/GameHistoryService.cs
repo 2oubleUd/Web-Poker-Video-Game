@@ -5,16 +5,14 @@ namespace Web_Poker_Video_Game.Services
 {
     public class GameHistoryService : IGameHistoryService
     {
-        private readonly HttpClient _httpClient;
-
         public List<GameHistory> gameHistoryList = new List<GameHistory>();
 
-        public GameHistoryService(HttpClient httpClient)
+        public List<GameHistory> GetAllGamesHistory()
         {
-            _httpClient = httpClient;
+            return gameHistoryList;
         }
 
-        public async Task<GameHistory> AddGameHistory(Card[] Table, int Winnings)
+        public void AddGameHistory(Card[] Table, int Winnings)
         {
             var _gameHistory = new GameHistory
             {
@@ -23,17 +21,6 @@ namespace Web_Poker_Video_Game.Services
             };
 
             gameHistoryList.Insert(0, _gameHistory);
-
-            var result = await _httpClient.PostAsJsonAsync<GameHistory>("api/GameHistory", _gameHistory);
-
-            if(result.IsSuccessStatusCode)
-            {
-                return await result.Content.ReadAsAsync<GameHistory>();
-            }
-            else
-            {
-                return null;
-            }
         }
 
         public void RemoveGameHistory()

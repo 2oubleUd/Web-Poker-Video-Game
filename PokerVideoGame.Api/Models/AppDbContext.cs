@@ -47,6 +47,9 @@ namespace PokerVideoGame.Api.Models
             modelBuilder.Entity<GameHistory>()
                 .HasKey(g => g.Id); // Assuming Id is the primary key 
 
+            modelBuilder.Entity<Card>()
+                .HasKey(c => c.Id);
+
         }
     }
 }

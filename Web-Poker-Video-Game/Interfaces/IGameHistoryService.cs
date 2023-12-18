@@ -5,7 +5,8 @@ namespace Web_Poker_Video_Game.Interfaces
 {
     public interface IGameHistoryService
     {
-        Task<GameHistory> AddGameHistory(Card[] Table, int Winnings);
+        public List<GameHistory> GetAllGamesHistory();
+        public void AddGameHistory(Card[] Table, int Winnings);
 
         public void RemoveGameHistory();
     }

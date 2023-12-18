@@ -18,8 +18,7 @@
 
     @if (_Player != null)
     {
-        
-        <div class="container mt-5">    
+        <div class="container mt-5">
             <h4>Player Information</h4>
             <div class="row">
                 <div class="col-md-6">
@@ -50,10 +49,6 @@
         </div>
 
         <div class="container mt-5">
-            <a href="@($"editplayer/{_Player.Id}")"
-            class="btn btn-primary m-1">Edit</a>
-
-
             <h4>Game history</h4>
             <div class="row">
                 <div class="col-md-6">
@@ -70,7 +65,7 @@
                             <tr>
                                 @foreach (var history in _Player.PlayerGameHistory)
                                 {
-                                    <td>@history.Id</td
+                                    <td>@history.Id;</td
                                     <td>@history.Prize</td
                                     <td>@history.PokerHandsHistory</td>
                                 }
