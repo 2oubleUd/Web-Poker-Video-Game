@@ -1,71 +1,58 @@
-﻿@page "/"
-@using PokerVideoGame.Models;
-@using System.Timers;
-@using Web_Poker_Video_Game.Interfaces;
-@using Web_Poker_Video_Game.Services;
+﻿@page "/game"
+@    using PokerVideoGame.Models;
+@    using System.Timers;
+@    using PokerVideoGame.ViewModels;
+@    using Web_Poker_Video_Game.Interfaces;
+@    using Web_Poker_Video_Game.Services;
+    using Web_Poker_Video_Game.Services2;
 
 @inject GameService gameService;
 @inject CardService cardService;
 @inject RankingService rankingService;
 @inject GameHistoryService gameHistoryService;
+@inject PokerViewModel pokerViewModel;
 
-<p> Selected wage: @SelectedWage</p>
+<p> Selected wage: @pokerViewModel.SelectedWage</p>
 
 <div class="bank-account">
-    Bank account: @Money
+    Bank account: @pokerViewModel.Money
 </div>
 
-<p> Your prize: @Prize</p>
+<p> Your prize: @pokerViewModel.Prize</p>
 
 <h3>PokerCards</h3>
 
 <div class="card-deck">
 
-    @if (PreparedDeck != null)
+    @if (pokerViewModel.PreparedDeck != null)
     {
         <div class="row">
 
             <div class="col-md-2 m-3">
                 <div class="d-flex justify-content-center">
-                    <img class="imageThumbnail" src="@($"PNG-cards-1.3\\{Table[0].ImagePath}")" asp-append-version="true" />
+                    <img class="imageThumbnail" src="@($"PNG-cards-1.3\\{pokerViewModel.Table[0].ImagePath}")" asp-append-version="true" />
                 </div>
 
                 <div class="text-center card-header">
-                    @Table[0].CardValue.ToString() of @Table[0].CardSuit.ToString()
+                    @pokerViewModel.Table[0].CardValue.ToString() of @pokerViewModel.Table[0].CardSuit.ToString()
                 </div>
 
                 <div class="text-center">
-                    <button class="btn @(!CardsToChange[0] ? "btn-hold-clicked" : "btn-hold") w-50" @onclick="@(e => HoldCard(0))">HOLD</button>
+                    <button class="btn @(!pokerViewModel.CardsToChange[0] ? "btn-hold-clicked" : "btn-hold") w-50" @onclick="@(e => HoldCard(0))">HOLD</button>
                 </div>
             </div>
 
             <div class="col-md-2 m-3">
                 <div class="d-flex justify-content-center">
-                    <img class="imageThumbnail" src="@($"PNG-cards-1.3\\{Table[1].ImagePath}")" asp-append-version="true" />
+                    <img class="imageThumbnail" src="@($"PNG-cards-1.3\\{pokerViewModel.Table[1].ImagePath}")" asp-append-version="true" />
                 </div>
 
                 <div class="text-center card-header">
-                    @Table[1].CardValue.ToString() of @Table[1].CardSuit.ToString()
+                    @pokerViewModel.Table[1].CardValue.ToString() of @pokerViewModel.Table[1].CardSuit.ToString()
                 </div>
 
                 <div class="text-center">
-                    <button class="btn @(!CardsToChange[1] ? "btn-hold-clicked" : "btn-hold") w-50" @onclick="@(e => HoldCard(1))">HOLD</button>
-                </div>
-            </div>
-
-            <div class="col-md-2 m-3">
-
-
-                <div class="d-flex justify-content-center">
-                    <img class="imageThumbnail" src="@($"PNG-cards-1.3\\{Table[2].ImagePath}")" asp-append-version="true" />
-                </div>
-
-                <div class="text-center card-header">
-                    @Table[2].CardValue.ToString() of @Table[2].CardSuit.ToString()
-                </div>
-
-                <div class="text-center">
-                    <button class="btn @(!CardsToChange[2] ? "btn-hold-clicked" : "btn-hold") w-50" @onclick="@(e => HoldCard(2))">HOLD</button>
+                    <button class="btn @(!pokerViewModel.CardsToChange[1] ? "btn-hold-clicked" : "btn-hold") w-50" @onclick="@(e => HoldCard(1))">HOLD</button>
                 </div>
             </div>
 
@@ -73,15 +60,31 @@
 
 
                 <div class="d-flex justify-content-center">
-                    <img class="imageThumbnail" src="@($"PNG-cards-1.3\\{Table[3].ImagePath}")" asp-append-version="true" />
+                    <img class="imageThumbnail" src="@($"PNG-cards-1.3\\{pokerViewModel.Table[2].ImagePath}")" asp-append-version="true" />
                 </div>
 
                 <div class="text-center card-header">
-                    @Table[3].CardValue.ToString() of @Table[3].CardSuit.ToString()
+                    @pokerViewModel.Table[2].CardValue.ToString() of @pokerViewModel.Table[2].CardSuit.ToString()
                 </div>
 
                 <div class="text-center">
-                    <button class="btn @(!CardsToChange[3] ? "btn-hold-clicked" : "btn-hold") w-50" @onclick="@(e => HoldCard(3))">HOLD</button>
+                    <button class="btn @(!pokerViewModel.CardsToChange[2] ? "btn-hold-clicked" : "btn-hold") w-50" @onclick="@(e => HoldCard(2))">HOLD</button>
+                </div>
+            </div>
+
+            <div class="col-md-2 m-3">
+
+
+                <div class="d-flex justify-content-center">
+                    <img class="imageThumbnail" src="@($"PNG-cards-1.3\\{pokerViewModel.Table[3].ImagePath}")" asp-append-version="true" />
+                </div>
+
+                <div class="text-center card-header">
+                    @pokerViewModel.Table[3].CardValue.ToString() of @pokerViewModel.Table[3].CardSuit.ToString()
+                </div>
+
+                <div class="text-center">
+                    <button class="btn @(!pokerViewModel.CardsToChange[3] ? "btn-hold-clicked" : "btn-hold") w-50" @onclick="@(e => HoldCard(3))">HOLD</button>
                 </div>
 
             </div>
@@ -89,15 +92,15 @@
             <div class="col-md-2 m-3">
 
                 <div class="d-flex justify-content-center">
-                    <img class="imageThumbnail" src="@($"PNG-cards-1.3\\{Table[4].ImagePath}")" asp-append-version="true" />
+                    <img class="imageThumbnail" src="@($"PNG-cards-1.3\\{pokerViewModel.Table[4].ImagePath}")" asp-append-version="true" />
                 </div>
 
                 <div class="text-center card-header">
-                    @Table[4].CardValue.ToString() of @Table[4].CardSuit.ToString()
+                    @pokerViewModel.Table[4].CardValue.ToString() of @pokerViewModel.Table[4].CardSuit.ToString()
                 </div>
 
                 <div class="text-center">
-                    <button class="btn @(!CardsToChange[4] ? "btn-hold-clicked" : "btn-hold") w-50" @onclick="@(e => HoldCard(4))">HOLD</button>
+                    <button class="btn @(!pokerViewModel.CardsToChange[4] ? "btn-hold-clicked" : "btn-hold") w-50" @onclick="@(e => HoldCard(4))">HOLD</button>
                 </div>
 
             </div>
@@ -120,12 +123,12 @@
     }
 
     <div class="poker-hand">
-        Poker ranking: @PokerHand
+        Poker ranking: @pokerViewModel.PokerHand
     </div>
 </div>
 
 <div>
-    @if (ListOfGames != null)
+    @if (pokerViewModel.ListOfGames != null)
     {
         <h3> </h3>
         <h3>Game History</h3>
@@ -139,7 +142,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var gameHistory in ListOfGames)
+                @foreach (var gameHistory in pokerViewModel.ListOfGames)
                 {
                     <tr>
                         
@@ -190,26 +193,9 @@
     [Inject]
     public IPlayerService playerService { get; set; }
 
-    public int Money { get; set; }
-
-    public Player Player { get; set; }
-
-    public List<GameHistory> ListOfGames { get; set; }
-
-    public int[] Wages = new int[6] { 10, 20, 50, 100, 200, 500 };
-    public int SelectedWage;
-    public int WageCounter = 0;
-    public int Prize = 0;
-
-    public List<Card> PreparedDeck = new List<Card>();
-    public List<bool> CardsToChange = new List<bool> { true, true, true, true, true };
-    Card[] Table = new Card[5];
-
     private Timer? delayTimer;
 
     private bool dealing = false;
-
-    private string PokerHand = "";
 
     protected async override Task OnInitializedAsync()
     {
@@ -217,43 +203,43 @@
         PrepareDeck();
         // to do: How to make program wait for choosing the right wage by player and then give him cards?
 
-        Player = await playerService.GetPlayerByIdAsync(2);
-        Money = Player.AccountBalance;
-        ListOfGames = Player.PlayerGameHistory;
+        pokerViewModel.Player = await playerService.GetPlayerByIdAsync(2);
+        pokerViewModel.Money = pokerViewModel.Player.AccountBalance;
+        pokerViewModel.ListOfGames = pokerViewModel.Player.PlayerGameHistory;
 
-        SelectedWage = Wages[0];
+        pokerViewModel.SelectedWage = pokerViewModel.Wages[0];
 
         // rankingService.Ranking(Table, SelectedWage);
-        PokerHand = gameService.CurrentPokerHand;
+        pokerViewModel.PokerHand = gameService.CurrentPokerHand;
     }
 
     public void ChangeWage()
     {
-        WageCounter = (WageCounter + 1) % Wages.Length;
-        SelectedWage = Wages[WageCounter];
+        pokerViewModel.WageCounter = (pokerViewModel.WageCounter + 1) % pokerViewModel.Wages.Length;
+        pokerViewModel.SelectedWage = pokerViewModel.Wages[pokerViewModel.WageCounter];
     }
 
     public void PrepareDeck()
     {
-        PreparedDeck = cardService.ShuffleCards(cardService.SetUpDeck());
-        Table = cardService.PrepareTable(PreparedDeck);
+        pokerViewModel.PreparedDeck = cardService.ShuffleCards(cardService.SetUpDeck());
+        pokerViewModel.Table = cardService.PrepareTable(pokerViewModel.PreparedDeck);
     }
 
     public void HoldCard(int card)
     {
-        CardsToChange[card] = !CardsToChange[card];
+        pokerViewModel.CardsToChange[card] = !pokerViewModel.CardsToChange[card];
         InvokeAsync(StateHasChanged);
 
     }
 
     public async Task DealCards()
     {
-        for (int i = 0; i < CardsToChange.Count; i++)
+        for (int i = 0; i < pokerViewModel.CardsToChange.Count; i++)
         {
-            if (CardsToChange[i])
+            if (pokerViewModel.CardsToChange[i])
             {
-                Table[i] = PreparedDeck[PreparedDeck.Count - 1];
-                PreparedDeck.RemoveAt(PreparedDeck.Count - 1);
+                pokerViewModel.Table[i] = pokerViewModel.PreparedDeck[pokerViewModel.PreparedDeck.Count - 1];
+                pokerViewModel.PreparedDeck.RemoveAt(pokerViewModel.PreparedDeck.Count - 1);
             }
         }
 
@@ -264,21 +250,21 @@
             return; // If already dealing, ignore subsequent clicks
         }
 
-        PokerHand = gameService.CurrentPokerHand;
+        pokerViewModel.PokerHand = gameService.CurrentPokerHand;
 
-        Money = rankingService.Ranking(Table, SelectedWage);
+        pokerViewModel.Money = rankingService.Ranking(pokerViewModel.Table, pokerViewModel.SelectedWage);
 
-        Prize = rankingService.Ranking(Table, SelectedWage) - Money;
+        pokerViewModel.Prize = rankingService.Ranking(pokerViewModel.Table, pokerViewModel.SelectedWage) - pokerViewModel.Money;
 
-        gameHistoryService.AddGameHistory(Table, Prize);
+        gameHistoryService.AddGameHistory(pokerViewModel.Table, pokerViewModel.Prize);
 
-        ListOfGames = gameHistoryService.GetAllGamesHistory();
+        pokerViewModel.ListOfGames = gameHistoryService.GetAllGamesHistory();
 
         // update of current player
-        this.Player.AccountBalance = Money;
-        this.Player.PlayerGameHistory = gameHistoryService.gameHistoryList;
+        pokerViewModel.Player.AccountBalance = pokerViewModel.Money;
+        pokerViewModel.Player.PlayerGameHistory = gameHistoryService.gameHistoryList;
 
-        await playerService.UpdatePlayerAsync(Player);
+        await playerService.UpdatePlayerAsync(pokerViewModel.Player);
 
         dealing = true;
 
@@ -299,9 +285,9 @@
         if (gameHistoryService.gameHistoryList.Count == 10)
             gameHistoryService.gameHistoryList.Clear();
 
-        CardsToChange = new List<bool> { true, true, true, true, true };
+        pokerViewModel.CardsToChange = new List<bool> { true, true, true, true, true };
 
-        PokerHand = "";
+        pokerViewModel.PokerHand = "";
         PrepareDeck();
     }
 }

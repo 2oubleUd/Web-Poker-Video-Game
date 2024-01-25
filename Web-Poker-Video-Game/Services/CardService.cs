@@ -1,12 +1,12 @@
 ﻿using PokerVideoGame.Models;
 using Web_Poker_Video_Game.Interfaces;
 
-namespace Web_Poker_Video_Game.Services
+namespace Web_Poker_Video_Game.Services2
 {
     public class CardService : ICardService
     {
 
-        public string PathToImages = @"C:\Users\Mikolaj\source\repos\WebPokerVideoGame\Web-Poker-Video-Game\wwwroot\PNG-cards-1.3";
+        public string PathToImages = @"C:\Users\Mikolaj\source\repos\WebPokerVideoGame-main\Web-Poker-Video-Game\wwwroot\PNG-cards-1.3";
 
         public List<Card> PrepareDeck()
         {
@@ -97,6 +97,5 @@ namespace Web_Poker_Video_Game.Services
             return Table;
         }
 
-        
     }
 }

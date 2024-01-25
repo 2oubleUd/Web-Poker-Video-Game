@@ -37,7 +37,7 @@ namespace PokerVideoGame.Api.Controllers
             }
         }
         
-        [HttpGet]
+        [HttpGet]    
         public async Task<ActionResult> GetAllPlayersAsync()
         {
             try

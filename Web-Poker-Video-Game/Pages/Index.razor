@@ -1,0 +1,22 @@
+﻿@page "/"
+
+<h1> Hello, world!</h1>
+<p>Welcome to your new app</p>
+
+<AuthorizeView>
+    <Authorized>
+        <p> Welcome, @context.User.Identity.Name </p>
+
+        <a href="/game">Start game</a>
+        <br />
+        <a href="/ranking">Show players ranking</a>
+
+    </Authorized>
+    <NotAuthorized>
+        <p> You are signed out!!! </p>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+
+}

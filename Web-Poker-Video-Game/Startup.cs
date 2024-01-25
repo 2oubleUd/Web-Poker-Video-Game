@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Web_Poker_Video_Game.Interfaces;
+using Web_Poker_Video_Game.Pages;
 using Web_Poker_Video_Game.Services;
+using Web_Poker_Video_Game.Services2;
 
 namespace Web_Poker_Video_Game
 {
@@ -15,10 +17,15 @@ namespace Web_Poker_Video_Game
                 client.BaseAddress = new Uri("https://localhost:7116/");
             });
 
+            
+
             services.AddTransient<GameService>();
             services.AddTransient<CardService>();
             services.AddTransient<RankingService>();
             services.AddTransient<GameHistoryService>();
+
+            //services.AddScoped<PokerCards>();
+
         }
 
         public void Configure(IApplicationBuilder app)

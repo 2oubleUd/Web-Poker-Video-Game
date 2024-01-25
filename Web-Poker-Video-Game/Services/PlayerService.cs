@@ -7,9 +7,9 @@ namespace Web_Poker_Video_Game.Services
 {
     public class PlayerService : IPlayerService
     {
-        private readonly HttpClient _httpClient;
+        private readonly HttpClient _httpClient;    
 
-        public PlayerService(HttpClient httpClient) 
+        public PlayerService(HttpClient httpClient)
         { 
             _httpClient = httpClient;
         }

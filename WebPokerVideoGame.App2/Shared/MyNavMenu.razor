@@ -1,0 +1,22 @@
+﻿
+<link href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" rel="stylesheet">
+
+<div class="nav-bar" Color>
+
+</div>
+<MudNavMenu>
+    <MudPaper Width="250px" Class="d-inline-flex py-3" Elevation="0" Color="Color.">
+        <MudNavMenu Class="mud-width-full">
+            <MudText Typo="Typo.h6" Class="px-4">Font Awesome</MudText>
+            <MudText Typo="Typo.body2" Class="px-4 mud-text-secondary">Icons</MudText>
+            <MudDivider Class="my-2" />
+            <MudNavLink Href="/playerdetails" Icon="fas fa-chart-line">Player Profile</MudNavLink>
+            <MudNavLink Href="/ranking" Icon="fas fa-server">Ranking</MudNavLink>
+            <MudNavLink Href="/billing" Icon="fas fa-receipt">Billing</MudNavLink>
+            <MudNavGroup Title="Settings" Icon="fas fa-cogs" Expanded="true">
+                <MudNavLink Href="/users" Icon="fas fa-users" IconColor="Color.Success">Users</MudNavLink>
+                <MudNavLink Href="/security" Icon="fas fa-user-shield" IconColor="Color.Info">Security</MudNavLink>
+            </MudNavGroup>
+        </MudNavMenu>
+    </MudPaper>
+</MudNavMenu>

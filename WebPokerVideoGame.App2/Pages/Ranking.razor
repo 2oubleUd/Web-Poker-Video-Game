@@ -1,0 +1,59 @@
+﻿@page "/ranking"
+
+@using Microsoft.AspNetCore.Authorization;
+@using PokerVideoGame.Models;
+@using PokerVideoGame.Models.Data.Entites;
+@using WebPokerVideoGame.App2.Services;
+@using WebPokerVideoGame.App2.Interfaces;
+@inject NavigationManager NavigationManager
+@attribute [Authorize]
+
+<header>
+    <style>
+        h2{
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        
+    </style>
+</header>
+
+<body>
+    <h2>Ranking</h2>
+
+    @if (ListOfUsers != null)
+    {
+        <div class="ma-1 d-flex justify-center">
+            <MudCard Width="80%">
+                <MudDataGrid Items="@ListOfUsers">
+                    <Columns>
+                        <PropertyColumn Property="x => x.FirstName" />
+                        <PropertyColumn Property="x => x.LastName" />
+                        <PropertyColumn Property="x => x.Email" />
+                        <PropertyColumn Property="x => x.AccountBalance" />
+                    </Columns>
+                </MudDataGrid>
+            </MudCard>
+        </div>
+
+    }
+    else
+    {
+        <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+    }
+</body>
+
+
+@code {
+
+    [Inject]
+    public IUserService UserService { get; set; }
+
+    public IEnumerable<User> ListOfUsers { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        ListOfUsers = (await UserService.GetUsersAsync()).ToList();
+    }
+
+}

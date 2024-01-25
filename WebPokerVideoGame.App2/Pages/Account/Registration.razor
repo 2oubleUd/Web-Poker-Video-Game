@@ -1,0 +1,120 @@
+﻿@page "/registration"
+@using System.Text.Json;
+@using System.Text;
+@using System.Net;
+@inject HttpClient _http;
+@inject NavigationManager navigationManager;
+
+<div class="ma-6 d-flex justify-center">
+    <MudChip Color="Color.Primary">
+        <h3>Registration</h3>
+    </MudChip>
+</div>
+
+<div class="ma-6 d-flex justify-center" >
+    <MudCard Width="500px">
+    <MudForm Model="model" @ref="validationForm" Validation="@validationModel.ValidateValue">
+        <MudCardContent>
+            @if(!string.IsNullOrEmpty(ApiErrorMessages))
+                {
+                    <div class="ma-6 d-flex justify-center">
+                        <MudChip Color="Color.Error">
+                            <p>@ApiErrorMessages</p>
+                        </MudChip>
+                    </div>
+                    
+                }
+                <MudTextField @bind-Value="model.FirstName"
+                          For="@(() => model.FirstName)"
+                          Immediate="true"
+                          Label="First Name" />
+
+            <MudTextField @bind-Value="model.LastName"
+                          For="@(() => model.LastName)"
+                          Immediate="true"
+                          Label="Last Name" />
+
+            <MudTextField @bind-Value="model.Email"
+                          For="@(() => model.Email)"
+                          Immediate="true"
+                          Label="Email" />
+
+            <MudTextField @bind-Value="model.Password"
+                          For="@(() => model.Password)"
+                          Immediate="true"
+                          Label="Password" InputType="InputType.Password" />
+
+            <MudTextField @bind-Value="model.ConfirmPassword"
+                          For="@(() => model.ConfirmPassword)"
+                          Immediate="true"
+                          Label="Confirm Password" InputType="InputType.Password" />
+
+        </MudCardContent>
+    </MudForm>
+
+    <MudCardActions>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="RegisterAsync">Register</MudButton>
+    </MudCardActions>
+</MudCard>
+
+</div>
+
+@code {
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; }
+
+    private RegistrationVM model = new RegistrationVM();
+
+    private RegistrationValidationVM validationModel;
+
+    private MudForm validationForm;
+
+    private string ApiErrorMessages;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var user = (await AuthState).User;
+        if (user.Identity.IsAuthenticated)
+        {
+            navigationManager.NavigateTo("/");
+        }
+        validationModel = new RegistrationValidationVM(_http);
+        await base.OnInitializedAsync();
+    }
+
+    private async Task RegisterAsync()
+    {
+        await validationForm.Validate();
+
+        if(validationForm.IsValid)
+        {
+            var jsonPayload = JsonSerializer.Serialize(model);
+            var requestContent = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+
+            var response = await _http.PostAsync("api/user/register", requestContent);
+
+            if(response.StatusCode == HttpStatusCode.BadRequest)
+            {
+                var errors = await response.Content.ReadFromJsonAsync<Dictionary<string, List<string>>>();
+                if(errors.Count > 0)
+                {
+                    foreach(var item in errors)
+                    {
+                        foreach(var errorMessage in item.Value)
+                        {
+                            ApiErrorMessages = $"{ApiErrorMessages} {errorMessage}";
+                        }
+                    }
+                }
+            }
+            else if(response.StatusCode == HttpStatusCode.OK)
+            {
+                navigationManager.NavigateTo("/registration-confirmation");
+            }
+            else
+            {
+                ApiErrorMessages = "Failed to register the user";
+            }
+        }
+    }
+}

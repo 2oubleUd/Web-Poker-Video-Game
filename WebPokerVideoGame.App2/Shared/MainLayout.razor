@@ -1,0 +1,72 @@
+﻿@inherits LayoutComponentBase
+
+<MudThemeProvider/>
+<MudDialogProvider/>
+<MudText Class="ma-4"></MudText>
+<MudSnackbarProvider/>
+
+<MudLayout >
+    <MudAppBar>
+        <AuthorizeView>
+            <Authorized>
+                <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+            </Authorized>
+        </AuthorizeView>
+        Web Poker Video Game
+        <MudLink Class="ml-6" Color="Color.Inherit" Href="/">Home Page</MudLink>
+        <MudSpacer/>
+        <AuthorizeView>
+            <Authorized>
+                <span>@UserDisplayName(context.User.Claims.ToList())</span>
+            </Authorized>
+            <NotAuthorized>
+                <MudLink Color="Color.Inherit" Href="/login" Class="mr-2">Login</MudLink>
+                <MudLink Color="Color.Inherit" Href="/registration">Register</MudLink>
+            </NotAuthorized>
+        </AuthorizeView>
+    </MudAppBar>
+    
+    <AuthorizeView>
+        <Authorized>
+             <MudDrawer @bind-Open="@_drawerOpen">
+                <MyNavMenu/>
+            </MudDrawer>
+        </Authorized>
+    </AuthorizeView>
+
+    <MudMainContent>
+        @Body
+    </MudMainContent>
+
+</MudLayout>
+
+
+@code{
+    bool _drawerOpen = true;
+    private MudTheme _theme = new();
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            StateHasChanged();
+        }
+    }
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+
+    private string UserDisplayName(List<Claim> claims)
+    {
+        var firstName = claims.Where(x => x.Type == "FirstName").Select(x => x.Value).FirstOrDefault();
+        var lastName = claims.Where(x => x.Type == "LastName").Select(x => x.Value).FirstOrDefault();
+        if(!string.IsNullOrEmpty(firstName) || !string.IsNullOrEmpty(lastName))
+        {
+            return $"{firstName} {lastName}";
+        }
+        var email = claims.Where(x => x.Type == "Email").Select(x => x.Value).FirstOrDefault();
+        return email;
+    }
+}

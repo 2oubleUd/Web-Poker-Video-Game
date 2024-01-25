@@ -1,0 +1,58 @@
+﻿@page "/playerdetails"
+@using PokerVideoGame.Models;
+@using PokerVideoGame.Models.Data.Entites;
+@using WebPokerVideoGame.App2.Services;
+@using WebPokerVideoGame.App2.Interfaces;
+@using System.Security.Claims;
+
+
+<body>
+    <h2>Player Info</h2>
+    <MudCard>
+        <MudCardContent>
+            <AuthorizeView>
+                <Authorized>
+                    <p>@DisplayUserInfo(context.User.Claims.ToList())</p>
+                </Authorized>
+            </AuthorizeView>
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
+        </MudCardActions>
+    </MudCard>
+
+    @* <MudProgressCircular Color="Color.Primary" Indeterminate="true" /> *@
+</body>
+
+
+@code {
+    private bool _hidePosition;
+    private bool _loading;
+
+    //public User User { get; set; }
+
+    [Inject]
+    public IUserService userService { get; set; }
+
+
+    //public string Id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        //User = await userService.GetUserByIdAsync(Int32.Parse(Id));
+    }
+
+    private string DisplayUserInfo(List<Claim> claims)
+    {
+        var Id = claims.Where(u => u.Type == "Id").Select(u => u.Value).FirstOrDefault();
+        var FirstName = claims.Where(x => x.Type == "FirstName").Select(x => x.Value).FirstOrDefault();
+        var LastName = claims.Where(x => x.Type == "LastName").Select(x => x.Value).FirstOrDefault();
+        if(Id != null)
+        {
+            return $"{Id} {FirstName} {LastName}";
+        }
+        var AccountBalance = claims.Where(x => x.Type == "AccountBalance").Select(x => x.Value).FirstOrDefault();
+        return AccountBalance;
+    }
+
+}

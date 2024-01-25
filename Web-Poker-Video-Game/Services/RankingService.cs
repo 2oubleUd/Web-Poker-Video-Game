@@ -1,4 +1,5 @@
 ﻿using PokerVideoGame.Models;
+using PokerVideoGame.ViewModels;
 using Web_Poker_Video_Game.Interfaces;
 using Web_Poker_Video_Game.Pages;
 
@@ -8,13 +9,13 @@ namespace Web_Poker_Video_Game.Services
     {
         // ta klasa to taki pomysl zgodny z Single Responsiblity Principle (Litera 'S' w SOLID)
         
-        private GameService _gameService;
-        private PokerCards _pokerCards;
+        private Web_Poker_Video_Game.Services.GameService _gameService;
+        private PokerViewModel _pokerViewModel;
 
-        public RankingService(GameService gameService, PokerCards pokerCards) 
+        public RankingService(GameService gameService, PokerViewModel pokerCards) 
         {
             _gameService = gameService;
-            _pokerCards = pokerCards;
+            _pokerViewModel = pokerCards;
         }
 
         public int Ranking(Card[] table, int wage)
@@ -68,11 +69,11 @@ namespace Web_Poker_Video_Game.Services
                 prize = 50 * wage;
             }
 
-            _pokerCards.Money -= wage;
+            _pokerViewModel.Money -= wage;
 
-            _pokerCards.Money += prize;
+            _pokerViewModel.Money += prize;
 
-            return _pokerCards.Money;
+            return _pokerViewModel.Money;
         }
     }
 }

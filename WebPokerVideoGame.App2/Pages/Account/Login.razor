@@ -1,0 +1,116 @@
+﻿@page "/login"
+@using System.Text.Json;
+@using System.Text;
+@using System.Net;
+@using WebPokerVideoGame.App2.Shared.Providers;
+@inject HttpClient _http;
+@inject ILocalStorageService _localStorageService;
+@inject AuthenticationStateProvider _authStateProvider;
+@inject NavigationManager _navigationManager;
+
+<div class="mb-6 d-flex justify-center">
+    <MudChip Color="Color.Primary">
+        <h3>Login</h3>
+    </MudChip>
+</div>
+
+<div class="ma-6 d-flex justify-center">
+    <MudCard Width="500px">
+        <MudForm Model="model" @ref="validationForm" Validation="@validationModel.ValidateValue">
+            <MudCardContent>
+                @if (!string.IsNullOrEmpty(ApiErrorMessage))
+                {
+                    <div class="ma-6 d-flex justify-center">
+                        <MudChip Color="Color.Error">
+                            <p>@ApiErrorMessage</p>
+                        </MudChip>
+                    </div>
+
+                }
+
+                <MudTextField @bind-Value="model.Email"
+                              For="@(() => model.Email)"
+                              Immediate="true"
+                              Label="Email" />
+
+                <MudTextField @bind-Value="model.Password"
+                              For="@(() => model.Password)"
+                              Immediate="true"
+                              Label="Password" InputType="InputType.Password" />
+
+            </MudCardContent>
+
+        </MudForm>
+
+        <MudCardActions>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="LoginAsync">Login</MudButton>
+        </MudCardActions>
+        
+    </MudCard>
+
+
+</div>
+
+
+@code {
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; }
+    LoginVM model = new LoginVM();
+
+    LoginValidationVM validationModel = new LoginValidationVM();
+
+    MudForm validationForm = new MudForm();
+
+    string ApiErrorMessage = String.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var user = (await AuthState).User;
+        if (user.Identity.IsAuthenticated)
+        {
+            _navigationManager.NavigateTo("/");
+        }
+        await base.OnInitializedAsync();
+    }
+
+    private async Task LoginAsync()
+    {
+        await validationForm.Validate();
+        if (validationForm.IsValid)
+        {
+            var jsonPayload = JsonSerializer.Serialize(model);
+            var requestContent = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+
+            var response = await _http.PostAsync("api/user/login", requestContent);
+
+            if(response.StatusCode == HttpStatusCode.BadRequest)
+            {
+                var errors = await response.Content.ReadFromJsonAsync<Dictionary<string, List<string>>>();
+                if(errors.Count > 0)
+                {
+                    foreach(var item in errors)
+                    {
+                        foreach(var errorMessage in item.Value)
+                        {
+                            ApiErrorMessage = $"{errorMessage}";
+                        }
+                    }
+                }
+            }
+            else if(response.StatusCode == HttpStatusCode.OK)
+            {
+                var tokenResponse = await response.Content.ReadFromJsonAsync<JwtTokenResponseVM>();
+                await _localStorageService.SetItemAsync<string>("jwt-access-token", tokenResponse.AccessToken);
+                await _localStorageService.SetItemAsync<string>("refresh-token", tokenResponse.RefreshToken);
+
+                (_authStateProvider as CustomAuthProvider).NotifyAuthState();
+                _navigationManager.NavigateTo("/login-confirmation");
+            }
+            else
+            {
+                ApiErrorMessage = "Unable to do login";
+            }
+            
+        }
+    }
+}
