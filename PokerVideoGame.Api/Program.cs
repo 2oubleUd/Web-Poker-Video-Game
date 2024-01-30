@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Bot.Connector.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PokerVideoGame.Api.Controllers;
 using PokerVideoGame.Api.Models;
 using PokerVideoGame.Models.Data.Settings;
+using System.Configuration;
 using System.Data.Common;
 using System.Text;
 
@@ -52,6 +54,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors("BlazorCors");
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseRouting(); // If you want to explicitly enable endpoint routing

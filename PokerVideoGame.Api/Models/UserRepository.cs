@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -17,12 +18,12 @@ namespace PokerVideoGame.Api.Models
     public class UserRepository : IUserRepository
     {
         private readonly AppDbContext _appDbContext;
-
         private readonly TokenSettings _tokenSettings;
         public UserRepository(AppDbContext appDbContext, IOptions<TokenSettings> tokenSettings)
         {
             _appDbContext = appDbContext;
             _tokenSettings = tokenSettings.Value;
+
         }
 
         private User FromUserRegistrationModelToUserModel(UserRegistrationDto userRegistration)
@@ -41,7 +42,7 @@ namespace PokerVideoGame.Api.Models
         private string HashPassword(string plainPassoword)
         {
             byte[] salt = new byte[16];
-            using(var rng = RandomNumberGenerator.Create())
+            using (var rng = RandomNumberGenerator.Create())
             {
                 rng.GetBytes(salt);
             }
@@ -60,7 +61,7 @@ namespace PokerVideoGame.Api.Models
         {
             var isUserExist = _appDbContext.User.Any(x => x.Email.ToLower() == userRegistration.Email.ToLower());
 
-            if(isUserExist)
+            if (isUserExist)
             {
                 return (false, "Email address already registered");
             }
@@ -75,7 +76,7 @@ namespace PokerVideoGame.Api.Models
 
         public bool CheckUserUniqueEmail(string email)
         {
-            var userAlreadyExists = _appDbContext.User.Any(x => x.Email.ToLower() ==  email.ToLower());
+            var userAlreadyExists = _appDbContext.User.Any(x => x.Email.ToLower() == email.ToLower());
 
             return !userAlreadyExists;
         }
@@ -95,7 +96,7 @@ namespace PokerVideoGame.Api.Models
             var securityToken = new JwtSecurityToken(
                 issuer: _tokenSettings.Issuer,
                 audience: _tokenSettings.Audience,
-                expires: DateTime.Now.AddMinutes(1),
+                expires: DateTime.Now.AddHours(1),
                 signingCredentials: credentials,
                 claims: claims);
 
@@ -113,7 +114,7 @@ namespace PokerVideoGame.Api.Models
 
             var refreshToken = new UserRefreshToken
             {
-                ExpirationDate = DateTime.Now.AddDays(3),
+                ExpirationDate = DateTime.UtcNow.AddMinutes(1),
                 Token = token,
                 UserId = userId
             };
@@ -127,15 +128,15 @@ namespace PokerVideoGame.Api.Models
         }
         public async Task<(bool IsLoginSuccess, JwtTokenResponseDto tokenResponse)> LoginAsync(LoginDto loginPayload)
         {
-            if(string.IsNullOrEmpty(loginPayload.Email) || string.IsNullOrEmpty(loginPayload.Password)) 
+            if (string.IsNullOrEmpty(loginPayload.Email) || string.IsNullOrEmpty(loginPayload.Password))
             {
                 return (false, null);
             }
 
             var user = await _appDbContext.User.Where(x => x.Email.ToLower() == loginPayload.Email.ToLower()).FirstOrDefaultAsync();
-        
-            if(user == null) 
-            { 
+
+            if (user == null)
+            {
                 return (false, null);
             }
 
@@ -170,9 +171,9 @@ namespace PokerVideoGame.Api.Models
             var rfcPassword = new Rfc2898DeriveBytes(plainPassword, salt, 1000, HashAlgorithmName.SHA1);
             byte[] rfcPasswordHash = rfcPassword.GetBytes(20);
 
-            for(int i = 0; i < rfcPasswordHash.Length; i++)
+            for (int i = 0; i < rfcPasswordHash.Length; i++)
             {
-                if (dbPasswordHash[i+16] != rfcPasswordHash[i])
+                if (dbPasswordHash[i + 16] != rfcPasswordHash[i])
                 {
                     return false;
                 }
@@ -185,7 +186,7 @@ namespace PokerVideoGame.Api.Models
         {
             var result = await _appDbContext.User.FirstOrDefaultAsync(p => p.Id == user.Id);
 
-            if(result != null)
+            if (result != null)
             {
                 result.AccountBalance = user.AccountBalance;
 
@@ -202,31 +203,26 @@ namespace PokerVideoGame.Api.Models
             return await _appDbContext.User.ToListAsync();
         }
 
-        public async Task<User> GetUserAsync(User user)
-        {
-            var result = await _appDbContext.User.FirstOrDefaultAsync(u => u.Id == user.Id);
-
-            return result;
-        }
 
         public async Task<(string ErrorMessage, JwtTokenResponseDto jwtTokenRespone)> RenewTokenAsync(RenewTokenRequestDto renewTokenRequest)
         {
             var existingRefreshToken = await _appDbContext.userRefreshToken
-                .Where(x => x.UserId == renewTokenRequest.UserId &&
-                x.Token == renewTokenRequest.RefreshToken &&
+                .Where(x => x.UserId == renewTokenRequest.UserId 
+                && x.Token == renewTokenRequest.RefreshToken && 
                 x.ExpirationDate > DateTime.Now).FirstOrDefaultAsync();
 
-            if(existingRefreshToken == null)
+            if (existingRefreshToken == null)
             {
                 return ("Invalid Refresh Token", null);
             }
 
-            _appDbContext.userRefreshToken.Remove(existingRefreshToken);
+            _appDbContext.Remove(existingRefreshToken);
             await _appDbContext.SaveChangesAsync();
 
             var user = await _appDbContext.User.Where(x => x.Id == renewTokenRequest.UserId).FirstOrDefaultAsync();
-            var jwtAccessToken = GenerateJwtToken(user);
-            var refreshToken = await GenerateRefreshToken(user.Id);
+            
+            string jwtAccessToken = GenerateJwtToken(user);
+            string refreshToken = await GenerateRefreshToken(user.Id);
             var result = new JwtTokenResponseDto
             {
                 AccessToken = jwtAccessToken,
@@ -234,6 +230,25 @@ namespace PokerVideoGame.Api.Models
             };
 
             return ("", result);
+
+        }
+
+        public Task<User> GetUserAsync(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task LogoutUserAsync(LogoutRequestDto logoutRequest)
+        {
+            var tokenToDelete = await _appDbContext.userRefreshToken.Where(x => x.UserId == logoutRequest.UserId
+            && x.Token == logoutRequest.RefreshToken).FirstOrDefaultAsync();
+
+            if(tokenToDelete != null)
+            {
+                _appDbContext.Remove(tokenToDelete);
+                await _appDbContext.SaveChangesAsync();
+            }
+
         }
     }
 }

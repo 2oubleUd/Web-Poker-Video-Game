@@ -24,8 +24,11 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https:/
 //    client.BaseAddress = new Uri("https://localhost:7116/");
 //});
 
+builder.Services.AddHttpClient();
+
 builder.Services.AddTransient<IPlayerService, PlayerService>();
 builder.Services.AddTransient<IUserService, UserService>();
+
 
 builder.Services.AddTransient<GameService>();
 builder.Services.AddTransient<CardService>();

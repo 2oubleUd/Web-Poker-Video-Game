@@ -1,5 +1,13 @@
-﻿@inherits LayoutComponentBase
-
+﻿@using System.Text.Json;
+@using System.Text;
+@using WebPokerVideoGame.App2.Shared.Providers;
+@inherits LayoutComponentBase
+@inject HttpClient _httpClient;
+@inject IHttpClientFactory _httpClientFactory
+@inject AuthenticationStateProvider _authStateProvider
+@inject ILocalStorageService _localStorageService
+@inject NavigationManager _navigationManager
+ 
 <MudThemeProvider/>
 <MudDialogProvider/>
 <MudText Class="ma-4"></MudText>
@@ -18,6 +26,7 @@
         <AuthorizeView>
             <Authorized>
                 <span>@UserDisplayName(context.User.Claims.ToList())</span>
+                <MudLink Class="ml-4" Color="Color.Inherit" OnClick="(() => LogoutAsync(context.User.Claims.ToList()))">Logout</MudLink>
             </Authorized>
             <NotAuthorized>
                 <MudLink Color="Color.Inherit" Href="/login" Class="mr-2">Login</MudLink>
@@ -42,6 +51,7 @@
 
 
 @code{
+
     bool _drawerOpen = true;
     private MudTheme _theme = new();
 
@@ -68,5 +78,24 @@
         }
         var email = claims.Where(x => x.Type == "Email").Select(x => x.Value).FirstOrDefault();
         return email;
+    }
+
+    private async Task LogoutAsync(List<Claim> claims)
+    {
+        var logout = new LogoutVm();
+        logout.UserId = Convert.ToInt32(claims.Where(_ => _.Type == "Sub").Select(_ => _.Value).FirstOrDefault() ?? "0");
+        logout.RefreshToken = await _localStorageService.GetItemAsync<string>("refresh-token");
+
+        var jsonPayload = JsonSerializer.Serialize(logout);
+        var requestContent = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
+
+        var httpClient = _httpClientFactory.CreateClient("Dot7Api");
+        var response = await _httpClient.PostAsync("api/user/logout", requestContent);
+
+        await _localStorageService.RemoveItemAsync("refresh-token");
+        await _localStorageService.RemoveItemAsync("jwt-access-token");
+
+        (_authStateProvider as CustomAuthProvider).NotifyAuthState();
+        _navigationManager.NavigateTo("/login");
     }
 }

@@ -14,15 +14,30 @@ namespace PokerVideoGame.Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUserRepository _userRepository;
+       
 
-
-        public UserController(IUserRepository userRepository)
+        public UserController(IUserRepository userRepository, IHttpContextAccessor httpContextAccessor)
         {
             _userRepository = userRepository;
+            _httpContextAccessor = httpContextAccessor;
+
+            Console.WriteLine("User Id: " +
+            _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier));
+            Console.WriteLine("Username: " +
+                _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.Name));
+
         }
 
-        
+        [HttpGet("get-user-id")]
+        public IActionResult GetUserId()
+        {
+            var result = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var result = _userRepository.CheckUserUniqueEmail();
+
+            return Ok(result);
+        }
 
         [HttpPost("register")]
         public async Task<IActionResult> UserRegistration(UserRegistrationDto userRegistration)
@@ -65,6 +80,15 @@ namespace PokerVideoGame.Api.Controllers
             }
             ModelState.AddModelError("LoginError", "Invalid Credentials");
             return BadRequest(ModelState);
+        }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> LogoutAsync(LogoutRequestDto logoutRequestDto)
+        {
+            await _userRepository.LogoutUserAsync(logoutRequestDto);
+
+            return Ok();
+
         }
 
         [HttpGet]
