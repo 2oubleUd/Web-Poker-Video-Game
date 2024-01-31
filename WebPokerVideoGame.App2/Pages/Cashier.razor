@@ -1,11 +1,91 @@
 ﻿@page "/billing"
+@using Microsoft.AspNetCore.Authorization;
+@using System.Text.Json;
+@using PokerVideoGame.Models.Data.Dtos;
+@using System.Text;
+@inject HttpClient _httpClient;
 
-<h3>Cashier</h3>
-
-<MudImage Src="C://Users//Mikolaj//source//repos//WebPokerVideoGame-main//WebPokerVideoGame.App2//wwwroot//billing.jpg" Alt="Logos" Class="rounded-lg" />
+@attribute [Authorize]
 
 
-<MudButton Variant="Variant.Filled" Color="Color.Primary">ADD CREDITS</MudButton>
+<head>
+    <style>
+        body{
+            text-align: center;
+            height: 100%;
+        }
+
+        html, body {height: 100%;}
+
+        .payment-logos {
+            display: -webkit-flex;
+            height: 100%;
+            -webkit-align-items: flex-end;
+            -webkit-justify-content: center;
+        }
+        .payments {
+            position: absolute;
+            bottom: 1rem%;
+       }
+
+        payment-logos:target {
+            position: absolute;
+            top: 0;
+            display: block;
+            align-items: center;
+       }
+
+        .more-credits{
+            display: inline-block;
+            margin: 30px;
+        }
+
+        .form-outline{
+            margin: 10px;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <h1>Cashier</h1>
+
+    <br />
+
+    <h3>Here you can add more credits to your account</h3>
+
+    <AuthorizeView>
+        <h3>@context.User.Claims.ToList()</h3>
+        
+        <div class="more-credits">
+            <MudNumericField Value="@user.AccountBalance" ValueChanged="(int newValue)=>AddMoneyAsync(context.User.Claims.ToList(),newValue)" Immediate-"true" Label="Add" For="@(()=> user.AccountBalance)"></MudNumericField>
+
+            <MudButton Variant="Variant.Filled" Color="Color.Primary">ADD CREDITS</MudButton>
+
+        </div>
+    </AuthorizeView>
+
+    <div class="payment-logos">
+        <img src="/images/billing.jpg" width="40%" height="20%" />
+    </div>
+
+</body>
+
 @code {
-    
+    public UserDto user { get; set; }
+
+    public async Task AddMoneyAsync(List<Claim> claims, int newValue)
+    {
+        user = new UserDto();
+        user.AccountBalance =+ newValue;
+
+        var updatedUser = JsonSerializer.Serialize(user);
+        var requestUpdatedUser = new StringContent(updatedUser, Encoding.UTF8, "application/json");
+
+        // to do: implement: API method for updating player details (eg. AccountBalance)
+        var response = await _httpClient.PostAsync("api/user/account", requestUpdatedUser);
+
+    }
+
 }

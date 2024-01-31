@@ -8,6 +8,7 @@ using WebPokerVideoGame.App2.Shared.Providers;
 using WebPokerVideoGame.App2.Services;
 using WebPokerVideoGame.App2.Interfaces;
 using WebPokerVideoGame.App2.ViewModels;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");

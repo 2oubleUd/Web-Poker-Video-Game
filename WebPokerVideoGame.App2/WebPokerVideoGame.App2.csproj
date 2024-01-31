@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\billing.jpg" />
+    <None Include="wwwroot\images\billing.jpg" />
   </ItemGroup>
 
 </Project>
