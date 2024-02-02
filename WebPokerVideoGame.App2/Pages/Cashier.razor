@@ -15,8 +15,6 @@
             height: 100%;
         }
 
-        html, body {height: 100%;}
-
         .payment-logos {
             display: -webkit-flex;
             height: 100%;
@@ -51,41 +49,43 @@
 <body>
     <h1>Cashier</h1>
 
-    <br />
+    <br/>
 
     <h3>Here you can add more credits to your account</h3>
 
     <AuthorizeView>
-        <h3>@context.User.Claims.ToList()</h3>
-        
         <div class="more-credits">
-            <MudNumericField Value="@user.AccountBalance" ValueChanged="(int newValue)=>AddMoneyAsync(context.User.Claims.ToList(),newValue)" Immediate-"true" Label="Add" For="@(()=> user.AccountBalance)"></MudNumericField>
+@*             <MudNumericField Value="@user.AccountBalance" ValueChanged="(int newValue)=>AddMoneyAsync(context.User.Claims.ToList(),newValue)" Immediate="true" Label="Add" For="@(()=> user.AccountBalance)"></MudNumericField>
+ *@
+            <MudNumericField @bind-Value="newValue" Label="Standard" Variant="Variant.Text" Min="0" Max="1000" />
 
-            <MudButton Variant="Variant.Filled" Color="Color.Primary">ADD CREDITS</MudButton>
+            <MudButton Color="Color.Secondary" OnClick="()=>AddMoneyAsync(context.User.Claims.ToList(), newValue)">Add Credits</MudButton>
 
         </div>
     </AuthorizeView>
 
     <div class="payment-logos">
-        <img src="/images/billing.jpg" width="40%" height="20%" />
+        <img src="/images/billing.jpg" width="40%" height="20%" /> 
     </div>
+
+    <!-- to do: Add toast after adding money successfuly-->
 
 </body>
 
 @code {
-    public UserDto user { get; set; }
+    public UpdateUserMoneyDto user { get; set; }
+    public int newValue { get; set; }
 
     public async Task AddMoneyAsync(List<Claim> claims, int newValue)
     {
-        user = new UserDto();
-        user.AccountBalance =+ newValue;
+        user = new UpdateUserMoneyDto();
+        user.AmountOfMoney = newValue;
+        user.UserId = Convert.ToInt32(claims.Where(x => x.Type == "Sub").Select(x => x.Value).FirstOrDefault() ?? "0");
 
         var updatedUser = JsonSerializer.Serialize(user);
-        var requestUpdatedUser = new StringContent(updatedUser, Encoding.UTF8, "application/json");
+        var requestUpdatedUser = new StringContent(updatedUser, Encoding.UTF8,"application/json");
 
         // to do: implement: API method for updating player details (eg. AccountBalance)
-        var response = await _httpClient.PostAsync("api/user/account", requestUpdatedUser);
-
+        var response = await _httpClient.PutAsync("api/user/account", requestUpdatedUser);
     }
-
 }

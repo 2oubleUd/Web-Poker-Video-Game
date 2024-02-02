@@ -182,13 +182,14 @@ namespace PokerVideoGame.Api.Models
             return true;
         }
 
-        public async Task<User> UpdateUserAsync(User user)
+        public async Task<User> UpdateUserAsync(UpdateUserMoneyDto user)
         {
-            var result = await _appDbContext.User.FirstOrDefaultAsync(p => p.Id == user.Id);
+            //var result = await _appDbContext.User.FirstOrDefaultAsync(p => p.Id == user.UserId);
+            var result = await GetUserAsync(user.UserId);
 
             if (result != null)
             {
-                result.AccountBalance = user.AccountBalance;
+                result.AccountBalance = result.AccountBalance + user.AmountOfMoney;
 
                 _appDbContext.SaveChanges();
 
@@ -233,9 +234,11 @@ namespace PokerVideoGame.Api.Models
 
         }
 
-        public Task<User> GetUserAsync(User user)
+        public async Task<User> GetUserAsync(int userId)
         {
-            throw new NotImplementedException();
+            var result = await _appDbContext.User.FirstOrDefaultAsync(p => p.Id == userId);
+
+            return result;
         }
 
         public async Task LogoutUserAsync(LogoutRequestDto logoutRequest)

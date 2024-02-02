@@ -115,19 +115,19 @@ namespace PokerVideoGame.Api.Controllers
         }
 
         // to do: implement method for adding money for user
-        [HttpPut("balance")]
-        public async Task<ActionResult<User>> PutUserAsync(User user)
+        [HttpPut("account")]
+        public async Task<ActionResult<User>> PutUserAsync(UpdateUserMoneyDto updateRequest)
         {
             try
             {
-                var userResult = await _userRepository.GetUserAsync(user);
+                var user = await _userRepository.GetUserAsync(updateRequest.UserId);
 
-                if(userResult == null)
+                if(user == null)
                 {
-                    return NotFound($"User with Id: {user.Id} not found");
+                    return NotFound($"User with Id: {updateRequest.UserId} not found");
                 }
 
-                return await _userRepository.UpdateUserAsync(user);
+                return await _userRepository.UpdateUserAsync(updateRequest);
             }
 
             catch(Exception)
