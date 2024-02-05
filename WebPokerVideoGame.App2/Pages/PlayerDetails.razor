@@ -5,54 +5,80 @@
 @using WebPokerVideoGame.App2.Interfaces;
 @using System.Security.Claims;
 
+@inject AuthenticationStateProvider authenticationStateProvider
+
+
 
 <body>
     <h2>Player Info</h2>
-    <MudCard>
-        <MudCardContent>
-            <AuthorizeView>
-                <Authorized>
-                    <p>@DisplayUserInfo(context.User.Claims.ToList())</p>
-                </Authorized>
-            </AuthorizeView>
-        </MudCardContent>
-        <MudCardActions>
-            <MudButton Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
-        </MudCardActions>
-    </MudCard>
-
-    @* <MudProgressCircular Color="Color.Primary" Indeterminate="true" /> *@
+<MudCard>
+    <MudCardContent>
+        <AuthorizeView>
+            <Authorized>
+                @if (userInfo.Count != 0)
+                {
+                    <ul>
+                        @foreach (var item in userInfo)
+                        {
+                            <li>@item</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+                }
+            </Authorized>
+        </AuthorizeView>
+    </MudCardContent>
+    <MudCardActions>
+        <MudButton Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
+    </MudCardActions>
+</MudCard>
 </body>
-
 
 @code {
     private bool _hidePosition;
     private bool _loading;
 
-    //public User User { get; set; }
+    public User user { get; set; }
+
+    public List<string> userInfo = new List<string>();
 
     [Inject]
     public IUserService userService { get; set; }
 
-
-    //public string Id { get; set; }
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        //User = await userService.GetUserByIdAsync(Int32.Parse(Id));
+        // to do: function to get result of logged player
+        var authenticationState = await authenticationStateTask;
+        await DisplayUserInfo(authenticationState.User.Claims.ToList());
     }
 
-    private string DisplayUserInfo(List<Claim> claims)
+    public async Task<List<string>> DisplayUserInfo(List<Claim> claims)
     {
-        var Id = claims.Where(u => u.Type == "Id").Select(u => u.Value).FirstOrDefault();
-        var FirstName = claims.Where(x => x.Type == "FirstName").Select(x => x.Value).FirstOrDefault();
-        var LastName = claims.Where(x => x.Type == "LastName").Select(x => x.Value).FirstOrDefault();
-        if(Id != null)
+        // Access the user claims from the context
+        var userClaims = (await authenticationStateTask).User.Claims.ToList();
+
+        // get result of logged player based on context.User.Id
+        var userId = Convert.ToInt32(claims.Where(_ => _.Type == "Sub").Select(_ => _.Value).FirstOrDefault() ?? "0");
+
+        user = await userService.GetUserAsync(userId);
+
+        if (user != null)
         {
-            return $"{Id} {FirstName} {LastName}";
+            userInfo.Add((user.Id).ToString());
+            userInfo.Add(user.FirstName);
+            userInfo.Add(user.LastName);
+            userInfo.Add((user.AccountBalance).ToString());
+
+            return userInfo;
         }
-        var AccountBalance = claims.Where(x => x.Type == "AccountBalance").Select(x => x.Value).FirstOrDefault();
-        return AccountBalance;
+
+        return null;
     }
 
 }

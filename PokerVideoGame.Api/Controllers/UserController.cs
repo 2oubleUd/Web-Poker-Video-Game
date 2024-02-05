@@ -91,13 +91,18 @@ namespace PokerVideoGame.Api.Controllers
 
         }
 
-        [HttpGet]
-        [Route("current")]
-        public async Task<IActionResult> GetLoggedUserId()
+        [HttpGet("current/{userId:int}")]
+        public async Task<IActionResult> GetCurrentUser(int userId)
         {
-            int id = Convert.ToInt32(HttpContext.User.FindFirstValue("Id"));
-   
-            return Ok(new {Id = id}); // to do: it returns always 0, not the correct Id
+        
+            User user = await _userRepository.GetUserAsync(userId);
+            if(user != null)
+            {
+                return Ok(await _userRepository.GetUserAsync(userId));
+            }
+
+            return StatusCode(StatusCodes.Status404NotFound,
+                $"User with Id: {userId} not found");
         }
 
         [HttpGet("rankings")]

@@ -5,5 +5,7 @@ namespace WebPokerVideoGame.App2.Interfaces
     public interface IUserService
     {
         Task<IEnumerable<User>> GetUsersAsync();
+
+        Task<User> GetUserAsync(int userId);
     }
 }

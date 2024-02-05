@@ -29,30 +29,18 @@ namespace WebPokerVideoGame.App2.Services
             }
         }
 
-        //public async Task LogoutUserAsync()
-        //{
-        //    try
-        //    {
-        //        return await _httpClient.PostAsJsonAsync<User>("api/user/logout",);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine($"Error logging out: {ex.Message}");
-        //        throw;
-        //    }
-        //}
+        public async Task<User> GetUserAsync(int userId)
+        {
+            try
+            {
+                return await _httpClient.GetFromJsonAsync<User>($"api/user/current/{userId}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching user with Id: {userId}");
+                throw;
+            }
 
-        //public async Task<User> GetUserById(int id)
-        //{
-        //    try
-        //    {
-        //        _httpClient.GetFromJsonAsync<User>()
-        //    }
-
-        //    catch (Exception ex)
-        //    {
-
-        //    }
-        //}
+        }
     }
 }

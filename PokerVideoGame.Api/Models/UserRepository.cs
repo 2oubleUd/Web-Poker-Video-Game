@@ -184,7 +184,6 @@ namespace PokerVideoGame.Api.Models
 
         public async Task<User> UpdateUserAsync(UpdateUserMoneyDto user)
         {
-            //var result = await _appDbContext.User.FirstOrDefaultAsync(p => p.Id == user.UserId);
             var result = await GetUserAsync(user.UserId);
 
             if (result != null)
@@ -236,7 +235,9 @@ namespace PokerVideoGame.Api.Models
 
         public async Task<User> GetUserAsync(int userId)
         {
-            var result = await _appDbContext.User.FirstOrDefaultAsync(p => p.Id == userId);
+
+            var result = await _appDbContext.User.Where(u => u.Id == userId).FirstOrDefaultAsync();
+
 
             return result;
         }
