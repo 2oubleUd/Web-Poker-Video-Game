@@ -1,0 +1,55 @@
+﻿@page "/game"
+
+@using PokerVideoGame.Models
+@inject ICardService cardService
+
+
+<h3>Game</h3>
+
+<head>
+    <div class="card-table">
+        @if (DeckOfCards != null)
+        {
+            <div class="row">
+                <div class="col-md-2 m-3">
+                    
+                    <div class="d-flex justify-content-center">
+                        <img class="imageThumbnail" src="@($"PNG-cards-1.3\\{Table[0].ImagePath}")" asp-append-version="true" />
+                    </div>
+
+                    <div class="text-center card-header">
+                        @Table[0].CardValue.ToString() of @Table[0].CardSuit.ToString()
+                    </div>
+
+                    <div class="text-center">
+                        <button class="btn @(!CardsToChange[0] ? "btn-hold-clicked" : "btn-hold") w-50" @onclick="@(e => HoldCard(0))">HOLD</button>
+                    </div>
+                </div>
+
+            </div>
+        }
+    </div>
+
+</head>
+
+@code {
+    public List<Card> DeckOfCards = new List<Card>();
+
+    public Card[] Table = new Card[5];
+
+    public List<bool> CardsToChange { get; set; } = new List<bool> { true, true, true, true, true };
+
+    protected override async Task OnInitializedAsync()
+    {
+        DeckOfCards = await cardService.PrepareDeck();
+        Table = await cardService.PrepareTable(DeckOfCards);
+
+    }
+
+    public async Task HoldCard(int cardNumber)
+    {
+        CardsToChange[cardNumber] = !CardsToChange[cardNumber];
+        await InvokeAsync(StateHasChanged);
+    }
+
+}

@@ -1,101 +1,106 @@
-﻿using PokerVideoGame.Models;
+﻿using Microsoft.JSInterop;
+using PokerVideoGame.Models;
 using WebPokerVideoGame.App2.Interfaces;
 
-namespace WebPokerVideoGame.App2.Services
+public class CardService : ICardService
 {
-    public class CardService : ICardService
+    private readonly IJSRuntime _jsRuntime;
+
+    public CardService(IJSRuntime jsRuntime)
     {
+        _jsRuntime = jsRuntime;
+    }
 
-        public string PathToImages = @"C:\Users\Mikolaj\source\repos\WebPokerVideoGame-main\Web-Poker-Video-Game\wwwroot\PNG-cards-1.3";
+    public async Task<List<Card>> PrepareDeck()
+    {
+        List<Card> ShuffledDeck = await ShuffleCards(await SetUpDeck());
+        return ShuffledDeck;
+    }
 
-        public List<Card> PrepareDeck()
+    public async Task<List<Card>> SetUpDeck()
+    {
+        int CardNumber = 0;
+
+        List<string> CardImage = await ImageNameToCardNumber();
+        List<Card> Cards = new List<Card>();
+
+        foreach (ValueOfCard v in Enum.GetValues(typeof(ValueOfCard)))
         {
-            List<Card> ShuffledDeck = ShuffleCards(SetUpDeck());
-            return ShuffledDeck;
-        }
-
-        public List<Card> SetUpDeck()
-        {
-            int CardNumber = 0;
-
-            List<string> CardImage = ImageNameToCardNumber();
-            List<Card> Cards = new List<Card>();
-
-            foreach (ValueOfCard v in Enum.GetValues(typeof(ValueOfCard)))
+            foreach (SuitOfCard s in Enum.GetValues(typeof(SuitOfCard)))
             {
-                foreach (SuitOfCard s in Enum.GetValues(typeof(SuitOfCard)))
-                {
-                    Cards.Add(new Card(CardImage[CardNumber]) { CardSuit = s, CardValue = v });
-                    CardNumber++;
-                }
+                Cards.Add(new Card(CardImage[CardNumber]) { CardSuit = s, CardValue = v });
+                CardNumber++;
             }
-
-            return Cards;
         }
 
-        public List<Card> ShuffleCards(List<Card> Cards)
-        {
-            Random random = new Random();
-            for (int i = 0; i < 1000; i++)
-            {
-                int FirstCard = random.Next(0, 52); // 0 do 52 bo 52 sie nie wlicza do tego zakresu
-                                                    // numer karty, ktory chce potasowac i indeks karty Z ktora chce potasowac
-                int SecondCard = random.Next(0, 52);
-                if (FirstCard != SecondCard) // zeby nie tasowac tej samej karty ze soba
-                {
-                    var temp = Cards[FirstCard];
-                    Cards[FirstCard] = Cards[SecondCard];
-                    Cards[SecondCard] = temp;
-                    FirstCard = SecondCard;
-                }
-            }
+        return Cards;
+    }
 
-            return Cards;
+    public async Task<List<string>> ImageNameToCardNumber()
+    {
+        List<string> ListOfImages = await InitListOfPictures();
+        List<string> CardsNumber = new List<string>();
+
+        for (int i = 0; i < ListOfImages.Count; i++)
+        {
+            CardsNumber.Add(Path.GetFileName(ListOfImages[i]));
         }
 
-        public List<string> ImageNameToCardNumber()
-        {
-            List<string> ListOfImages = InitListOfPictures();
-            List<string> CardsNumber = new List<string>();
+        var ordered = CardsNumber.Select(s => new { Str = s, Split = s.Split('.') })
+            .OrderBy(x => int.Parse(x.Split[0]))
+            .ThenBy(x => x.Split[1])
+            .Select(x => x.Str)
+            .ToList();
 
-            for (int i = 0; i < ListOfImages.Count; i++)
-            {
-                CardsNumber.Add(Path.GetFileName(ListOfImages[i]));
-            }
+        return ordered;
+    }
 
-            var ordered = CardsNumber.Select(s => new { Str = s, Split = s.Split('.') })
-                .OrderBy(x => int.Parse(x.Split[0]))
-                .ThenBy(x => x.Split[1])
-                .Select(x => x.Str)
-                .ToList();
+    public async Task<List<string>> InitListOfPictures()
+    {
+        var baseUri = await _jsRuntime.InvokeAsync<string>("BlazorWebAssemblyApp.getBaseUri");
+        var imagesFolder = Path.Combine(baseUri, "images", "PNG-cards-1.3");
 
-            return ordered;
-        }
+        string relImageFolder = new Uri(imagesFolder).LocalPath;
 
-        public List<string> InitListOfPictures()
-        {
-            var ext = new List<string> { ".jpg", ".gif", ".png" };
-            List<string> ListOfImages;
+        var ext = new List<string> { ".jpg", ".gif", ".png" };
+        List<string> ListOfImages;
 
-            ListOfImages = new List<string>
-                    (Directory.GetFiles(PathToImages, "*.*", SearchOption.TopDirectoryOnly)
+        ListOfImages = new List<string>(
+            Directory.GetFiles(imagesFolder, "*.*", SearchOption.TopDirectoryOnly)
                 .Where(s => ext.Any(e => s.EndsWith(e))));
 
-            return ListOfImages;
-        }
+        return ListOfImages;
+    }
 
-        public Card[] PrepareTable(List<Card> PreparedDeck)
+    public async Task<List<Card>> ShuffleCards(List<Card> Cards)
+    {
+        Random random = new Random();
+        for (int i = 0; i < 1000; i++)
         {
-            Card[] Table = new Card[5];
-
-            for (int i = 0; i < Table.Length; i++)
+            int FirstCard = random.Next(0, 52);
+            int SecondCard = random.Next(0, 52);
+            if (FirstCard != SecondCard)
             {
-                Table[i] = PreparedDeck[PreparedDeck.Count - 1];
-                PreparedDeck.RemoveAt(PreparedDeck.Count - 1);
+                var temp = Cards[FirstCard];
+                Cards[FirstCard] = Cards[SecondCard];
+                Cards[SecondCard] = temp;
+                FirstCard = SecondCard;
             }
-
-            return Table;
         }
 
+        return Cards;
+    }
+
+    public async Task<Card[]> PrepareTable(List<Card> PreparedDeck)
+    {
+        Card[] Table = new Card[5];
+
+        for (int i = 0; i < Table.Length; i++)
+        {
+            Table[i] = PreparedDeck[PreparedDeck.Count - 1];
+            PreparedDeck.RemoveAt(PreparedDeck.Count - 1);
+        }
+
+        return Table;
     }
 }

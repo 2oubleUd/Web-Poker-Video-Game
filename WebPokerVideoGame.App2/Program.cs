@@ -32,11 +32,10 @@ builder.Services.AddTransient<IUserService, UserService>();
 
 
 builder.Services.AddTransient<GameService>();
-builder.Services.AddTransient<CardService>();
+builder.Services.AddTransient<ICardService, CardService>();
 builder.Services.AddTransient<RankingService>();
 builder.Services.AddTransient<GameHistoryService>();
 builder.Services.AddTransient<PokerViewModel>();
-
 
 builder.Services.AddMudServices();
 builder.Services.AddBlazoredLocalStorage();
