@@ -1,5 +1,5 @@
 ﻿using PokerVideoGame.Models;
-using Web_Poker_Video_Game.Interfaces;
+using WebPokerVideoGame.App2.Interfaces;
 using WebPokerVideoGame.App2.ViewModels;
 
 namespace WebPokerVideoGame.App2.Services

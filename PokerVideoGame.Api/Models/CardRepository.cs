@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
+using Microsoft.EntityFrameworkCore;
 using PokerVideoGame.Models;
 using ServiceStack.Text;
 using System;
@@ -31,8 +32,8 @@ namespace PokerVideoGame.Api.Models
         public async Task SeedCardsAsync()
         {
             List<Card> cards = await SetUpDeckAsync();
-            
-            for(int i = 1; i < cards.Count; i++)
+
+            for (int i = 1; i < cards.Count; i++)
             {
                 _appDbContext.Deck.Add(new Card
                 {
@@ -45,7 +46,6 @@ namespace PokerVideoGame.Api.Models
                 _appDbContext.SaveChanges();
 
             }
-
 
             // Save changes to the database.
             await _appDbContext.SaveChangesAsync();
@@ -82,33 +82,12 @@ namespace PokerVideoGame.Api.Models
         {
             List<string> pathToImages = new List<string>();
             List<byte[]> imgData = new List<byte[]>();
-            
-            for(int i = 1; i < 53; i++)
+
+            for (int i = 1; i < 53; i++)
             {
                 pathToImages.Add(Path.Combine(_env.WebRootPath, $"PNG-cards-1.3\\{1}.png"));
                 imgData.Add(System.IO.File.ReadAllBytes(pathToImages[i - 1]));
             }
-            
-            //byte[] imgData = System.IO.File.ReadAllBytes(pathToImages);
-            //var ext = new List<string> { ".jpg", ".gif", ".png" };
-            //List<byte[]> imageData = new List<byte[]>();
-            //List<string> listOfImages = new List<string>(Directory.GetFiles(pathToImages));
-
-            //foreach (string imagePath in listOfImages)
-            //{
-            //    if (ext.Any(e => imagePath.EndsWith(e, StringComparison.OrdinalIgnoreCase)))
-            //    {
-            //        try
-            //        {
-            //            imageData.Add(System.IO.File.ReadAllBytes(imagePath));
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            Console.WriteLine("Didn't work out");
-            //            // Handle or log the exception.
-            //        }
-            //    }
-            //}
 
             return imgData;
         }
@@ -130,5 +109,12 @@ namespace PokerVideoGame.Api.Models
 
             return cards;
         }
+
+        public async Task<IEnumerable<Card>> GetDeckOfCardsAsync()
+        {
+            return await _appDbContext.Deck.ToListAsync();
+        }
+
+
     }
 }

@@ -13,8 +13,8 @@ namespace WebPokerVideoGame.App2.Services
         public UserService(HttpClient httpClient) 
         {
             _httpClient = httpClient;
-
         }
+
         public async Task<IEnumerable<User>> GetUsersAsync()
         {
             

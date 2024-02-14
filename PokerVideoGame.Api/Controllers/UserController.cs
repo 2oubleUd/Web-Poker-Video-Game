@@ -159,7 +159,18 @@ namespace PokerVideoGame.Api.Controllers
             }
         }
 
+        [HttpGet("get-deck")]
+        public async Task<IActionResult> GetDeckAsync()
+        {
+            var result = await _cardRepository.GetDeckOfCardsAsync();
 
+            if (!result.IsNullOrEmpty())
+            {
+                return Ok(result);
+            }
 
+            return StatusCode(StatusCodes.Status500InternalServerError,
+                "Error retrieving deck of cards");
+        }
     }
 }

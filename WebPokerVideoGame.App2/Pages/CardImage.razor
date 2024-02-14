@@ -1,0 +1,8 @@
+﻿<div>
+    <img src="@($"data:image/png;base64,{Base64Image}")" alt="PNG Image" />
+</div>
+
+@code {
+    [Parameter]
+    public string Base64Image { get; set; }
+}

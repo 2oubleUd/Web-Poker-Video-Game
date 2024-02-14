@@ -1,6 +1,6 @@
 ﻿using PokerVideoGame.Models;
 
-namespace Web_Poker_Video_Game.Interfaces
+namespace WebPokerVideoGame.App2.Interfaces
 {
     public interface IRankingService
     {
