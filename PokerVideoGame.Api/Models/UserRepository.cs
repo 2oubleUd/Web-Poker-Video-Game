@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using PokerVideoGame.Models;
 using PokerVideoGame.Models.Data.Dtos;
 using PokerVideoGame.Models.Data.Entites;
 using PokerVideoGame.Models.Data.Settings;
@@ -254,5 +255,7 @@ namespace PokerVideoGame.Api.Models
             }
 
         }
+
+        
     }
 }

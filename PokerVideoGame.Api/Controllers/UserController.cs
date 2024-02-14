@@ -16,11 +16,13 @@ namespace PokerVideoGame.Api.Controllers
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUserRepository _userRepository;
-       
+        private readonly ICardRepository _cardRepository;
 
-        public UserController(IUserRepository userRepository, IHttpContextAccessor httpContextAccessor)
+        public UserController(IUserRepository userRepository, IHttpContextAccessor httpContextAccessor,
+            ICardRepository cardRepository)
         {
             _userRepository = userRepository;
+            _cardRepository = cardRepository;
             _httpContextAccessor = httpContextAccessor;
 
             Console.WriteLine("User Id: " +
@@ -141,5 +143,23 @@ namespace PokerVideoGame.Api.Controllers
                     "Error updating data");
             }
         }
+
+        [HttpPut("create-deck")]
+        public async Task<IActionResult> CreateDeck()
+        {
+            try
+            {
+                await _cardRepository.SeedCardsAsync();
+                return Ok("Deck created successfully!");
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception appropriately.
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
+
+
+
     }
 }

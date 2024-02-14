@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using PokerVideoGame.Api.Controllers;
 using PokerVideoGame.Api.Models;
@@ -28,7 +29,7 @@ namespace PokerVideoGame.Api
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>();
 
-            services.AddScoped<IPlayerRepository, PlayerRepository>();
+            //services.AddScoped<IPlayerRepository, PlayerRepository>();
 
             services.AddHttpContextAccessor();
 

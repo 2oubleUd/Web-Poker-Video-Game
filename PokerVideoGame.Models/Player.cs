@@ -21,6 +21,6 @@ namespace PokerVideoGame.Models
         //public string? Login { get; set; }
         //public string? Password { get; set; }
 
-        public List<GameHistory>? PlayerGameHistory { get; set; } = new List<GameHistory>();
+        //public List<GameHistory>? PlayerGameHistory { get; set; } = new List<GameHistory>();
     }
 }

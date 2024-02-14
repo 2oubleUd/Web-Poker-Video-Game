@@ -24,8 +24,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ICardRepository, CardRepository>();
 
-builder.Services.AddScoped<IPlayerRepository, PlayerRepository>(); // I needed to add it from Startup.cs
+//builder.Services.AddScoped<IPlayerRepository, PlayerRepository>(); // I needed to add it from Startup.cs
 
 builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
 

@@ -128,7 +128,7 @@
     </div>
 </div>
 
-<div>
+@* <div>
     @if (pokerViewModel.ListOfGames != null)
     {
         <h3> </h3>
@@ -180,7 +180,7 @@
         <div class="spinner"></div>
     }
 
-</div>
+</div> *@
 
 
 @* to do: implement displaying poker rankings *@
@@ -206,7 +206,7 @@
 
         pokerViewModel.Player = await playerService.GetPlayerByIdAsync(2);
         pokerViewModel.Money = pokerViewModel.Player.AccountBalance;
-        pokerViewModel.ListOfGames = pokerViewModel.Player.PlayerGameHistory;
+        //pokerViewModel.ListOfGames = pokerViewModel.Player.PlayerGameHistory;
 
         pokerViewModel.SelectedWage = pokerViewModel.Wages[0];
 
@@ -257,13 +257,13 @@
 
         pokerViewModel.Prize = rankingService.Ranking(pokerViewModel.Table, pokerViewModel.SelectedWage) - pokerViewModel.Money;
 
-        gameHistoryService.AddGameHistory(pokerViewModel.Table, pokerViewModel.Prize);
+        //gameHistoryService.AddGameHistory(pokerViewModel.Table, pokerViewModel.Prize);
 
-        pokerViewModel.ListOfGames = gameHistoryService.GetAllGamesHistory();
+        //pokerViewModel.ListOfGames = gameHistoryService.GetAllGamesHistory();
 
         // update of current player
         pokerViewModel.Player.AccountBalance = pokerViewModel.Money;
-        pokerViewModel.Player.PlayerGameHistory = gameHistoryService.gameHistoryList;
+        //pokerViewModel.Player.PlayerGameHistory = gameHistoryService.gameHistoryList;
 
         await playerService.UpdatePlayerAsync(pokerViewModel.Player);
 
@@ -283,8 +283,8 @@
 
     private void ResetGame()
     {
-        if (gameHistoryService.gameHistoryList.Count == 10)
-            gameHistoryService.gameHistoryList.Clear();
+        // if (gameHistoryService.gameHistoryList.Count == 10)
+        //     gameHistoryService.gameHistoryList.Clear();
 
         pokerViewModel.CardsToChange = new List<bool> { true, true, true, true, true };
 

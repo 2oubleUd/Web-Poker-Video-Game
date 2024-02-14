@@ -7,7 +7,7 @@ namespace PokerVideoGame.ViewModels
     {
         public int Money { get; set; }
         public Player Player { get; set; }
-        public List<GameHistory> ListOfGames { get; set; }
+        //public List<GameHistory> ListOfGames { get; set; }
         public int[] Wages { get; set; } = new int[6] { 10, 20, 50, 100, 200, 500 };
         public int SelectedWage { get; set; }
         public int WageCounter { get; set; }

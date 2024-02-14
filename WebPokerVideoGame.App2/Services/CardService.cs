@@ -28,7 +28,9 @@ public class CardService : ICardService
         {
             foreach (SuitOfCard s in Enum.GetValues(typeof(SuitOfCard)))
             {
-                Cards.Add(new Card(CardImage[CardNumber]) { CardSuit = s, CardValue = v });
+                //Cards.Add(new Card(CardImage[CardNumber]) { CardSuit = s, CardValue = v });
+                Cards.Add(new Card() { CardSuit = s, CardValue = v, ImagePath = CardImage[CardNumber] });
+
                 CardNumber++;
             }
         }

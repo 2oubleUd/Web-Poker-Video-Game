@@ -25,7 +25,8 @@ namespace Web_Poker_Video_Game.Services2
             {
                 foreach (SuitOfCard s in Enum.GetValues(typeof(SuitOfCard)))
                 {
-                    Cards.Add(new Card(CardImage[CardNumber]) { CardSuit = s, CardValue = v });
+                    //Cards.Add(new Card(CardImage[CardNumber]) { CardSuit = s, CardValue = v });
+                    Cards.Add(new Card() { CardSuit = s, CardValue = v, ImagePath = CardImage[CardNumber] });
                     CardNumber++;
                 }
             }
