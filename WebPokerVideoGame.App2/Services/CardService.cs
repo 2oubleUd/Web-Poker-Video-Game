@@ -7,7 +7,7 @@ public class CardService : ICardService
 {
     private readonly HttpClient _httpClient;
 
-    public List<Card> deckOfCards { get; set; }
+    
     public CardService(HttpClient httpClient)
     {
         _httpClient = httpClient;
@@ -30,8 +30,8 @@ public class CardService : ICardService
 
     public async Task<List<Card>> PrepareDeck()
     {
-        deckOfCards = (await GetDeckOfCardsAsync()).ToList();
-        List<Card> ShuffledDeck = await ShuffleCards(deckOfCards);// to do: here get deck from DB);
+        List<Card> deckOfCards = (await GetDeckOfCardsAsync()).ToList();
+        List<Card> ShuffledDeck = await ShuffleCards(deckOfCards);
         return ShuffledDeck;
     }
 
@@ -54,16 +54,16 @@ public class CardService : ICardService
         return Cards;
     }
 
-    public async Task<Card[]> PrepareTable(List<Card> PreparedDeck)
+    public Card[] PrepareTable(List<Card> preparedDeck)
     {
-        Card[] Table = new Card[5];
+        Card[] table = new Card[5];
 
-        for (int i = 0; i < Table.Length; i++)
+        for (int i = 0; i < table.Length; i++)
         {
-            Table[i] = PreparedDeck[PreparedDeck.Count - 1];
-            PreparedDeck.RemoveAt(PreparedDeck.Count - 1);
+            table[i] = preparedDeck[preparedDeck.Count - 1];
+            preparedDeck.RemoveAt(preparedDeck.Count - 1);
         }
 
-        return Table;
+        return table;
     }
 }

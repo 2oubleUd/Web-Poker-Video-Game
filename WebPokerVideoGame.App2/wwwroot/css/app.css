@@ -18,12 +18,28 @@ a, .btn-link {
     border-color: #1861ac;
 }
 
+.btn-hold {
+    background-color: red;
+    color: white;
+}
+
+.btn-hold-clicked {
+    background-color: green;
+    color: white;
+}
+
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 .content {
     padding-top: 1.1rem;
+}
+
+.card-image-history {
+    width: 50px;
+    height: 70px;
+    margin: 5px; /* Adjust this value to control the spacing between images. */
 }
 
 .valid.modified:not([type=checkbox]) {
@@ -99,3 +115,34 @@ a, .btn-link {
     .loading-progress-text:after {
         content: var(--blazor-load-percentage-text, "Loading");
     }
+
+.imageThumbnail {
+    height: 187px;
+    width: 128px;
+}
+
+.bank-account {
+    font-size: 28px; /* Change this value to adjust the font size */
+    text-align: right;
+    position: absolute;
+    top: 40px; /* Adjust the top and right values as needed to position it in the upper right corner */
+    right: 70px;
+}
+
+.poker-hand {
+    font-size: 16px;
+    text-align: right;
+    position: absolute;
+    right: 200px;
+}
+.spinner {
+    border: 16px solid silver;
+    border-top: 16px solid #337AB7;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 700ms linear infinite;
+    top: 40%;
+    left: 55%;
+    position: absolute;
+}

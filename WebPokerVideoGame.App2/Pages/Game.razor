@@ -1,5 +1,4 @@
-﻿<!-- Your existing component -->
-@page "/game"
+﻿@page "/game"
 @using PokerVideoGame.Models;
 @using System.Timers;
 
@@ -21,25 +20,89 @@
 
 <div class="card-deck">
 
-    @if (deckOfCards != null)
+    @if (IsTableNull())
     {
-        <div class="row">
-            <div class="col-md-2 m-3">
-                
+        <div class="row justify-content-center">
+            <div class="col-md-2 m-3" style="display: inline-block">
                 <div class="d-flex justify-content-center">
-                    <CardImage Base64Image="@Convert.ToBase64String(deckOfCards[0].ImageData)" />
+                    <img class="imageThumbnail" src="@($"data:image/png;base64,{@Convert.ToBase64String(table[0].ImageData)}")" alt="PNG Image" />
                 </div>
 
-                <div class="text-center card-header">
-                    @deckOfCards[0].CardValue.ToString() of @deckOfCards[0].CardSuit.ToString()
+                <div class="text-center card-header mb-4 mt-4">
+                    @table[0].CardValue.ToString() of @table[0].CardSuit.ToString()
                 </div>
 
                 <div class="text-center">
-                    <button @* class="btn @(!pokerViewModel.CardsToChange[0] ? "btn-hold-clicked" : "btn-hold") w-50" @onclick="@(e => HoldCard(0))" *@>HOLD</button>
+                    <button class="btn @(!cardsToChange[0] ? "btn-hold-clicked" : "btn-hold") w-50" @onclick="@(e => HoldCard(0))">HOLD</button>
                 </div>
-
             </div>
 
+            <div class="col-md-2 m-3" style="display: inline-block">
+                <div class="d-flex justify-content-center">
+                    <img class="imageThumbnail" src="@($"data:image/png;base64,{@Convert.ToBase64String(table[1].ImageData)}")" alt="PNG Image" />
+                </div>
+
+                <div class="text-center card-header mb-4 mt-4">
+                    @table[1].CardValue.ToString() of @table[1].CardSuit.ToString()
+                </div>
+
+                <div class="text-center">
+                    <button class="btn @(!cardsToChange[1] ? "btn-hold-clicked" : "btn-hold") w-50" @onclick="@(e => HoldCard(1))">HOLD</button>
+                </div>
+            </div>
+
+            <div class="col-md-2 m-3" style="display: inline-block">
+                <div class="d-flex justify-content-center">
+                    <img class="imageThumbnail" src="@($"data:image/png;base64,{@Convert.ToBase64String(table[2].ImageData)}")" alt="PNG Image" />
+                </div>
+
+                <div class="text-center card-header mb-4 mt-4">
+                    @table[2].CardValue.ToString() of @table[2].CardSuit.ToString()
+                </div>
+
+                <div class="text-center">
+                    <button class="btn @(!cardsToChange[2] ? "btn-hold-clicked" : "btn-hold") w-50" @onclick="@(e => HoldCard(2))">HOLD</button>
+                </div>
+            </div>
+
+            <div class="col-md-2 m-3" style="display: inline-block">
+                <div class="d-flex justify-content-center">
+                    <img class="imageThumbnail" src="@($"data:image/png;base64,{@Convert.ToBase64String(table[3].ImageData)}")" alt="PNG Image" />
+                </div>
+
+                <div class="text-center card-header mb-4 mt-4">
+                    @table[3].CardValue.ToString() of @table[3].CardSuit.ToString()
+                </div>
+
+                <div class="text-center">
+                    <button class="btn @(!cardsToChange[3] ? "btn-hold-clicked" : "btn-hold") w-50" @onclick="@(e => HoldCard(3))">HOLD</button>
+                </div>
+            </div>
+
+            <div class="col-md-2 m-3" style="display: inline-block">
+                <div class="d-flex justify-content-center">
+                    <img class="imageThumbnail" src="@($"data:image/png;base64,{@Convert.ToBase64String(table[4].ImageData)}")" alt="PNG Image" />
+
+                </div>
+
+                <div class="text-center card-header mb-4 mt-4">
+                    @table[4].CardValue.ToString() of @table[4].CardSuit.ToString()
+                </div>
+
+                <div class="text-center">
+                    <button class="btn @(!cardsToChange[4] ? "btn-hold-clicked" : "btn-hold") w-50" @onclick="@(e => HoldCard(4))">HOLD</button>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-1 mt-4 mr-6">
+                <button class="btn btn-primary" disabled=@dealing @onclick="DealCards">DEAL</button>
+            </div>
+
+            <div class="col-md-3 mt-4 ml-6">
+                <button class="btn btn-primary" @onclick="ChangeWage">ADD COIN</button>
+            </div>
         </div>
     }
     else
@@ -55,16 +118,118 @@
 
     public Card[] table = new Card[5];
 
+    public bool[] cardsToChange = new bool[5] { true, true, true, true, true };
+
+    private Timer? delayTimer;
+
+    private bool dealing = false;
+
     protected async override Task OnInitializedAsync()
     {
         base.OnInitialized();
 
-        deckOfCards = (await cardService.GetDeckOfCardsAsync()).ToList();
+        await PrepareTable();
 
-        for (int i = 0; i < table.Length; i++)
-        {
-            table[i] = deckOfCards[deckOfCards.Count - 1];
-            deckOfCards.Remove(deckOfCards[deckOfCards.Count - 1]);
-        }
     }
+
+    private async Task PrepareTable()
+    {
+        deckOfCards = await cardService.PrepareDeck();
+        table = cardService.PrepareTable(deckOfCards);
+    }
+
+    private void HoldCard(int cardNumber)
+    {
+        cardsToChange[cardNumber] = !cardsToChange[cardNumber];
+    }
+
+    private async Task DealCards()
+    {
+        if (dealing)
+        {
+            return; // If already dealing, ignore subsequent clicks
+        }
+
+        dealing = true;
+
+        int i = 0;
+        foreach (var card in cardsToChange)
+        {
+            if (card)
+            {
+                table[i] = deckOfCards[deckOfCards.Count - 1];
+                deckOfCards.RemoveAt(deckOfCards.Count - 1);
+            }
+            i++;
+        }
+
+        // Wait for 3 seconds and run ResetGame()
+        delayTimer = new Timer(3000);
+        delayTimer.Elapsed += async (sender, e) => await ResetGame();
+        delayTimer.AutoReset = false;
+        delayTimer.Start();
+    }
+
+
+    private bool IsTableNull()
+    {
+        bool[] emptinessOfTable = new bool[5] { false, false, false, false, false };
+        int cardNum = 0;
+
+        foreach (Card card in table)
+        {
+            for (int i = 0; i < 1000; i++)
+            {
+                if (card != null)
+                {
+                    emptinessOfTable[cardNum] = true;
+                }
+            }
+            cardNum++; 
+        }
+
+        foreach (bool isEmpty in emptinessOfTable)
+        {
+            if (!isEmpty)
+            {
+                return false; 
+            }
+        }
+
+        return true;
+    }
+
+    private async Task ResetGame()
+    {
+        Console.WriteLine("ResetGame method called");
+
+        try
+        {
+            delayTimer?.Dispose();
+            dealing = false;
+            cardsToChange = new bool[5] { true, true, true, true, true };
+            deckOfCards.Clear();
+
+            await PrepareTable();
+
+
+            await InvokeAsync(() => StateHasChanged());
+
+            Console.WriteLine("ResetGame completed successfully");
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error in ResetGame: {ex.Message}");
+            throw;
+        }
+
+
+    }
+
+    private void ChangeWage()
+    {
+
+    }
+
 }

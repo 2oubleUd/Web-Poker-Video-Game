@@ -33,7 +33,7 @@ namespace PokerVideoGame.Api.Models
         {
             List<Card> cards = await SetUpDeckAsync();
 
-            for (int i = 1; i < cards.Count; i++)
+            for (int i = 0; i < cards.Count; i++)
             {
                 _appDbContext.Deck.Add(new Card
                 {
@@ -46,8 +46,6 @@ namespace PokerVideoGame.Api.Models
                 _appDbContext.SaveChanges();
 
             }
-
-            // Save changes to the database.
             await _appDbContext.SaveChangesAsync();
         }
 
@@ -85,7 +83,7 @@ namespace PokerVideoGame.Api.Models
 
             for (int i = 1; i < 53; i++)
             {
-                pathToImages.Add(Path.Combine(_env.WebRootPath, $"PNG-cards-1.3\\{1}.png"));
+                pathToImages.Add(Path.Combine(_env.WebRootPath, $"PNG-cards-1.3\\{i}.png"));
                 imgData.Add(System.IO.File.ReadAllBytes(pathToImages[i - 1]));
             }
 
