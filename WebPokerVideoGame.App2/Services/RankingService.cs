@@ -68,11 +68,7 @@ namespace WebPokerVideoGame.App2.Services
                 prize = 50 * wage;
             }
 
-            _pokerViewModel.Money -= wage;
-
-            _pokerViewModel.Money += prize;
-
-            return _pokerViewModel.Money;
+            return prize - wage;
         }
     }
 }

@@ -46,7 +46,7 @@ namespace PokerVideoGame.Api.Models
                 _appDbContext.SaveChanges();
 
             }
-            await _appDbContext.SaveChangesAsync();
+
         }
 
         public async Task<List<byte[]>> InitListOfPicturesAsync()
@@ -58,18 +58,32 @@ namespace PokerVideoGame.Api.Models
 
             List<string> listOfImages = new List<string>(Directory.GetFiles(pathToImages, "*.*", SearchOption.AllDirectories));
 
-            foreach (string imagePath in listOfImages)
+
+          
+            //foreach (string imagePath in listOfImages)
+            //{
+            //    if (ext.Any(e => imagePath.EndsWith(e, StringComparison.OrdinalIgnoreCase)))
+            //    {
+            //        try
+            //        {
+            //            imageData.Add(System.IO.File.ReadAllBytes(imagePath));
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            // Handle or log the exception.
+            //        }
+            //    }
+            //}
+
+            if (ext.Any(e => listOfImages[52].EndsWith(e, StringComparison.OrdinalIgnoreCase)))
             {
-                if (ext.Any(e => imagePath.EndsWith(e, StringComparison.OrdinalIgnoreCase)))
+                try
                 {
-                    try
-                    {
-                        imageData.Add(System.IO.File.ReadAllBytes(imagePath));
-                    }
-                    catch (Exception ex)
-                    {
-                        // Handle or log the exception.
-                    }
+                    imageData.Add(System.IO.File.ReadAllBytes(listOfImages[52]));
+                }
+                catch (Exception ex)
+                {
+                    // Handle or log the exception.
                 }
             }
 
@@ -81,7 +95,7 @@ namespace PokerVideoGame.Api.Models
             List<string> pathToImages = new List<string>();
             List<byte[]> imgData = new List<byte[]>();
 
-            for (int i = 1; i < 53; i++)
+            for (int i = 1; i <= 53; i++)
             {
                 pathToImages.Add(Path.Combine(_env.WebRootPath, $"PNG-cards-1.3\\{i}.png"));
                 imgData.Add(System.IO.File.ReadAllBytes(pathToImages[i - 1]));
@@ -104,6 +118,8 @@ namespace PokerVideoGame.Api.Models
                     cardNumber++;
                 }
             }
+
+            cards.Add(new Card { ImageData = cardImage[52] });
 
             return cards;
         }

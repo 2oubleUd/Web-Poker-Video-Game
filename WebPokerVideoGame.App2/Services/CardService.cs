@@ -54,7 +54,7 @@ public class CardService : ICardService
         return Cards;
     }
 
-    public Card[] PrepareTable(List<Card> preparedDeck)
+    public async Task<Card[]> PrepareTable(List<Card> preparedDeck)
     {
         Card[] table = new Card[5];
 

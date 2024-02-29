@@ -4,6 +4,7 @@
 @using PokerVideoGame.Models.Data.Dtos;
 @using System.Text;
 @inject HttpClient _httpClient;
+@inject UserService userService;
 
 @attribute [Authorize]
 
@@ -82,6 +83,7 @@
         user.AmountOfMoney = newValue;
         user.UserId = Convert.ToInt32(claims.Where(x => x.Type == "Sub").Select(x => x.Value).FirstOrDefault() ?? "0");
 
+        //await userService.UpdateUsersAccountBalance(claims, newValue, user);
         var updatedUser = JsonSerializer.Serialize(user);
         var requestUpdatedUser = new StringContent(updatedUser, Encoding.UTF8,"application/json");
 

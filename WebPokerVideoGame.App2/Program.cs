@@ -8,7 +8,7 @@ using WebPokerVideoGame.App2.Shared.Providers;
 using WebPokerVideoGame.App2.Services;
 using WebPokerVideoGame.App2.Interfaces;
 using WebPokerVideoGame.App2.ViewModels;
-using Microsoft.Extensions.FileProviders;
+using Blazored.Modal;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -27,17 +27,20 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https:/
 
 builder.Services.AddHttpClient();
 
+
+
 builder.Services.AddTransient<IPlayerService, PlayerService>();
 builder.Services.AddTransient<IUserService, UserService>();
 
 
 builder.Services.AddTransient<GameService>();
 builder.Services.AddTransient<ICardService, CardService>();
-builder.Services.AddTransient<RankingService>();
+builder.Services.AddTransient<IRankingService, RankingService>();
 //builder.Services.AddTransient<GameHistoryService>();
 builder.Services.AddTransient<PokerViewModel>();
 
 builder.Services.AddMudServices();
+builder.Services.AddBlazoredModal();
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
 builder.Services.AddAuthorizationCore();

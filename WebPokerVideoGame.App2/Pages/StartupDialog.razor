@@ -1,0 +1,19 @@
+﻿@inherits MudDialog
+
+<MudDialog>
+    <DialogContent>
+        <MudText Typo="Typo.h5">@Message</MudText>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="CloseDialog">OK</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [Parameter] public string Message { get; set; }
+
+    private void CloseDialog()
+    {
+        //MudDialog.Close(DialogResult.Ok());
+    }
+}

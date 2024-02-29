@@ -6,7 +6,7 @@ namespace WebPokerVideoGame.App2.Interfaces
     {
         Task<List<Card>> PrepareDeck();
         Task<List<Card>> ShuffleCards(List<Card> Cards);
-        Card[] PrepareTable(List<Card> PreparedDeck);
+        Task<Card[]> PrepareTable(List<Card> PreparedDeck);
 
         Task<IEnumerable<Card>> GetDeckOfCardsAsync();
     }

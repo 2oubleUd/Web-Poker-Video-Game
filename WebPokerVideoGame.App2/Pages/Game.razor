@@ -1,23 +1,29 @@
 ﻿@page "/game"
 @using PokerVideoGame.Models;
 @using System.Timers;
+@using MudBlazor;
+@using System.Security.Claims;
+@using PokerVideoGame.Models.Data.Entites;
+
+@inject IModalService modal;
 
 @inject GameService gameService;
 @inject ICardService cardService;
 @inject RankingService rankingService;
+@inject IUserService userService;
+@inject AuthenticationStateProvider authenticationStateProvider;
+@inject IRankingService rankingService;
 
-@inject NavigationManager NavigationManager
 
-<p> Selected wage: </p>
+<p> Selected wage: @wages[wageCounter]</p>
 
 <div class="bank-account">
-    Bank account:
+    Bank account: @accountBalance
 </div>
 
 <p> Your prize: </p>
 
 <h3>PokerCards</h3>
-
 <div class="card-deck">
 
     @if (IsTableNull())
@@ -28,12 +34,22 @@
                     <img class="imageThumbnail" src="@($"data:image/png;base64,{@Convert.ToBase64String(table[0].ImageData)}")" alt="PNG Image" />
                 </div>
 
-                <div class="text-center card-header mb-4 mt-4">
-                    @table[0].CardValue.ToString() of @table[0].CardSuit.ToString()
-                </div>
+
+                @if (table[0].CardValue.ToString() == "0" && table[0].CardSuit.ToString() == "Clubs")
+                {
+                    <div class="text-center card-header mb-4 mt-4">
+                        @("N/A")
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center card-header mb-4 mt-4">
+                        @table[0].CardValue.ToString() of @table[0].CardSuit.ToString()
+                    </div>
+                }
 
                 <div class="text-center">
-                    <button class="btn @(!cardsToChange[0] ? "btn-hold-clicked" : "btn-hold") w-50" @onclick="@(e => HoldCard(0))">HOLD</button>
+                    <button class="btn @(!cardsToChange[0] ? "btn-hold-clicked" : "btn-hold") w-50" disabled=@startGame @onclick="@(e => HoldCard(0))">HOLD</button>
                 </div>
             </div>
 
@@ -47,7 +63,7 @@
                 </div>
 
                 <div class="text-center">
-                    <button class="btn @(!cardsToChange[1] ? "btn-hold-clicked" : "btn-hold") w-50" @onclick="@(e => HoldCard(1))">HOLD</button>
+                    <button class="btn @(!cardsToChange[1] ? "btn-hold-clicked" : "btn-hold") w-50" disabled=@startGame @onclick ="@(e => HoldCard(1))">HOLD</button>
                 </div>
             </div>
 
@@ -61,7 +77,7 @@
                 </div>
 
                 <div class="text-center">
-                    <button class="btn @(!cardsToChange[2] ? "btn-hold-clicked" : "btn-hold") w-50" @onclick="@(e => HoldCard(2))">HOLD</button>
+                    <button class="btn @(!cardsToChange[2] ? "btn-hold-clicked" : "btn-hold") w-50" disabled=@startGame @onclick="@(e => HoldCard(2))">HOLD</button>
                 </div>
             </div>
 
@@ -75,7 +91,7 @@
                 </div>
 
                 <div class="text-center">
-                    <button class="btn @(!cardsToChange[3] ? "btn-hold-clicked" : "btn-hold") w-50" @onclick="@(e => HoldCard(3))">HOLD</button>
+                    <button class="btn @(!cardsToChange[3] ? "btn-hold-clicked" : "btn-hold") w-50" disabled=@startGame @onclick ="@(e => HoldCard(3))">HOLD</button>
                 </div>
             </div>
 
@@ -90,27 +106,27 @@
                 </div>
 
                 <div class="text-center">
-                    <button class="btn @(!cardsToChange[4] ? "btn-hold-clicked" : "btn-hold") w-50" @onclick="@(e => HoldCard(4))">HOLD</button>
+                    <button class="btn @(!cardsToChange[4] ? "btn-hold-clicked" : "btn-hold") w-50" disabled=@startGame @onclick="@(e => HoldCard(4))">HOLD</button>
                 </div>
             </div>
-
-
 
             <div class="col-md-1 mt-4 mr-6">
                 <button class="btn btn-primary" disabled=@dealing @onclick="DealCards">DEAL</button>
             </div>
 
             <div class="col-md-3 mt-4 ml-6">
-                <button class="btn btn-primary" @onclick="ChangeWage">ADD COIN</button>
+                <button class="btn btn-primary" disabled=@dealing @onclick="ChangeWage">ADD COIN</button>
             </div>
         </div>
     }
+
     else
     {
         <div class="spinner"></div>
     }
 
 </div>
+
 
 @code
 {
@@ -124,18 +140,72 @@
 
     private bool dealing = false;
 
+    public int[] wages = new int[7] { 10, 20, 50, 100, 200, 500, 1000 };
+
+    public int wageCounter = 0;
+
+    public bool startGame;
+
+    public User user { get; set; }
+
+
+    public int accountBalance = 0;
+
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationStateTask { get; set; }
+
     protected async override Task OnInitializedAsync()
     {
+        var authenticationState = await authenticationStateTask;
+        await DisplayUserInfo(authenticationState.User.Claims.ToList());
+
+        await StartupTable();
+
         base.OnInitialized();
+        //await PrepareTable();
 
-        await PrepareTable();
+    }
 
+    public async Task StartupTable()
+    {
+        deckOfCards = (await cardService.GetDeckOfCardsAsync()).ToList();
+        for (int i = 0; i < table.Length; i++)
+        {
+            table[i] = deckOfCards.Last();
+        }
+        deckOfCards.RemoveAt(deckOfCards.Count - 1);
+        startGame = true;
+
+    }
+
+    public async Task<int> DisplayUserInfo(List<Claim> claims)
+    {
+        // Access the user claims from the context
+        var userClaims = (await authenticationStateTask).User.Claims.ToList();
+
+        // get result of logged player based on context.User.Id
+        var userId = Convert.ToInt32(claims.Where(_ => _.Type == "Sub").Select(_ => _.Value).FirstOrDefault() ?? "0");
+
+        user = await userService.GetUserAsync(userId);
+
+        if (user != null)
+        {
+
+            accountBalance = user.AccountBalance;
+            await InvokeAsync(() => StateHasChanged());
+
+            return accountBalance;
+        }
+
+        return 0;
     }
 
     private async Task PrepareTable()
     {
-        deckOfCards = await cardService.PrepareDeck();
-        table = cardService.PrepareTable(deckOfCards);
+        deckOfCards = await cardService.ShuffleCards(deckOfCards);
+        table = await cardService.PrepareTable(deckOfCards);
+
+        await InvokeAsync(() => StateHasChanged());
     }
 
     private void HoldCard(int cardNumber)
@@ -145,29 +215,42 @@
 
     private async Task DealCards()
     {
-        if (dealing)
+        if (startGame)
         {
-            return; // If already dealing, ignore subsequent clicks
+            await PrepareTable();
         }
 
-        dealing = true;
-
-        int i = 0;
-        foreach (var card in cardsToChange)
+        if(!startGame)
         {
-            if (card)
+            if (dealing)
             {
-                table[i] = deckOfCards[deckOfCards.Count - 1];
-                deckOfCards.RemoveAt(deckOfCards.Count - 1);
+                return; // If already dealing, ignore subsequent clicks
             }
-            i++;
-        }
 
-        // Wait for 3 seconds and run ResetGame()
-        delayTimer = new Timer(3000);
-        delayTimer.Elapsed += async (sender, e) => await ResetGame();
-        delayTimer.AutoReset = false;
-        delayTimer.Start();
+            dealing = true;
+            int i = 0;
+            foreach (var card in cardsToChange)
+            {
+                if (card)
+                {
+                    table[i] = deckOfCards[deckOfCards.Count - 1];
+                    deckOfCards.RemoveAt(deckOfCards.Count - 1);
+                }
+                i++;
+            }
+            var currentWage = wages[wageCounter];
+            var callApiToAddMoney = rankingService.Ranking(table, currentWage);
+            Console.WriteLine(wages[wageCounter]);
+            await userService.UpdateUsersAccountBalance((await authenticationStateTask).User.Claims.ToList(), callApiToAddMoney);
+
+            // Wait for 3 seconds and run ResetGame()
+            delayTimer = new Timer(3000);
+            delayTimer.Elapsed += async (sender, e) => await ResetGame();
+            delayTimer.AutoReset = false;
+            delayTimer.Start();
+        }
+        startGame = !startGame;
+
     }
 
 
@@ -185,14 +268,14 @@
                     emptinessOfTable[cardNum] = true;
                 }
             }
-            cardNum++; 
+            cardNum++;
         }
 
         foreach (bool isEmpty in emptinessOfTable)
         {
             if (!isEmpty)
             {
-                return false; 
+                return false;
             }
         }
 
@@ -210,7 +293,7 @@
             cardsToChange = new bool[5] { true, true, true, true, true };
             deckOfCards.Clear();
 
-            await PrepareTable();
+            await StartupTable();
 
 
             await InvokeAsync(() => StateHasChanged());
@@ -226,10 +309,18 @@
 
 
     }
-
     private void ChangeWage()
     {
-
+        if (wageCounter < 7)
+        {
+            wageCounter++;
+        }
+        if (wageCounter == 7)
+        {
+            wageCounter = 0;
+        }
     }
+
+
 
 }

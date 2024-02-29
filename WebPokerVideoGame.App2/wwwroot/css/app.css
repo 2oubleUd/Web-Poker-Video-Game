@@ -127,6 +127,7 @@ a, .btn-link {
     position: absolute;
     top: 40px; /* Adjust the top and right values as needed to position it in the upper right corner */
     right: 70px;
+    margin-top: 0.2rem;
 }
 
 .poker-hand {

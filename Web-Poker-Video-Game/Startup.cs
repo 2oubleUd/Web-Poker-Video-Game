@@ -21,7 +21,7 @@ namespace Web_Poker_Video_Game
 
             services.AddTransient<GameService>();
             services.AddTransient<CardService>();
-            services.AddTransient<RankingService>();
+            services.AddTransient<IRankingService, RankingService>();
             services.AddTransient<GameHistoryService>();
 
             //services.AddScoped<PokerCards>();
