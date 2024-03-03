@@ -6,8 +6,6 @@ namespace WebPokerVideoGame.App2.Services
 {
     public class RankingService : IRankingService
     {
-        // ta klasa to taki pomysl zgodny z Single Responsiblity Principle (Litera 'S' w SOLID)
-
         private GameService _gameService;
         private PokerViewModel _pokerViewModel;
 
@@ -19,56 +17,53 @@ namespace WebPokerVideoGame.App2.Services
 
         public int Ranking(Card[] table, int wage)
         {
-
-            int prize = 0;
-
-            if (_gameService.Pair(table))
+            if (_gameService.EvaluateHand(table) == GameService.HandRank.OnePair)
             {
-                prize = wage;
+                return 0;
             }
 
-            if (_gameService.TwoPairs(table))
+            if (_gameService.EvaluateHand(table) == GameService.HandRank.TwoPair)
             {
-                prize = 2 * wage;
+                return wage;
 
             }
 
-            if (_gameService.ThreeOfKind(table))
+            if (_gameService.EvaluateHand(table) == GameService.HandRank.ThreeOfKind)
             {
-                prize = 3 * wage;
+                return 3 * wage;
 
             }
 
-            if (_gameService.FourOfKind(table))
+            if (_gameService.EvaluateHand(table) == GameService.HandRank.FourOfKind)
             {
-                prize = 25 * wage;
+                return 25 * wage;
 
             }
 
-            if (_gameService.Flush(table))
+            if (_gameService.EvaluateHand(table) == GameService.HandRank.Flush)
             {
-                prize = 6 * wage;
+                return 6 * wage;
 
             }
 
-            if (_gameService.FullHouse(table))
+            if (_gameService.EvaluateHand(table) == GameService.HandRank.FullHouse)
             {
-                prize = 9 * wage;
+                return 9 * wage;
 
             }
 
-            if (_gameService.Straight(table))
+            if (_gameService.EvaluateHand(table) == GameService.HandRank.Straight)
             {
-                prize = 4 * wage;
+                return 4 * wage;
 
             }
 
-            if (_gameService.StraightFlush(table))
+            if (_gameService.EvaluateHand(table) == GameService.HandRank.StraightFlush)
             {
-                prize = 50 * wage;
+                return 50 * wage;
             }
 
-            return prize - wage;
+            return (-1*wage);
         }
     }
 }

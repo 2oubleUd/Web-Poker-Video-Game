@@ -1,16 +1,19 @@
 ﻿using PokerVideoGame.Models;
+using static WebPokerVideoGame.App2.Services.GameService;
 
 namespace WebPokerVideoGame.App2.Interfaces
 {
     public interface IGameService
     {
-        bool Pair(Card[] table);
-        bool TwoPairs(Card[] table);
-        bool ThreeOfKind(Card[] table);
-        bool FourOfKind(Card[] table);
-        bool Flush(Card[] table);
-        bool FullHouse(Card[] table);
-        bool Straight(Card[] table);
-        bool StraightFlush(Card[] table);
+        public HandRank EvaluateHand(Card[] table);
+        bool IsRoyalFlush(Card[] table);
+        bool IsStraightFlush(Card[] table);
+        bool IsFourOfKind(Card[] table);
+        bool IsFullHouse(Card[] table);
+        bool IsFlush(Card[] table);
+        bool IsStraight(Card[] table);
+        bool IsThreeOfKind(Card[] table);
+        bool IsTwoPair(Card[] table);
+        bool IsOnePair(Card[] table);
     }
 }

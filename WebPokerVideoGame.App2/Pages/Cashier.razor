@@ -4,7 +4,7 @@
 @using PokerVideoGame.Models.Data.Dtos;
 @using System.Text;
 @inject HttpClient _httpClient;
-@inject UserService userService;
+@inject IUserService userService;
 
 @attribute [Authorize]
 
@@ -79,15 +79,6 @@
 
     public async Task AddMoneyAsync(List<Claim> claims, int newValue)
     {
-        user = new UpdateUserMoneyDto();
-        user.AmountOfMoney = newValue;
-        user.UserId = Convert.ToInt32(claims.Where(x => x.Type == "Sub").Select(x => x.Value).FirstOrDefault() ?? "0");
-
-        //await userService.UpdateUsersAccountBalance(claims, newValue, user);
-        var updatedUser = JsonSerializer.Serialize(user);
-        var requestUpdatedUser = new StringContent(updatedUser, Encoding.UTF8,"application/json");
-
-        // to do: implement: API method for updating player details (eg. AccountBalance)
-        var response = await _httpClient.PutAsync("api/user/account", requestUpdatedUser);
+        await userService.UpdateUsersAccountBalance(claims, newValue);
     }
 }

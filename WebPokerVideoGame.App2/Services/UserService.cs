@@ -46,23 +46,24 @@ namespace WebPokerVideoGame.App2.Services
             }
 
         }
-
-        public Task<User> PutUserInfo(List<Claim> claims, int newValue)
-        {
-            throw new NotImplementedException();
-        }
-
+    
         public async Task UpdateUsersAccountBalance(List<Claim> claims, int newValue)
         {
-            UpdateUserMoneyDto user = new UpdateUserMoneyDto();
-            user.AmountOfMoney = newValue;
-            user.UserId = Convert.ToInt32(claims.Where(x => x.Type == "Sub").Select(x => x.Value).FirstOrDefault() ?? "0");
+            try
+            {
+                UpdateUserMoneyDto user = new UpdateUserMoneyDto();
+                user.AmountOfMoney = newValue;
+                user.UserId = Convert.ToInt32(claims.Where(x => x.Type == "Sub").Select(x => x.Value).FirstOrDefault() ?? "0");
 
-            var updatedUser = JsonSerializer.Serialize(user);
-            var requestUpdatedUser = new StringContent(updatedUser, Encoding.UTF8, "application/json");
+                var updatedUser = JsonSerializer.Serialize(user);
+                var requestUpdatedUser = new StringContent(updatedUser, Encoding.UTF8, "application/json");
 
-            // to do: implement: API method for updating player details (eg. AccountBalance)
-            var response = await _httpClient.PutAsync("api/user/account", requestUpdatedUser);
+                var response = await _httpClient.PutAsync("api/user/account", requestUpdatedUser);
+            }
+            catch(HttpRequestException ex)
+            {
+                throw new Exception("Error with updating user's bank account", ex);
+            }
         }
     }
 }

@@ -5,7 +5,8 @@
 @using System.Security.Claims;
 @using PokerVideoGame.Models.Data.Entites;
 
-@inject IModalService modal;
+@inject IToastService toastService;
+
 
 @inject GameService gameService;
 @inject ICardService cardService;
@@ -13,7 +14,6 @@
 @inject IUserService userService;
 @inject AuthenticationStateProvider authenticationStateProvider;
 @inject IRankingService rankingService;
-
 
 <p> Selected wage: @wages[wageCounter]</p>
 
@@ -25,9 +25,10 @@
 
 <h3>PokerCards</h3>
 <div class="card-deck">
-
     @if (IsTableNull())
     {
+
+
         <div class="row justify-content-center">
             <div class="col-md-2 m-3" style="display: inline-block">
                 <div class="d-flex justify-content-center">
@@ -63,7 +64,7 @@
                 </div>
 
                 <div class="text-center">
-                    <button class="btn @(!cardsToChange[1] ? "btn-hold-clicked" : "btn-hold") w-50" disabled=@startGame @onclick ="@(e => HoldCard(1))">HOLD</button>
+                    <button class="btn @(!cardsToChange[1] ? "btn-hold-clicked" : "btn-hold") w-50" disabled=@startGame @onclick="@(e => HoldCard(1))">HOLD</button>
                 </div>
             </div>
 
@@ -91,7 +92,7 @@
                 </div>
 
                 <div class="text-center">
-                    <button class="btn @(!cardsToChange[3] ? "btn-hold-clicked" : "btn-hold") w-50" disabled=@startGame @onclick ="@(e => HoldCard(3))">HOLD</button>
+                    <button class="btn @(!cardsToChange[3] ? "btn-hold-clicked" : "btn-hold") w-50" disabled=@startGame @onclick="@(e => HoldCard(3))">HOLD</button>
                 </div>
             </div>
 
@@ -117,8 +118,15 @@
             <div class="col-md-3 mt-4 ml-6">
                 <button class="btn btn-primary" disabled=@dealing @onclick="ChangeWage">ADD COIN</button>
             </div>
+
+            <div class="col-md-1 mt-4 mr-6">
+                <button class="btn btn-danger" @onclick="@(()=> toastService.ShowWarning("You don't have enouh money for selected bet"))"></button>
+            </div>
         </div>
+
+
     }
+
 
     else
     {
@@ -144,10 +152,10 @@
 
     public int wageCounter = 0;
 
-    public bool startGame;
+    // to do: fix startGame bcs when user doesn't have enough money for bet, hold btns for cards are changing when btn deal is clicked
+    public bool startGame = true;
 
     public User user { get; set; }
-
 
     public int accountBalance = 0;
 
@@ -157,12 +165,11 @@
     protected async override Task OnInitializedAsync()
     {
         var authenticationState = await authenticationStateTask;
-        await DisplayUserInfo(authenticationState.User.Claims.ToList());
-
+        await DisplayUserInfo();
         await StartupTable();
 
+
         base.OnInitialized();
-        //await PrepareTable();
 
     }
 
@@ -174,12 +181,15 @@
             table[i] = deckOfCards.Last();
         }
         deckOfCards.RemoveAt(deckOfCards.Count - 1);
-        startGame = true;
+        
 
     }
 
-    public async Task<int> DisplayUserInfo(List<Claim> claims)
+    public async Task DisplayUserInfo()
     {
+        var authenticationState = await authenticationStateTask;
+        List<Claim> claims = (authenticationState.User.Claims.ToList());
+
         // Access the user claims from the context
         var userClaims = (await authenticationStateTask).User.Claims.ToList();
 
@@ -190,21 +200,22 @@
 
         if (user != null)
         {
-
             accountBalance = user.AccountBalance;
             await InvokeAsync(() => StateHasChanged());
-
-            return accountBalance;
         }
 
-        return 0;
     }
+
+    private async Task ShowToastAsync()
+    {
+        toastService.ShowWarning("You don't have enouh money for selected bet");
+    }
+
 
     private async Task PrepareTable()
     {
         deckOfCards = await cardService.ShuffleCards(deckOfCards);
         table = await cardService.PrepareTable(deckOfCards);
-
         await InvokeAsync(() => StateHasChanged());
     }
 
@@ -215,12 +226,18 @@
 
     private async Task DealCards()
     {
-        if (startGame)
+        if (accountBalance < wages[wageCounter])
+        {
+            await ShowToastAsync();
+        }
+
+        // to do: prepare function to check does user has enough money to pay for bet
+        if (startGame && accountBalance >= wages[wageCounter])
         {
             await PrepareTable();
         }
 
-        if(!startGame)
+        if (!startGame && accountBalance >= wages[wageCounter])
         {
             if (dealing)
             {
@@ -229,6 +246,7 @@
 
             dealing = true;
             int i = 0;
+
             foreach (var card in cardsToChange)
             {
                 if (card)
@@ -238,17 +256,20 @@
                 }
                 i++;
             }
-            var currentWage = wages[wageCounter];
-            var callApiToAddMoney = rankingService.Ranking(table, currentWage);
-            Console.WriteLine(wages[wageCounter]);
-            await userService.UpdateUsersAccountBalance((await authenticationStateTask).User.Claims.ToList(), callApiToAddMoney);
+
+            // to do: they probably work (check straight hand bcs it's tricky)
+            var prize = rankingService.Ranking(table, wages[wageCounter]);
+            if (prize != 0) await userService.UpdateUsersAccountBalance((await authenticationStateTask).User.Claims.ToList(), prize);
+            await DisplayUserInfo();
 
             // Wait for 3 seconds and run ResetGame()
             delayTimer = new Timer(3000);
             delayTimer.Elapsed += async (sender, e) => await ResetGame();
             delayTimer.AutoReset = false;
             delayTimer.Start();
+
         }
+        
         startGame = !startGame;
 
     }
@@ -284,8 +305,6 @@
 
     private async Task ResetGame()
     {
-        Console.WriteLine("ResetGame method called");
-
         try
         {
             delayTimer?.Dispose();
@@ -294,11 +313,9 @@
             deckOfCards.Clear();
 
             await StartupTable();
-
+            await DisplayUserInfo();
 
             await InvokeAsync(() => StateHasChanged());
-
-            Console.WriteLine("ResetGame completed successfully");
 
         }
         catch (Exception ex)
@@ -306,9 +323,8 @@
             Console.WriteLine($"Error in ResetGame: {ex.Message}");
             throw;
         }
-
-
     }
+
     private void ChangeWage()
     {
         if (wageCounter < 7)

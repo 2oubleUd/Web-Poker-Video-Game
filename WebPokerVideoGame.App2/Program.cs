@@ -9,6 +9,7 @@ using WebPokerVideoGame.App2.Services;
 using WebPokerVideoGame.App2.Interfaces;
 using WebPokerVideoGame.App2.ViewModels;
 using Blazored.Modal;
+using Blazored.Toast;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -40,6 +41,9 @@ builder.Services.AddTransient<IRankingService, RankingService>();
 builder.Services.AddTransient<PokerViewModel>();
 
 builder.Services.AddMudServices();
+
+builder.Services.AddBlazoredToast();
+
 builder.Services.AddBlazoredModal();
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();

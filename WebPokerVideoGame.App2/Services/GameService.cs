@@ -3,142 +3,103 @@ using WebPokerVideoGame.App2.Interfaces;
 
 namespace WebPokerVideoGame.App2.Services
 {
-    public class GameService : IGameService
+    public class GameService 
     {
-        public string CurrentPokerHand = "";
-
-        public bool Pair(Card[] table)
+        public enum HandRank
         {
-            // see if exacly 2 cards on the table have the same rank
-            if (table.GroupBy(c => c.CardValue).Count(g => g.Count() == 2) == 1)
-            {
-                CurrentPokerHand = $"Pair of {table.GroupBy(c => c.CardValue).Count(g => g.Count() == 2) == 1}";
-                return table.GroupBy(c => c.CardValue).Count(g => g.Count() == 2) == 1;
-            }
-            else
-            {
-                return false;
-            }
+            HighCard,
+            OnePair,
+            TwoPair,
+            ThreeOfKind,
+            Straight,
+            Flush,
+            FullHouse,
+            FourOfKind,
+            StraightFlush,
+            RoyalFlush
         }
 
-        public bool TwoPairs(Card[] table)
+        public HandRank EvaluateHand(Card[] table)
         {
-            // see if there are 2 lots of exacly 2 cards with the same rank
-            if (table.GroupBy(c => c.CardValue).Count(g => g.Count() == 2) == 2)
-            {
-                CurrentPokerHand = $"Two pairs of {table.GroupBy(c => c.CardValue).Count(g => g.Count() == 2) == 2}";
-                return table.GroupBy(c => c.CardValue).Count(g => g.Count() == 2) == 2;
-            }
-            else
-            {
-                return false;
-            }
+            if (IsRoyalFlush(table)) { Console.WriteLine("It royal flush"); return HandRank.RoyalFlush; }
+            if (IsStraightFlush(table)) { Console.WriteLine("It royal flush"); return HandRank.StraightFlush; }
+            if (IsFourOfKind(table)) { Console.WriteLine("It royal flush"); return HandRank.FourOfKind; }
+            if (IsFullHouse(table)) { Console.WriteLine("It royal flush"); return HandRank.FullHouse; }
+            if (IsFlush(table)) { Console.WriteLine("It's flush"); return HandRank.Flush; }
+            if (IsStraight(table)) { Console.WriteLine("It's straight"); return HandRank.Straight; }
+            if (IsThreeOfKind(table)) { Console.WriteLine("It's three of kind"); return HandRank.ThreeOfKind; }
+            if (IsTwoPair(table)) { Console.WriteLine("It's two pair"); return HandRank.TwoPair; }
+            if (IsOnePair(table)) { Console.WriteLine("It's one pair"); return HandRank.OnePair; }
+            return HandRank.HighCard;
         }
 
-        public bool ThreeOfKind(Card[] table)
+        private bool IsRoyalFlush(Card[] table)
         {
-            if (table.GroupBy(c => c.CardValue).Any(g => g.Count() == 3))
-            {
-                CurrentPokerHand = $"Three of kind of {table.GroupBy(c => c.CardValue).Any(g => g.Count() == 3)}";
-                return table.GroupBy(c => c.CardValue).Any(g => g.Count() == 3);
-            }
-            else
-            {
-                return false;
-            }
+            return IsStraightFlush(table) && table.All(card => card.CardValue >= ValueOfCard.Ten);
         }
 
-        public bool FourOfKind(Card[] table)
+        private bool IsStraightFlush(Card[] table)
         {
-            if (table.GroupBy(c => c.CardValue).Any(g => g.Count() == 4))
-            {
-                CurrentPokerHand = $"Four of kind of {table.GroupBy(c => c.CardValue).Any(g => g.Count() == 4)}";
-                return table.GroupBy(c => c.CardValue).Any(g => g.Count() == 4);
-            }
-            else
-            {
-                return false;
-            }
+            return IsStraight(table) && IsFlush(table);
         }
 
-        public bool Flush(Card[] table)
+        private bool IsFourOfKind(Card[] table)
         {
-            if (table.GroupBy(c => c.CardSuit).Count(g => g.Count() >= 5) == 1)
-            {
-                CurrentPokerHand = $"Flush of {table.GroupBy(c => c.CardSuit).Count(g => g.Count() >= 5) == 1}";
-                return table.GroupBy(c => c.CardSuit).Count(g => g.Count() >= 5) == 1;
-            }
-            else
-            {
-                return false;
-            }
+            var groupValue = table.GroupBy(c => c.CardValue);
+            return groupValue.Any(g => g.Count() == 4);
         }
 
-        public bool FullHouse(Card[] table)
+        private bool IsFullHouse(Card[] table)
         {
-            if (table.GroupBy(c => c.CardValue).Count(g => g.Count() == 2) == 1
-                && table.GroupBy(c => c.CardValue).Any(g => g.Count() == 3))
-            {
-                CurrentPokerHand = $"Full House of {table.GroupBy(c => c.CardValue).Count(g => g.Count() == 2) == 1
-                    && table.GroupBy(c => c.CardValue).Any(g => g.Count() == 3)}";
-
-                return table.GroupBy(c => c.CardValue).Count(g => g.Count() == 2) == 1 &&
-                    table.GroupBy(c => c.CardValue).Any(g => g.Count() == 3);
-            }
-            else
-            {
-                return false;
-            }
+            var groupValue = table.GroupBy(card => card.CardValue);
+            return groupValue.Any(g => g.Count() == 2) && groupValue.Any(g => g.Count() == 3);
         }
-
-        // Straight
-        public bool Straight(Card[] table)
+        private bool IsFlush(Card[] table)
         {
-            var ordered = table.OrderByDescending(a => a.CardValue).ToList();
-            for (int i = 0; i < ordered.Count - 5; i++)
+            var groupSuites = table.GroupBy(c => c.CardSuit);
+            return groupSuites.Any(g => g.Count() == 5);
+
+            // alternative
+            //return table.GroupBy(c => c.suiteOfCard).Count() == 1;
+        }
+        private bool IsStraight(Card[] table)
+        {
+            // select cards from table and parse their values to integers, then sort them and
+            // save in array
+            var sortedRanks = table.Select(card => (int)card.CardValue).OrderBy(rank => rank).ToList();
+            if (sortedRanks.Last() == (int)ValueOfCard.Ace && sortedRanks.First() == (int)ValueOfCard.Two)
             {
-                var skipped = ordered.Skip(i);
-                var possibleStraight = skipped.Take(5);
-                if (IsStraight(possibleStraight))
+                // Handle A-2-3-4-5 as a valid straight (wheel)
+                sortedRanks.Remove(sortedRanks.Last());
+                sortedRanks.Insert(0, 1);
+            }
+            for (int i = 1; i < sortedRanks.Count; i++)
+            {
+                if (sortedRanks[i] != sortedRanks[i - 1] + 1)
                 {
-
-                    return true;
+                    return false;
                 }
             }
-            return false;
+            return true;
+
         }
 
-        public bool IsStraight(IEnumerable<Card> table)
+        private bool IsThreeOfKind(Card[] table)
         {
-            if (table.GroupBy(c => c.CardValue).Count() == table.Count()
-                && table.Max(c => (int)c.CardValue) - table.Min(c => (int)c.CardValue) == 4)
-            {
-                CurrentPokerHand = $"Straight of {table.GroupBy(c => c.CardValue).Count() == table.Count()
-                        && table.Max(c => (int)c.CardValue) - table.Min(c => (int)c.CardValue) == 4}";
-
-                return table.GroupBy(c => c.CardValue).Count() == table.Count()
-                && table.Max(c => (int)c.CardValue) - table.Min(c => (int)c.CardValue) == 4;
-            }
-            else
-            {
-                return false;
-            }
+            var groupValues = table.GroupBy(c => c.CardValue);
+            return groupValues.Any(g => g.Count() == 3);
         }
 
-        // Stright Flash    
-        public bool StraightFlush(Card[] table)
+        private bool IsTwoPair(Card[] table)
         {
-            if (Straight(table) && Flush(table))
-            {
-                CurrentPokerHand = $"Straight Flush of {table.GroupBy(c => c.CardValue).Count() == table.Count()
-                && table.Max(c => (int)c.CardValue) - table.Min(c => (int)c.CardValue) == 4 &&
-                table.GroupBy(c => c.CardSuit).Count(g => g.Count() >= 5) == 1}";
-                return Straight(table) && Flush(table);
-            }
-            else
-            {
-                return false;
-            }
+            var groupValues = table.GroupBy(card => card.CardValue);
+            return groupValues.Count(g => g.Count() == 2) == 2;
+        }
+
+        private bool IsOnePair(Card[] table)
+        {
+            var groupValues = table.GroupBy(c => c.CardValue);
+            return groupValues.Any(g => g.Count() == 2);
         }
 
     }
