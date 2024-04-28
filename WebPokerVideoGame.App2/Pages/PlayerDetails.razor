@@ -7,35 +7,68 @@
 
 @inject AuthenticationStateProvider authenticationStateProvider
 
+<head>
+    <style>
+        body {
+            text-align: center;
+            align-content: center;
+            align-items: center;
+            height: 100%;
+        }
 
+    </style>
+</head>
 
 <body>
-    <h2>Player Info</h2>
-<MudCard>
-    <MudCardContent>
-        <AuthorizeView>
-            <Authorized>
-                @if (userInfo.Count != 0)
-                {
-                    <ul>
-                        @foreach (var item in userInfo)
-                        {
-                            <li>@item</li>
-                        }
-                    </ul>
-                }
-                else
-                {
-                    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
-                }
-            </Authorized>
-        </AuthorizeView>
-    </MudCardContent>
-    <MudCardActions>
-        <MudButton Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>
-    </MudCardActions>
-</MudCard>
+    <h2> Player info</h2>
+    <br />
+
+    <div class="ma-1 d-flex justify-center">
+        <div class="card-deck">
+            @if (userInfo.Count >= 5)
+            {
+                <div class="card m-3" style="min-width: 35rem; max-width:40.5%;">
+                    <div class="card-header">
+                        <h3>@userInfo[1]</h3>
+                    </div>
+
+
+                    <div class="d-flex justify-content-center">
+                        <img style="width:12rem; height:12rem; padding: 0.5rem" src="/images/blank-profile-avatar.jpg" />
+                    </div>
+
+                    <div class="card-body">
+                        <h6>First name: @userInfo[1]</h6>
+                        <h6>Last name: @userInfo[2]</h6>
+                        <h6>Account balance: @userInfo[3]$</h6>
+                        <h6>E-mail address: @userInfo[4]</h6>
+                    </div>
+
+                    <div class="card-footer text-center">
+                        <a href="#" class="btn btn-primary m-1">View</a>
+
+                        <a href="#" class="btn btn-primary m-1">Edit</a>
+
+                        <a href="#" class="btn btn-danger m-1">Delete</a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+
+            }
+
+        </div>
+
+    </div>
+
+
 </body>
+
+
+
+
 
 @code {
     private bool _hidePosition;
@@ -74,6 +107,7 @@
             userInfo.Add(user.FirstName);
             userInfo.Add(user.LastName);
             userInfo.Add((user.AccountBalance).ToString());
+            userInfo.Add(user.Email);
 
             return userInfo;
         }

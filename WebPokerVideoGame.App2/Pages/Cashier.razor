@@ -5,6 +5,7 @@
 @using System.Text;
 @inject HttpClient _httpClient;
 @inject IUserService userService;
+@inject IToastService toastService;
 
 @attribute [Authorize]
 
@@ -43,16 +44,15 @@
             margin: 10px;
         }
 
-
     </style>
 </head>
 
 <body>
-    <h1>Cashier</h1>
+    <h2>Cashier</h2>
 
     <br/>
 
-    <h3>Here you can add more credits to your account</h3>
+    <h5>Here you can add more credits to your account</h5>
 
     <AuthorizeView>
         <div class="more-credits">
@@ -80,5 +80,8 @@
     public async Task AddMoneyAsync(List<Claim> claims, int newValue)
     {
         await userService.UpdateUsersAccountBalance(claims, newValue);
+
+        toastService.ShowSuccess("Succesfuly added money to your account!");       
+
     }
 }

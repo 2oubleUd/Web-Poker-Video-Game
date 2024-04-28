@@ -15,15 +15,30 @@
 @inject AuthenticationStateProvider authenticationStateProvider;
 @inject IRankingService rankingService;
 
-<p> Selected wage: @wages[wageCounter]</p>
+<head>
+    <style>
+        p{
+            padding: 0.4rem;
+        }
 
-<div class="bank-account">
+        h3, h6{
+            padding: 0.4rem;
+        }
+    </style>
+</head>
+
+
+<h3>PokerCards</h3>
+
+
+<h6> Selected wage: @wages[wageCounter]</h6>
+
+<div class="bank-account" style="padding: 1rem">
     Bank account: @accountBalance
 </div>
 
-<p> Your prize: </p>
+<h6> Your prize: </h6>
 
-<h3>PokerCards</h3>
 <div class="card-deck">
     @if (IsTableNull())
     {
@@ -118,15 +133,10 @@
             <div class="col-md-3 mt-4 ml-6">
                 <button class="btn btn-primary" disabled=@dealing @onclick="ChangeWage">ADD COIN</button>
             </div>
-
-            <div class="col-md-1 mt-4 mr-6">
-                <button class="btn btn-danger" @onclick="@(()=> toastService.ShowWarning("You don't have enouh money for selected bet"))"></button>
-            </div>
         </div>
 
 
     }
-
 
     else
     {
@@ -168,9 +178,7 @@
         await DisplayUserInfo();
         await StartupTable();
 
-
         base.OnInitialized();
-
     }
 
     public async Task StartupTable()
@@ -181,7 +189,6 @@
             table[i] = deckOfCards.Last();
         }
         deckOfCards.RemoveAt(deckOfCards.Count - 1);
-        
 
     }
 
@@ -203,14 +210,12 @@
             accountBalance = user.AccountBalance;
             await InvokeAsync(() => StateHasChanged());
         }
-
     }
 
     private async Task ShowToastAsync()
     {
         toastService.ShowWarning("You don't have enouh money for selected bet");
     }
-
 
     private async Task PrepareTable()
     {
@@ -231,16 +236,12 @@
             await ShowToastAsync();
         }
 
-        // to do: prepare function to check does user has enough money to pay for bet
-        if (startGame && accountBalance >= wages[wageCounter])
-        {
-            await PrepareTable();
-        }
-
         if (!startGame && accountBalance >= wages[wageCounter])
         {
+
             if (dealing)
             {
+
                 return; // If already dealing, ignore subsequent clicks
             }
 
@@ -267,10 +268,15 @@
             delayTimer.Elapsed += async (sender, e) => await ResetGame();
             delayTimer.AutoReset = false;
             delayTimer.Start();
-
+            
         }
-        
-        startGame = !startGame;
+
+        // to do: prepare function to check does user has enough money to pay for bet
+        if (startGame && accountBalance >= wages[wageCounter])
+        {
+            await PrepareTable();
+            startGame = !startGame;
+        }
 
     }
 
@@ -308,6 +314,7 @@
         try
         {
             delayTimer?.Dispose();
+            startGame = true;
             dealing = false;
             cardsToChange = new bool[5] { true, true, true, true, true };
             deckOfCards.Clear();
