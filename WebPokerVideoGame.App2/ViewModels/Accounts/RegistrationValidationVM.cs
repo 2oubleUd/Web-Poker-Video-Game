@@ -3,8 +3,6 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading;
 
-
-
 namespace WebPokerVideoGame.App2.ViewModels.Accounts
 {
     public class RegistrationValidationVM : AbstractValidator<RegistrationVM>
@@ -33,7 +31,7 @@ namespace WebPokerVideoGame.App2.ViewModels.Accounts
                 .Matches(@"[\@\!\?\*\.]+").WithMessage("Your password must contain at least one (@!? *.).");
 
             RuleFor(x => x.ConfirmPassword).Equal(c =>  c.Password).WithMessage("Confirm password must be equal to password");
-            _httpClient = httpClient; 
+            _httpClient = httpClient;
         }
 
         public Func<object, string, Task<IEnumerable<string>>> ValidateValue => async (model, propertyName) =>

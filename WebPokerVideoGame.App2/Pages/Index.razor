@@ -1,13 +1,74 @@
 ﻿@page "/"
+@inject IJSRuntime JSRuntime
 
 <PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
+<head>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-<div class="alert alert-warning" role="alert">
-    Before authentication will function correctly, you must configure your provider details in <code>Program.cs</code>
-</div>
+        .carousel-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+    </style>
+</head>
 
-Welcome to your new app.
+<body>
+    @* TO DO: add here carousel or something to not scare average users *@
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+    <h1>Welcome in Web Poker Video Game</h1>
+
+    <div class="alert alert-warning" role="alert">
+        Here will be some nice carousel showing photos of the upcoming poker events
+    </div>
+
+    Let's lose some money today!
+
+    <h3>Carousel</h3>
+
+    <div class="carousel-container">
+        <div id="@carouselName" class="carousel slide" data-bs-ride="carousel" data-bs-wrap="true" data-bs-interval="2000" data-bs-pause="false">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://picsum.photos/id/196/1920/1080" class="d-block mx-auto" alt="..." style="height: 50vh;">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://picsum.photos/id/1057/1920/1080" class="d-block mx-auto" alt="..." style="height: 50vh;">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://picsum.photos/id/1067/1920/1080" class="d-block mx-auto" alt="..." style="height: 50vh;">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</body>
+
+@code {
+    const string carouselName = "carouselExampleIndicators";
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        object[] args = { carouselName };
+        await JSRuntime.InvokeVoidAsync("startCarousel", args); 
+    }
+}

@@ -84,7 +84,7 @@ namespace PokerVideoGame.Api.Models
 
         //public List<byte[]> InitListOfPictures()
         //{
-        //    string pathToImages = Path.Combine(_env.WebRootPath, @"wwwroot\PNG-cards-1.3"); // Adjust the subfolder as needed
+        //    string pathToImages = Path.Combine(_env.WebRootPath, @"wwwroot\PNG-cards-1.3");
         //    byte[] imgData = System.IO.File.ReadAllBytes(pathToImages);
         //    var ext = new List<string> { ".jpg", ".gif", ".png" };
         //    List<byte[]> imageData = new List<byte[]>();

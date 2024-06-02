@@ -42,14 +42,11 @@
 <div class="card-deck">
     @if (IsTableNull())
     {
-
-
         <div class="row justify-content-center">
             <div class="col-md-2 m-3" style="display: inline-block">
                 <div class="d-flex justify-content-center">
                     <img class="imageThumbnail" src="@($"data:image/png;base64,{@Convert.ToBase64String(table[0].ImageData)}")" alt="PNG Image" />
                 </div>
-
 
                 @if (table[0].CardValue.ToString() == "0" && table[0].CardSuit.ToString() == "Clubs")
                 {
@@ -127,15 +124,13 @@
             </div>
 
             <div class="col-md-1 mt-4 mr-6">
-                <button class="btn btn-primary" disabled=@dealing @onclick="DealCards">DEAL</button>
+                <button class="btn btn-primary" disabled=@dealing @onclick="DealCardsAsync">DEAL</button>
             </div>
 
             <div class="col-md-3 mt-4 ml-6">
-                <button class="btn btn-primary" disabled=@dealing @onclick="ChangeWage">ADD COIN</button>
+                <button class="btn btn-primary" disabled=@dealing @onclick="ChangeWageAsync">ADD COIN</button>
             </div>
         </div>
-
-
     }
 
     else
@@ -229,7 +224,7 @@
         cardsToChange[cardNumber] = !cardsToChange[cardNumber];
     }
 
-    private async Task DealCards()
+    private async Task DealCardsAsync()
     {
         if (accountBalance < wages[wageCounter])
         {
@@ -332,7 +327,7 @@
         }
     }
 
-    private void ChangeWage()
+    private async void ChangeWageAsync()
     {
         if (wageCounter < 7)
         {

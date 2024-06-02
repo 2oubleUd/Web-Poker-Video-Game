@@ -1,8 +1,10 @@
 ﻿@page "/login"
+
 @using System.Text.Json;
 @using System.Text;
 @using System.Net;
 @using WebPokerVideoGame.App2.Shared.Providers;
+
 @inject HttpClient _http;
 @inject ILocalStorageService _localStorageService;
 @inject AuthenticationStateProvider _authStateProvider;
@@ -25,7 +27,6 @@
                             <p>@ApiErrorMessage</p>
                         </MudChip>
                     </div>
-
                 }
 
                 <MudTextField @bind-Value="model.Email"
@@ -37,9 +38,7 @@
                               For="@(() => model.Password)"
                               Immediate="true"
                               Label="Password" InputType="InputType.Password" />
-
             </MudCardContent>
-
         </MudForm>
 
         <MudCardActions>
@@ -47,8 +46,6 @@
         </MudCardActions>
         
     </MudCard>
-
-
 </div>
 
 
