@@ -1,2 +1,2 @@
 # Web-Poker-Video-Game
-A lightweight and intuitive web-based poker game designed for players of all levels. Enjoy the excitement of poker without the need for downloads or installations. Connect with players worldwide, compete in tournaments, and experience authentic gameplay. 
+This is a game created in Blazor of Poker Video Game based from slots in real casinos from United States. Project implements JWT Authentication and CRUD methods in WebApi to provide signing in and creating accounts for players. Whole logic of the poker game is implemented in WebPokerVideoGame.App2. 
