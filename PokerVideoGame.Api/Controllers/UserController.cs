@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PokerVideoGame.Api.Models;
 using PokerVideoGame.Models.Data.Dtos;
@@ -18,18 +19,36 @@ namespace PokerVideoGame.Api.Controllers
         private readonly IUserRepository _userRepository;
         private readonly ICardRepository _cardRepository;
 
+        private readonly IConfiguration _configuration;
+
         public UserController(IUserRepository userRepository, IHttpContextAccessor httpContextAccessor,
-            ICardRepository cardRepository)
+            ICardRepository cardRepository, IConfiguration configuration)
         {
             _userRepository = userRepository;
             _cardRepository = cardRepository;
             _httpContextAccessor = httpContextAccessor;
+
+            _configuration = configuration;
 
             Console.WriteLine("User Id: " +
             _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier));
             Console.WriteLine("Username: " +
                 _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.Name));
 
+        }
+
+        [HttpGet("test-connection")]
+        public IActionResult TestConnection()
+        {
+            var options = new DbContextOptionsBuilder<AppDbContext>()
+                .UseSqlServer(_configuration.GetConnectionString("DBConnection"))
+                .Options;
+
+            using (var context = new AppDbContext(options))
+            {
+                var canConnect = context.Database.CanConnect();
+                return Ok($"Can connect to database: {canConnect}");
+            }
         }
 
         [HttpGet("get-user-id")]
