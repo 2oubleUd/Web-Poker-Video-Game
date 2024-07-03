@@ -203,3 +203,8 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 *.vsidx
+*.json
+*.bin
+*.v2
+*.wsuo
+*.dtbcatche
