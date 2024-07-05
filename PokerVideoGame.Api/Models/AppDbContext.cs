@@ -9,7 +9,7 @@ using Web_Poker_Video_Game.Services;
 
 namespace PokerVideoGame.Api.Models
 {
-    public class AppDbContext : IdentityDbContext
+    public class AppDbContext : IdentityDbContext // DbContext
     {
         private readonly IWebHostEnvironment _env;
         private List<Card> cards;
@@ -22,7 +22,7 @@ namespace PokerVideoGame.Api.Models
         public DbSet<User> User { get; set; }
         public DbSet<UserRefreshToken> userRefreshToken { get; set; }
         public DbSet<Card> Deck { get; set; }
-        
+
         // it's for seeding DbSet by data 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -55,8 +55,8 @@ namespace PokerVideoGame.Api.Models
             //modelBuilder.Entity<GameHistory>()
             //    .HasKey(g => g.Id); // Assuming Id is the primary key 
 
-            //modelBuilder.Entity<Card>()
-            //    .HasKey(c => c.Id);
+            modelBuilder.Entity<Card>()
+                .HasKey(c => c.Id);
 
 
             //for (int i = 0; i < 52; i++)
@@ -84,7 +84,9 @@ namespace PokerVideoGame.Api.Models
 
         //public List<byte[]> InitListOfPictures()
         //{
-        //    string pathToImages = Path.Combine(_env.WebRootPath, @"wwwroot\PNG-cards-1.3");
+        //    //string pathToDirectory = Environment.CurrentDirectory;
+        //    string pathToImages = Path.Combine(Environment.CurrentDirectory, @"wwwroot\PNG-cards-1.3");
+        //    //File.SetAttributes(pathToImages, FileAttributes.Normal);
         //    byte[] imgData = System.IO.File.ReadAllBytes(pathToImages);
         //    var ext = new List<string> { ".jpg", ".gif", ".png" };
         //    List<byte[]> imageData = new List<byte[]>();

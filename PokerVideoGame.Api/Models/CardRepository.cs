@@ -37,57 +37,12 @@ namespace PokerVideoGame.Api.Models
             {
                 _appDbContext.Deck.Add(new Card
                 {
-                    Id = i + 1,
                     CardSuit = cards[i].CardSuit,
                     CardValue = cards[i].CardValue,
                     ImageData = cards[i].ImageData
                 });
-
                 _appDbContext.SaveChanges();
-
             }
-
-        }
-
-        public async Task<List<byte[]>> InitListOfPicturesAsync()
-        {
-            byte[] imgData = System.IO.File.ReadAllBytes(pathToImages);
-            var ext = new List<string> { ".jpg", ".gif", ".png" };
-            List<byte[]> imageData = new List<byte[]>();
-
-
-            List<string> listOfImages = new List<string>(Directory.GetFiles(pathToImages, "*.*", SearchOption.AllDirectories));
-
-
-          
-            //foreach (string imagePath in listOfImages)
-            //{
-            //    if (ext.Any(e => imagePath.EndsWith(e, StringComparison.OrdinalIgnoreCase)))
-            //    {
-            //        try
-            //        {
-            //            imageData.Add(System.IO.File.ReadAllBytes(imagePath));
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            // Handle or log the exception.
-            //        }
-            //    }
-            //}
-
-            if (ext.Any(e => listOfImages[52].EndsWith(e, StringComparison.OrdinalIgnoreCase)))
-            {
-                try
-                {
-                    imageData.Add(System.IO.File.ReadAllBytes(listOfImages[52]));
-                }
-                catch (Exception ex)
-                {
-                    // Handle or log the exception.
-                }
-            }
-
-            return imageData;
         }
 
         public List<byte[]> InitListOfPictures()
@@ -114,12 +69,12 @@ namespace PokerVideoGame.Api.Models
             {
                 foreach (SuitOfCard s in Enum.GetValues(typeof(SuitOfCard)))
                 {
-                    cards.Add(new Card { CardSuit = s, CardValue = v, ImageData = cardImage[cardNumber] });
+                    cards.Add(new Card { /*Id = cardNumber + 1,*/ CardSuit = s, CardValue = v, ImageData = cardImage[cardNumber] });
                     cardNumber++;
                 }
             }
 
-            cards.Add(new Card { ImageData = cardImage[52] });
+            cards.Add(new Card { ImageData = cardImage[52] }); // Add blank card at the end
 
             return cards;
         }

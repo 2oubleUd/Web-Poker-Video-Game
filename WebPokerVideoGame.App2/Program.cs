@@ -10,6 +10,7 @@ using WebPokerVideoGame.App2.Interfaces;
 using WebPokerVideoGame.App2.ViewModels;
 using Blazored.Modal;
 using Blazored.Toast;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -17,8 +18,10 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-// part 3 tutoriala
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7116/") });
+// coonection to API by ApiConection field form appsettings.json
+builder.Services.AddScoped(sp => new HttpClient { 
+    BaseAddress = new Uri(builder.Configuration.GetSection("ConnectionStrings:ApiConnection").Value)
+});
 
 // Add services to have an ability to use Api function through Web Application
 //builder.Services.AddHttpClient<IPlayerService, PlayerService>(client =>
@@ -27,8 +30,6 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https:/
 //});
 
 builder.Services.AddHttpClient();
-
-
 
 builder.Services.AddTransient<IPlayerService, PlayerService>();
 builder.Services.AddTransient<IUserService, UserService>();

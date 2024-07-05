@@ -55,7 +55,6 @@ namespace PokerVideoGame.Api.Controllers
         public IActionResult GetUserId()
         {
             var result = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            //var result = _userRepository.CheckUserUniqueEmail();
 
             return Ok(result);
         }
@@ -88,6 +87,7 @@ namespace PokerVideoGame.Api.Controllers
             {
                 return BadRequest(result.ErrorMessage);
             }
+
             return Ok(result.jwtTokenRespone);
         }
 
@@ -100,6 +100,7 @@ namespace PokerVideoGame.Api.Controllers
                 return Ok(result.tokenResponse);
             }
             ModelState.AddModelError("LoginError", "Invalid Credentials");
+
             return BadRequest(ModelState);
         }
 
@@ -109,13 +110,11 @@ namespace PokerVideoGame.Api.Controllers
             await _userRepository.LogoutUserAsync(logoutRequestDto);
 
             return Ok();
-
         }
 
         [HttpGet("current/{userId:int}")]
         public async Task<IActionResult> GetCurrentUser(int userId)
         {
-        
             User user = await _userRepository.GetUserAsync(userId);
             if(user != null)
             {
@@ -135,12 +134,10 @@ namespace PokerVideoGame.Api.Controllers
                 return Ok(await _userRepository.GetUsersListAsync());
             }
 
-            
             return StatusCode(StatusCodes.Status500InternalServerError, 
                 "Error retrieving list of users");
         }
 
-        // to do: implement method for adding money for user
         [HttpPut("account")]
         public async Task<ActionResult<User>> PutUserAsync(UpdateUserMoneyDto updateRequest)
         {
@@ -148,7 +145,7 @@ namespace PokerVideoGame.Api.Controllers
             {
                 var user = await _userRepository.GetUserAsync(updateRequest.UserId);
 
-                if(user == null)
+                if (user == null)
                 {
                     return NotFound($"User with Id: {updateRequest.UserId} not found");
                 }
@@ -156,40 +153,11 @@ namespace PokerVideoGame.Api.Controllers
                 return await _userRepository.UpdateUserAsync(updateRequest);
             }
 
-            catch(Exception)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
                     "Error updating data");
             }
-        }
-
-        [HttpPut("create-deck")]
-        public async Task<IActionResult> CreateDeck()
-        {
-            try
-            {
-                await _cardRepository.SeedCardsAsync();
-                return Ok("Deck created successfully!");
-            }
-            catch (Exception ex)
-            {
-                // Log or handle the exception appropriately.
-                return StatusCode(500, "Internal Server Error");
-            }
-        }
-
-        [HttpGet("get-deck")]
-        public async Task<IActionResult> GetDeckAsync()
-        {
-            var result = await _cardRepository.GetDeckOfCardsAsync();
-
-            if (!result.IsNullOrEmpty())
-            {
-                return Ok(result);
-            }
-
-            return StatusCode(StatusCodes.Status500InternalServerError,
-                "Error retrieving deck of cards");
         }
     }
 }

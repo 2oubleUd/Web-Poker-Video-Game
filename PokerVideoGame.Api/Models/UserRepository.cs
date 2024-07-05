@@ -76,7 +76,7 @@ namespace PokerVideoGame.Api.Models
         }
 
         public bool CheckUserUniqueEmail(string email)
-        {
+        {            
             var userAlreadyExists = _appDbContext.User.Any(x => x.Email.ToLower() == email.ToLower());
 
             return !userAlreadyExists;
@@ -159,7 +159,6 @@ namespace PokerVideoGame.Api.Models
             };
 
             return (true, result);
-
         }
 
         private bool PasswordVerification(string plainPassword, string dbPassword)
@@ -179,7 +178,6 @@ namespace PokerVideoGame.Api.Models
                     return false;
                 }
             }
-
             return true;
         }
 
@@ -195,7 +193,6 @@ namespace PokerVideoGame.Api.Models
 
                 return result;
             }
-
             return null;
         }
 
@@ -203,7 +200,6 @@ namespace PokerVideoGame.Api.Models
         {
             return await _appDbContext.User.ToListAsync();
         }
-
 
         public async Task<(string ErrorMessage, JwtTokenResponseDto jwtTokenRespone)> RenewTokenAsync(RenewTokenRequestDto renewTokenRequest)
         {
@@ -231,15 +227,11 @@ namespace PokerVideoGame.Api.Models
             };
 
             return ("", result);
-
         }
 
         public async Task<User> GetUserAsync(int userId)
         {
-
             var result = await _appDbContext.User.Where(u => u.Id == userId).FirstOrDefaultAsync();
-
-
             return result;
         }
 
@@ -248,14 +240,11 @@ namespace PokerVideoGame.Api.Models
             var tokenToDelete = await _appDbContext.userRefreshToken.Where(x => x.UserId == logoutRequest.UserId
             && x.Token == logoutRequest.RefreshToken).FirstOrDefaultAsync();
 
-            if(tokenToDelete != null)
+            if (tokenToDelete != null)
             {
                 _appDbContext.Remove(tokenToDelete);
                 await _appDbContext.SaveChangesAsync();
             }
-
         }
-
-        
     }
 }
