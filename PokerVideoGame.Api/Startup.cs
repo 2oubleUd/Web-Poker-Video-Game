@@ -37,8 +37,6 @@ namespace PokerVideoGame.Api
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>();
 
-            //services.AddScoped<IPlayerRepository, PlayerRepository>();
-
             services.AddHttpContextAccessor();
 
             services.AddControllers();
@@ -66,6 +64,8 @@ namespace PokerVideoGame.Api
             {
                 endpoints.MapControllers();
             });
+
+
         }
     }
 }

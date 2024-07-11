@@ -3,13 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\Web-Poker-Video-Game\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4F2A58D5-0A16-4137-BC04-63AADF0AAE74}|..\\PokerVideoGame.Api\\PokerVideoGame.Api.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\pokervideogame.api\\controllers\\cardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F2A58D5-0A16-4137-BC04-63AADF0AAE74}|..\\PokerVideoGame.Api\\PokerVideoGame.Api.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\pokervideogame.api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F2A58D5-0A16-4137-BC04-63AADF0AAE74}|..\\PokerVideoGame.Api\\PokerVideoGame.Api.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\pokervideogame.api\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8B863CA5-A541-48D5-AD84-61860BC37C44}|..\\WebPokerVideoGame.App2\\WebPokerVideoGame.App2.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\webpokervideogame.app2\\pages\\game.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4F2A58D5-0A16-4137-BC04-63AADF0AAE74}|..\\PokerVideoGame.Api\\PokerVideoGame.Api.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\pokervideogame.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -18,10 +12,10 @@
       "AbsoluteMoniker": "D:0:0:{4F2A58D5-0A16-4137-BC04-63AADF0AAE74}|..\\PokerVideoGame.Api\\PokerVideoGame.Api.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\pokervideogame.api\\models\\cardrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4F2A58D5-0A16-4137-BC04-63AADF0AAE74}|..\\PokerVideoGame.Api\\PokerVideoGame.Api.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\pokervideogame.api\\models\\icardrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4F2A58D5-0A16-4137-BC04-63AADF0AAE74}|..\\PokerVideoGame.Api\\PokerVideoGame.Api.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\pokervideogame.api\\models\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{490706A5-B63D-4FEC-992E-7889FBD9960F}|..\\PokerVideoGame.Models\\PokerVideoGame.Models.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\pokervideogame.models\\card.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4F2A58D5-0A16-4137-BC04-63AADF0AAE74}|..\\PokerVideoGame.Api\\PokerVideoGame.Api.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\pokervideogame.api\\models\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,33 +25,47 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "..\\PokerVideoGame.Api\\Controllers\\UserController.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Controllers\\UserController.cs",
-              "RelativeToolTip": "..\\PokerVideoGame.Api\\Controllers\\UserController.cs",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAABwAAAAgAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T14:58:20.156Z",
+              "DocumentIndex": 0,
+              "Title": "Game.razor",
+              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Pages\\Game.razor",
+              "RelativeDocumentMoniker": "..\\WebPokerVideoGame.App2\\Pages\\Game.razor",
+              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Pages\\Game.razor",
+              "RelativeToolTip": "..\\WebPokerVideoGame.App2\\Pages\\Game.razor",
+              "ViewState": "AQIAAKoAAAAAAAAAAAAAALoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-11T21:48:06.572Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CardController.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Controllers\\CardController.cs",
-              "RelativeDocumentMoniker": "..\\PokerVideoGame.Api\\Controllers\\CardController.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Controllers\\CardController.cs*",
-              "RelativeToolTip": "..\\PokerVideoGame.Api\\Controllers\\CardController.cs*",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAA0AAAAOAAAA",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Program.cs",
+              "RelativeDocumentMoniker": "..\\PokerVideoGame.Api\\Program.cs",
+              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Program.cs",
+              "RelativeToolTip": "..\\PokerVideoGame.Api\\Program.cs",
+              "ViewState": "AQIAADMAAAAAAAAAAAAYwEIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T15:48:56.247Z",
+              "WhenOpened": "2024-07-11T20:25:12.922Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CardRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Models\\CardRepository.cs",
+              "RelativeDocumentMoniker": "..\\PokerVideoGame.Api\\Models\\CardRepository.cs",
+              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Models\\CardRepository.cs",
+              "RelativeToolTip": "..\\PokerVideoGame.Api\\Models\\CardRepository.cs",
+              "ViewState": "AQIAAEgAAAAAAAAAAAArwE0AAAA/AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-11T20:40:42.67Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
@@ -75,67 +83,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Startup.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Startup.cs",
-              "RelativeDocumentMoniker": "..\\PokerVideoGame.Api\\Startup.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Startup.cs",
-              "RelativeToolTip": "..\\PokerVideoGame.Api\\Startup.cs",
-              "ViewState": "AQIAAB0AAAAAAAAAAAAgwCsAAAAmAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T16:06:08.577Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Program.cs",
-              "RelativeDocumentMoniker": "..\\PokerVideoGame.Api\\Program.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Program.cs",
-              "RelativeToolTip": "..\\PokerVideoGame.Api\\Program.cs",
-              "ViewState": "AQIAADYAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Title": "DbInitializer.cs",
+              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Models\\DbInitializer.cs",
+              "RelativeDocumentMoniker": "..\\PokerVideoGame.Api\\Models\\DbInitializer.cs",
+              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Models\\DbInitializer.cs",
+              "RelativeToolTip": "..\\PokerVideoGame.Api\\Models\\DbInitializer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACQAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T16:06:02.845Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Card.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Models\\Card.cs",
-              "RelativeDocumentMoniker": "..\\PokerVideoGame.Models\\Card.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Models\\Card.cs",
-              "RelativeToolTip": "..\\PokerVideoGame.Models\\Card.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T15:47:12.876Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ICardRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Models\\ICardRepository.cs",
-              "RelativeDocumentMoniker": "..\\PokerVideoGame.Api\\Models\\ICardRepository.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Models\\ICardRepository.cs",
-              "RelativeToolTip": "..\\PokerVideoGame.Api\\Models\\ICardRepository.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAA2AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T15:46:13.481Z",
+              "WhenOpened": "2024-07-11T20:27:11.592Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "CardRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Models\\CardRepository.cs",
-              "RelativeDocumentMoniker": "..\\PokerVideoGame.Api\\Models\\CardRepository.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Models\\CardRepository.cs",
-              "RelativeToolTip": "..\\PokerVideoGame.Api\\Models\\CardRepository.cs",
-              "ViewState": "AQIAAEYAAAAAAAAAAAAAAE4AAAAZAAAA",
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Models\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "..\\PokerVideoGame.Api\\Models\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Models\\AppDbContext.cs",
+              "RelativeToolTip": "..\\PokerVideoGame.Api\\Models\\AppDbContext.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAiwBgAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-05T15:17:01.391Z",
+              "WhenOpened": "2024-07-11T20:25:05.556Z",
               "EditorCaption": ""
             }
           ]

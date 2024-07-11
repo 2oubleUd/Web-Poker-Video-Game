@@ -7,7 +7,6 @@ public class CardService : ICardService
 {
     private readonly HttpClient _httpClient;
 
-    
     public CardService(HttpClient httpClient)
     {
         _httpClient = httpClient;
@@ -18,14 +17,12 @@ public class CardService : ICardService
         try
         { 
             return await _httpClient.GetFromJsonAsync<Card[]>("api/user/get-deck"); ;
-
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error fetching deck of cards: {ex.Message} ");
             throw;
         }
-
     }
 
     public async Task<List<Card>> PrepareDeck()

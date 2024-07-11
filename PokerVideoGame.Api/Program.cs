@@ -26,8 +26,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICardRepository, CardRepository>();
 
-//builder.Services.AddScoped<IPlayerRepository, PlayerRepository>(); // I needed to add it from Startup.cs
-
 builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
 
 
@@ -63,5 +61,21 @@ app.UseRouting(); // If you want to explicitly enable endpoint routing
 
 app.MapControllers();
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    try
+    {
+        var context = services.GetRequiredService<AppDbContext>();
+        var cardRepository = services.GetRequiredService<ICardRepository>();
+        await DbInitializer.Initialize(context, cardRepository);
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex.Message, "An error has occured seeding the DB");
+    }
+}
 
 app.Run();

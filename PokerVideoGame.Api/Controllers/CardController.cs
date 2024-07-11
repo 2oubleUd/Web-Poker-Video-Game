@@ -19,9 +19,9 @@ namespace PokerVideoGame.Api.Controllers
         [HttpPut("create-deck")]
         public async Task<IActionResult> CreateDeck()
         {
-            var deck = _cardRepository.GetDeckOfCardsAsync();
+            var deck = await _cardRepository.GetDeckOfCardsAsync();
 
-            if(deck != null)
+            if (deck == null || !deck.Any())
             {
                 try
                 {
@@ -31,26 +31,31 @@ namespace PokerVideoGame.Api.Controllers
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Exception during deck creating: {ex}");
-                    // Log or handle the exception appropriately.
                     return StatusCode(500, "Internal Server Error");
                 }
             }
-
             return BadRequest("Deck is already created!");
         }
 
         [HttpGet("get-deck")]
         public async Task<IActionResult> GetDeckAsync()
         {
-            var result = await _cardRepository.GetDeckOfCardsAsync();
-
-            if (!result.IsNullOrEmpty())
+            try
             {
-                return Ok(result);
-            }
+                var result = await _cardRepository.GetDeckOfCardsAsync();
 
-            return StatusCode(StatusCodes.Status500InternalServerError,
+                if (result != null && result.Any())
+                {
+                    return Ok(result);
+                }
+
+                return NotFound("Deck is empty");
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
                 "Error retrieving deck of cards");
+            }
         }
     }
 }

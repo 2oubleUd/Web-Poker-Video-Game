@@ -34,7 +34,6 @@ namespace PokerVideoGame.Api.Controllers
             _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier));
             Console.WriteLine("Username: " +
                 _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.Name));
-
         }
 
         [HttpGet("test-connection")]

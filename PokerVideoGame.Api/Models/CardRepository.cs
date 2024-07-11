@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Extensions;
 using PokerVideoGame.Models;
 using ServiceStack.Text;
 using System;
@@ -24,15 +25,14 @@ namespace PokerVideoGame.Api.Models
 
             if (!Directory.Exists(pathToImages))
             {
-                // Handle or log the situation
                 throw new DirectoryNotFoundException($"Directory not found: {pathToImages}");
             }
         }
 
         public async Task SeedCardsAsync()
         {
-            List<Card> cards = await SetUpDeckAsync();
-
+            List<Card> cards = (await SetUpDeckAsync()).ToList();
+            
             for (int i = 0; i < cards.Count; i++)
             {
                 _appDbContext.Deck.Add(new Card
@@ -59,7 +59,7 @@ namespace PokerVideoGame.Api.Models
             return imgData;
         }
 
-        public async Task<List<Card>> SetUpDeckAsync()
+        public async Task<IEnumerable<Card>> SetUpDeckAsync()
         {
             int cardNumber = 0;
             List<byte[]> cardImage = InitListOfPictures();
@@ -69,21 +69,18 @@ namespace PokerVideoGame.Api.Models
             {
                 foreach (SuitOfCard s in Enum.GetValues(typeof(SuitOfCard)))
                 {
-                    cards.Add(new Card { /*Id = cardNumber + 1,*/ CardSuit = s, CardValue = v, ImageData = cardImage[cardNumber] });
+                    cards.Add(new Card { CardSuit = s, CardValue = v, ImageData = cardImage[cardNumber] });
                     cardNumber++;
                 }
             }
 
             cards.Add(new Card { ImageData = cardImage[52] }); // Add blank card at the end
-
-            return cards;
+            return await Task.FromResult(cards.AsEnumerable());
         }
 
         public async Task<IEnumerable<Card>> GetDeckOfCardsAsync()
         {
             return await _appDbContext.Deck.ToListAsync();
         }
-
-
     }
 }

@@ -6,5 +6,6 @@ namespace PokerVideoGame.Api.Models
     {
         Task SeedCardsAsync();
         Task<IEnumerable<Card>> GetDeckOfCardsAsync();
+        Task<IEnumerable<Card>> SetUpDeckAsync();
     }
 }

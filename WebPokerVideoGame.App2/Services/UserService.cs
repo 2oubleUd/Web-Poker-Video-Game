@@ -21,7 +21,6 @@ namespace WebPokerVideoGame.App2.Services
 
         public async Task<IEnumerable<User>> GetUsersAsync()
         {
-            
             try
             {
                 return await _httpClient.GetFromJsonAsync<User[]>("api/user/rankings");
@@ -44,7 +43,6 @@ namespace WebPokerVideoGame.App2.Services
                 Console.WriteLine($"Error fetching user with Id: {userId}");
                 throw;
             }
-
         }
     
         public async Task UpdateUsersAccountBalance(List<Claim> claims, int newValue)
