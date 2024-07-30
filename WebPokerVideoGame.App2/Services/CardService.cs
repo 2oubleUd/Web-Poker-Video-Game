@@ -15,11 +15,12 @@ public class CardService : ICardService
     public async Task<IEnumerable<Card>> GetDeckOfCardsAsync()
     {
         try
-        { 
-            return await _httpClient.GetFromJsonAsync<Card[]>("api/user/get-deck"); ;
-        }
-        catch (Exception ex)
         {
+            return await _httpClient.GetFromJsonAsync<Card[]>("api/card/get-deck");
+        }
+        catch (Exception ex) // to do: write handling Error 404
+        {
+            
             Console.WriteLine($"Error fetching deck of cards: {ex.Message} ");
             throw;
         }

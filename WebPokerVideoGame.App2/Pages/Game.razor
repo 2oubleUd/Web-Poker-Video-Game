@@ -7,7 +7,6 @@
 
 @inject IToastService toastService;
 
-
 @inject GameService gameService;
 @inject ICardService cardService;
 @inject RankingService rankingService;
@@ -27,9 +26,7 @@
     </style>
 </head>
 
-
 <h3>PokerCards</h3>
-
 
 <h6> Selected wage: @wages[wageCounter]</h6>
 
@@ -137,9 +134,7 @@
     {
         <div class="spinner"></div>
     }
-
 </div>
-
 
 @code
 {
@@ -157,7 +152,6 @@
 
     public int wageCounter = 0;
 
-    // to do: fix startGame bcs when user doesn't have enough money for bet, hold btns for cards are changing when btn deal is clicked
     public bool startGame = true;
 
     public User user { get; set; }
@@ -184,7 +178,6 @@
             table[i] = deckOfCards.Last();
         }
         deckOfCards.RemoveAt(deckOfCards.Count - 1);
-
     }
 
     public async Task DisplayUserInfo()
@@ -233,10 +226,8 @@
 
         if (!startGame && accountBalance >= wages[wageCounter])
         {
-
             if (dealing)
             {
-
                 return; // If already dealing, ignore subsequent clicks
             }
 
@@ -263,7 +254,6 @@
             delayTimer.Elapsed += async (sender, e) => await ResetGame();
             delayTimer.AutoReset = false;
             delayTimer.Start();
-            
         }
 
         // to do: prepare function to check does user has enough money to pay for bet
@@ -272,9 +262,7 @@
             await PrepareTable();
             startGame = !startGame;
         }
-
     }
-
 
     private bool IsTableNull()
     {
@@ -338,7 +326,4 @@
             wageCounter = 0;
         }
     }
-
-
-
 }
