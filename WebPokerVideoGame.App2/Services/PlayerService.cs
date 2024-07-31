@@ -1,9 +1,9 @@
 ﻿using PokerVideoGame.Models;
 using System.Net.Http;
 using System.Net.Http.Json;
-using WebPokerVideoGame.App2.Interfaces;
+using WebPokerVideoGame.App.Interfaces;
 
-namespace WebPokerVideoGame.App2.Services
+namespace WebPokerVideoGame.App.Services
 {
     public class PlayerService : IPlayerService
     {

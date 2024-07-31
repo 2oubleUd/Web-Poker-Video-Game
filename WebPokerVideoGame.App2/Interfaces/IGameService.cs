@@ -1,7 +1,7 @@
 ﻿using PokerVideoGame.Models;
-using static WebPokerVideoGame.App2.Services.GameService;
+using static WebPokerVideoGame.App.Services.GameService;
 
-namespace WebPokerVideoGame.App2.Interfaces
+namespace WebPokerVideoGame.App.Interfaces
 {
     public interface IGameService
     {

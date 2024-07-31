@@ -3,7 +3,7 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading;
 
-namespace WebPokerVideoGame.App2.ViewModels.Accounts
+namespace WebPokerVideoGame.App.ViewModels.Accounts
 {
     public class RegistrationValidationVM : AbstractValidator<RegistrationVM>
     {

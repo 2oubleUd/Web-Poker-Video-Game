@@ -1,7 +1,7 @@
 ﻿using PokerVideoGame.Models;
 using System.ComponentModel;
 
-namespace WebPokerVideoGame.App2.Interfaces
+namespace WebPokerVideoGame.App.Interfaces
 {
     //public interface IGameHistoryService
     //{

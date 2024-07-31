@@ -6,9 +6,9 @@ using System.Net.Http.Json;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
-using WebPokerVideoGame.App2.Interfaces;
+using WebPokerVideoGame.App.Interfaces;
 
-namespace WebPokerVideoGame.App2.Services
+namespace WebPokerVideoGame.App.Services
 {
     public class UserService : IUserService
     {

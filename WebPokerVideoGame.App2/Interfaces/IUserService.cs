@@ -2,7 +2,7 @@
 using PokerVideoGame.Models.Data.Entites;
 using System.Security.Claims;
 
-namespace WebPokerVideoGame.App2.Interfaces
+namespace WebPokerVideoGame.App.Interfaces
 {
     public interface IUserService
     {

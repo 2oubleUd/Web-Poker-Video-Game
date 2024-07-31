@@ -7,11 +7,11 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
-using WebPokerVideoGame.App2.ViewModels.Accounts;
+using WebPokerVideoGame.App.ViewModels.Accounts;
 
 
 
-namespace WebPokerVideoGame.App2.Shared.Providers
+namespace WebPokerVideoGame.App.Shared.Providers
 {
     public class CustomHttpHandler : DelegatingHandler
     {

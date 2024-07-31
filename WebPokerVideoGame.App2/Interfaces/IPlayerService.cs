@@ -1,6 +1,6 @@
 ﻿using PokerVideoGame.Models;
 
-namespace WebPokerVideoGame.App2.Interfaces
+namespace WebPokerVideoGame.App.Interfaces
 {
     public interface IPlayerService
     {

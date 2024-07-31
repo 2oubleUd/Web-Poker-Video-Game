@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace WebPokerVideoGame.App2.ViewModels.Accounts
+namespace WebPokerVideoGame.App.ViewModels.Accounts
 {
     public class LoginValidationVM : AbstractValidator<LoginVM>
     {

@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokerVideoGame.Api", "..\Po
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokerVideoGame.Models", "..\PokerVideoGame.Models\PokerVideoGame.Models.csproj", "{490706A5-B63D-4FEC-992E-7889FBD9960F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebPokerVideoGame.App2", "..\WebPokerVideoGame.App2\WebPokerVideoGame.App2.csproj", "{8B863CA5-A541-48D5-AD84-61860BC37C44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebPokerVideoGame.App", "..\WebPokerVideoGame.App2\WebPokerVideoGame.App.csproj", "{8B863CA5-A541-48D5-AD84-61860BC37C44}"
 	ProjectSection(ProjectDependencies) = postProject
 		{490706A5-B63D-4FEC-992E-7889FBD9960F} = {490706A5-B63D-4FEC-992E-7889FBD9960F}
 	EndProjectSection

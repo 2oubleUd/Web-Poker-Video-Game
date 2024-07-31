@@ -1,8 +1,8 @@
 ﻿using PokerVideoGame.Models;
-using WebPokerVideoGame.App2.Interfaces;
-using WebPokerVideoGame.App2.ViewModels;
+using WebPokerVideoGame.App.Interfaces;
+using WebPokerVideoGame.App.ViewModels;
 
-namespace WebPokerVideoGame.App2.Services
+namespace WebPokerVideoGame.App.Services
 {
     public class RankingService : IRankingService
     {

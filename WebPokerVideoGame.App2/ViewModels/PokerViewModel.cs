@@ -1,7 +1,7 @@
 ﻿using PokerVideoGame.Models;
 
 // Create a PokerViewModel.cs file
-namespace WebPokerVideoGame.App2.ViewModels
+namespace WebPokerVideoGame.App.ViewModels
 {
     public class PokerViewModel
     {

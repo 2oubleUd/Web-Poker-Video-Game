@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using System.Text.Json;
 
-namespace WebPokerVideoGame.App2.Shared.Providers
+namespace WebPokerVideoGame.App.Shared.Providers
 {
     public class Utility
     {

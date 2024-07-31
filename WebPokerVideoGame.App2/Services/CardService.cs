@@ -1,7 +1,7 @@
 ﻿using Microsoft.JSInterop;
 using PokerVideoGame.Models;
 using System.Net.Http.Json;
-using WebPokerVideoGame.App2.Interfaces;
+using WebPokerVideoGame.App.Interfaces;
 
 public class CardService : ICardService
 {
