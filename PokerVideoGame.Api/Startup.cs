@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using PokerVideoGame.Api.Controllers;
-using PokerVideoGame.Api.Models;
+using PokerVideoGame.Api.Data;
 
 namespace PokerVideoGame.Api
 {

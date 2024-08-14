@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using PokerVideoGame.Api.Data;
 using PokerVideoGame.Models;
 using PokerVideoGame.Models.Data.Dtos;
 using PokerVideoGame.Models.Data.Entites;
@@ -14,7 +15,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace PokerVideoGame.Api.Models
+namespace PokerVideoGame.Api.Repositories
 {
     public class UserRepository : IUserRepository
     {
@@ -76,7 +77,7 @@ namespace PokerVideoGame.Api.Models
         }
 
         public bool CheckUserUniqueEmail(string email)
-        {            
+        {
             var userAlreadyExists = _appDbContext.User.Any(x => x.Email.ToLower() == email.ToLower());
 
             return !userAlreadyExists;
@@ -204,8 +205,8 @@ namespace PokerVideoGame.Api.Models
         public async Task<(string ErrorMessage, JwtTokenResponseDto jwtTokenRespone)> RenewTokenAsync(RenewTokenRequestDto renewTokenRequest)
         {
             var existingRefreshToken = await _appDbContext.userRefreshToken
-                .Where(x => x.UserId == renewTokenRequest.UserId 
-                && x.Token == renewTokenRequest.RefreshToken && 
+                .Where(x => x.UserId == renewTokenRequest.UserId
+                && x.Token == renewTokenRequest.RefreshToken &&
                 x.ExpirationDate > DateTime.Now).FirstOrDefaultAsync();
 
             if (existingRefreshToken == null)
@@ -217,7 +218,7 @@ namespace PokerVideoGame.Api.Models
             await _appDbContext.SaveChangesAsync();
 
             var user = await _appDbContext.User.Where(x => x.Id == renewTokenRequest.UserId).FirstOrDefaultAsync();
-            
+
             string jwtAccessToken = GenerateJwtToken(user);
             string refreshToken = await GenerateRefreshToken(user.Id);
             var result = new JwtTokenResponseDto

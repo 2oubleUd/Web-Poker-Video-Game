@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PokerVideoGame.Api.Repositories;
 using PokerVideoGame.Models;
 
-namespace PokerVideoGame.Api.Models
+namespace PokerVideoGame.Api.Data
 {
     public static class DbInitializer
     {
@@ -9,7 +10,7 @@ namespace PokerVideoGame.Api.Models
         {
             context.Database.EnsureCreated();
 
-            if(context.Deck.AsNoTracking().Any())
+            if (context.Deck.AsNoTracking().Any())
             {
                 return;
             }

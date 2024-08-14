@@ -1,23 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\Web-Poker-Video-Game\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{F0E160EC-5310-49ED-867A-1A5EB10BD38E}|..\\WebPokerVideoGame.Tests\\WebPokerVideoGame.Tests.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\webpokervideogame.tests\\rankingservicetest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8B863CA5-A541-48D5-AD84-61860BC37C44}|..\\WebPokerVideoGame.App2\\WebPokerVideoGame.App.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\webpokervideogame.app2\\services\\rankingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8B863CA5-A541-48D5-AD84-61860BC37C44}|..\\WebPokerVideoGame.App2\\WebPokerVideoGame.App.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\webpokervideogame.app2\\services\\gameservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{490706A5-B63D-4FEC-992E-7889FBD9960F}|..\\PokerVideoGame.Models\\PokerVideoGame.Models.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\pokervideogame.models\\card.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8B863CA5-A541-48D5-AD84-61860BC37C44}|..\\WebPokerVideoGame.App2\\WebPokerVideoGame.App.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\webpokervideogame.app2\\interfaces\\irankingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -25,49 +9,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": -1,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "RankingServiceTest.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.Tests\\RankingServiceTest.cs",
-              "RelativeDocumentMoniker": "..\\WebPokerVideoGame.Tests\\RankingServiceTest.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.Tests\\RankingServiceTest.cs*",
-              "RelativeToolTip": "..\\WebPokerVideoGame.Tests\\RankingServiceTest.cs*",
-              "ViewState": "AQIAAC4AAAAAAAAAAAAswEEAAAArAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-13T17:20:53.129Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "RankingService.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Services\\RankingService.cs",
-              "RelativeDocumentMoniker": "..\\WebPokerVideoGame.App2\\Services\\RankingService.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Services\\RankingService.cs",
-              "RelativeToolTip": "..\\WebPokerVideoGame.App2\\Services\\RankingService.cs",
-              "ViewState": "AQIAACEAAAAAAAAAAAAYwCkAAAApAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-13T16:15:20.21Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "GameService.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Services\\GameService.cs",
-              "RelativeDocumentMoniker": "..\\WebPokerVideoGame.App2\\Services\\GameService.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Services\\GameService.cs",
-              "RelativeToolTip": "..\\WebPokerVideoGame.App2\\Services\\GameService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAFMAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-14T10:14:39.609Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -79,32 +22,6 @@
             {
               "$type": "Bookmark",
               "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "IRankingService.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Interfaces\\IRankingService.cs",
-              "RelativeDocumentMoniker": "..\\WebPokerVideoGame.App2\\Interfaces\\IRankingService.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Interfaces\\IRankingService.cs",
-              "RelativeToolTip": "..\\WebPokerVideoGame.App2\\Interfaces\\IRankingService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-13T16:15:46.332Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Card.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Models\\Card.cs",
-              "RelativeDocumentMoniker": "..\\PokerVideoGame.Models\\Card.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Models\\Card.cs",
-              "RelativeToolTip": "..\\PokerVideoGame.Models\\Card.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-13T16:35:46.04Z",
-              "EditorCaption": ""
             }
           ]
         }

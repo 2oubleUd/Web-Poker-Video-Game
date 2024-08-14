@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Extensions;
+using PokerVideoGame.Api.Data;
 using PokerVideoGame.Models;
 using ServiceStack.Text;
 using System;
@@ -8,7 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace PokerVideoGame.Api.Models
+namespace PokerVideoGame.Api.Repositories
 {
     public class CardRepository : ICardRepository
     {
@@ -32,7 +33,7 @@ namespace PokerVideoGame.Api.Models
         public async Task SeedCardsAsync()
         {
             List<Card> cards = (await SetUpDeckAsync()).ToList();
-            
+
             for (int i = 0; i < cards.Count; i++)
             {
                 _appDbContext.Deck.Add(new Card
@@ -53,7 +54,7 @@ namespace PokerVideoGame.Api.Models
             for (int i = 1; i <= 53; i++)
             {
                 pathToImages.Add(Path.Combine(_env.WebRootPath, $"PNG-cards-1.3\\{i}.png"));
-                imgData.Add(System.IO.File.ReadAllBytes(pathToImages[i - 1]));
+                imgData.Add(File.ReadAllBytes(pathToImages[i - 1]));
             }
 
             return imgData;

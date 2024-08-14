@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore;
 
-namespace PokerVideoGame.Api.Models
+namespace PokerVideoGame.Api.Data
 {
     // this class was needed because of Add-Migration InitialCreate didn't work without it
     public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
