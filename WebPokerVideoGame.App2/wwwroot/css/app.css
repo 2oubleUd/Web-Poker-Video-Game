@@ -121,6 +121,9 @@ a, .btn-link {
         content: var(--blazor-load-percentage-text, "Loading");
     }
 
+mud-appbar{
+    background-color: rgb(23 134 76) !important;
+}
 .imageThumbnail {
     height: 187px;
     width: 128px;

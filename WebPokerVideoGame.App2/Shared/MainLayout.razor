@@ -1,5 +1,6 @@
 ﻿@using System.Text.Json;
 @using System.Text;
+@using Microsoft.AspNetCore.Components.Authorization
 @using WebPokerVideoGame.App.Shared.Providers;
 @inherits LayoutComponentBase
 @inject HttpClient _httpClient;
@@ -14,8 +15,8 @@
 <MudText Class="ma-4"></MudText>
 <MudSnackbarProvider/>
 
-<MudLayout >
-    <MudAppBar>
+<MudLayout>
+    <MudAppBar Elevation="1" Style="background-image: linear-gradient( 109.6deg,  rgba(0,182,255,1) 11.2%, rgba(102,51,153,1) 91.1% );">
         <AuthorizeView>
             <Authorized>
                 <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
@@ -59,8 +60,6 @@
     WarningIcon="fa fa-warning"
     InfoIcon="fa fa-info-circle">
 </BlazoredToasts>
-
-
 
 @code{
 

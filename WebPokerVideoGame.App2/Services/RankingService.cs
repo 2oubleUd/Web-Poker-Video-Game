@@ -25,7 +25,6 @@ namespace WebPokerVideoGame.App.Services
             if (_gameService.EvaluateHand(table) == GameService.HandRank.TwoPair)
             {
                 return wage;
-
             }
 
             if (_gameService.EvaluateHand(table) == GameService.HandRank.ThreeOfKind)
@@ -55,7 +54,6 @@ namespace WebPokerVideoGame.App.Services
             if (_gameService.EvaluateHand(table) == GameService.HandRank.Straight)
             {
                 return 4 * wage;
-
             }
 
             if (_gameService.EvaluateHand(table) == GameService.HandRank.StraightFlush)

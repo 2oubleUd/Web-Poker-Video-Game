@@ -81,7 +81,6 @@ namespace WebPokerVideoGame.App.Services
                 }
             }
             return true;
-
         }
 
         private bool IsThreeOfKind(Card[] table)
