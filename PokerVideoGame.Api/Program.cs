@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Bot.Connector.Authentication;
@@ -9,6 +10,7 @@ using PokerVideoGame.Api.Repositories;
 using PokerVideoGame.Models.Data.Settings;
 using System.Configuration;
 using System.Data.Common;
+using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +19,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Add MediatR
+builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(options =>

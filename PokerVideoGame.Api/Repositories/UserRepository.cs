@@ -25,7 +25,6 @@ namespace PokerVideoGame.Api.Repositories
         {
             _appDbContext = appDbContext;
             _tokenSettings = tokenSettings.Value;
-
         }
 
         private User FromUserRegistrationModelToUserModel(UserRegistrationDto userRegistration)
@@ -37,7 +36,6 @@ namespace PokerVideoGame.Api.Repositories
                 LastName = userRegistration.LastName,
                 Password = userRegistration.Password,
                 AccountBalance = 0
-
             };
         }
 
@@ -128,6 +126,7 @@ namespace PokerVideoGame.Api.Repositories
             return token;
 
         }
+
         public async Task<(bool IsLoginSuccess, JwtTokenResponseDto tokenResponse)> LoginAsync(LoginDto loginPayload)
         {
             if (string.IsNullOrEmpty(loginPayload.Email) || string.IsNullOrEmpty(loginPayload.Password))

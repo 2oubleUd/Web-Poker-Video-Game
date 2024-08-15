@@ -11,8 +11,6 @@ namespace PokerVideoGame.Api.Data
 {
     public class AppDbContext : IdentityDbContext
     {
-        private readonly IWebHostEnvironment _env;
-        private List<Card> cards;
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {

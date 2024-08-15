@@ -7,8 +7,12 @@ using PokerVideoGame.Api.Data;
 using PokerVideoGame.Api.Repositories;
 using PokerVideoGame.Models.Data.Dtos;
 using PokerVideoGame.Models.Data.Entites;
+using MediatR;
 using ServiceStack;
 using System.Security.Claims;
+using PokerVideoGame.Api.Queries;
+using PokerVideoGame.Api.Handlers;
+using PokerVideoGame.Api.Commands;
 
 namespace PokerVideoGame.Api.Controllers
 {
@@ -19,11 +23,11 @@ namespace PokerVideoGame.Api.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUserRepository _userRepository;
         private readonly ICardRepository _cardRepository;
-
         private readonly IConfiguration _configuration;
+        private readonly IMediator _mediator;
 
         public UserController(IUserRepository userRepository, IHttpContextAccessor httpContextAccessor,
-            ICardRepository cardRepository, IConfiguration configuration)
+            ICardRepository cardRepository, IConfiguration configuration, IMediator mediator)
         {
             _userRepository = userRepository;
             _cardRepository = cardRepository;
@@ -35,6 +39,8 @@ namespace PokerVideoGame.Api.Controllers
             _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier));
             Console.WriteLine("Username: " +
                 _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.Name));
+            
+            _mediator = mediator;
         }
 
         [HttpGet("test-connection")]
@@ -51,6 +57,14 @@ namespace PokerVideoGame.Api.Controllers
             }
         }
 
+        [HttpGet("unique-user-email")]
+        public IActionResult CheckUserUniqueEmail(string email)
+        {
+            var result = _userRepository.CheckUserUniqueEmail(email);
+
+            return Ok(result);
+        }
+
         [HttpGet("get-user-id")]
         public IActionResult GetUserId()
         {
@@ -59,24 +73,48 @@ namespace PokerVideoGame.Api.Controllers
             return Ok(result);
         }
 
+        [HttpGet("current/{userId:int}")]
+        public async Task<IActionResult> GetCurrentUser(int userId)
+        {
+            var user = await _mediator.Send(new GetUserQuery() { Id = userId });
+                
+            if (user != null)
+            {
+                return Ok(await _userRepository.GetUserAsync(userId));
+            }
+
+            return StatusCode(StatusCodes.Status404NotFound,
+                $"User with Id: {userId} not found");
+        }
+
+        [HttpGet("rankings")]
+        public async Task<IActionResult> GetAllUsersAsync()
+        {
+            var result = await _mediator.Send(new GetUsersListQuery());
+
+            if (!result.IsNullOrEmpty())
+            {
+                return Ok(await _mediator.Send(new GetUsersListQuery()) /*await _userRepository.GetUsersListAsync()*/);
+            }
+
+            return StatusCode(StatusCodes.Status500InternalServerError,
+                "Error retrieving list of users");
+        }
+
         [HttpPost("register")]
         public async Task<IActionResult> UserRegistration(UserRegistrationDto userRegistration)
         {
-            var result = await _userRepository.RegisterNewUserAsync(userRegistration);
+            var result = await _mediator.Send(new RegisterNewUserCommand(userRegistration.FirstName,
+                 userRegistration.LastName, userRegistration.Email, userRegistration.Password, 
+                 userRegistration.ConfirmPassword));
+
             if (result.IsUserRegistered)
             {
                 return Ok(result.Message);
             }
             ModelState.AddModelError("Email", result.Message);
+
             return BadRequest(ModelState);
-        }
-
-        [HttpGet("unique-user-email")]
-        public IActionResult CheckUserUniqueEmail(string email)
-        {
-            var result =_userRepository.CheckUserUniqueEmail(email);
-
-            return Ok(result);
         }
 
         [HttpPost("renew-tokens")]
@@ -94,7 +132,10 @@ namespace PokerVideoGame.Api.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync(LoginDto payload)
         {
-            var result = await _userRepository.LoginAsync(payload);
+            var result = await _mediator.Send(new LoginCommand(payload.Email, payload.Password));
+
+            //var result = await _userRepository.LoginAsync(payload);
+            
             if(result.IsLoginSuccess)
             {
                 return Ok(result.tokenResponse);
@@ -112,47 +153,21 @@ namespace PokerVideoGame.Api.Controllers
             return Ok();
         }
 
-        [HttpGet("current/{userId:int}")]
-        public async Task<IActionResult> GetCurrentUser(int userId)
-        {
-            User user = await _userRepository.GetUserAsync(userId);
-            if(user != null)
-            {
-                return Ok(await _userRepository.GetUserAsync(userId));
-            }
-
-            return StatusCode(StatusCodes.Status404NotFound,
-                $"User with Id: {userId} not found");
-        }
-
-        [HttpGet("rankings")]
-        public async Task<IActionResult> GetAllUsersAsync()
-        {
-            var result = await _userRepository.GetUsersListAsync();
-            if(!result.IsNullOrEmpty())
-            {
-                return Ok(await _userRepository.GetUsersListAsync());
-            }
-
-            return StatusCode(StatusCodes.Status500InternalServerError, 
-                "Error retrieving list of users");
-        }
-
         [HttpPut("account")]
         public async Task<ActionResult<User>> PutUserAsync(UpdateUserMoneyDto updateRequest)
         {
             try
             {
-                var user = await _userRepository.GetUserAsync(updateRequest.UserId);
+                var user = await _mediator.Send(new GetUserQuery() { Id = updateRequest.UserId });
 
                 if (user == null)
                 {
                     return NotFound($"User with Id: {updateRequest.UserId} not found");
                 }
 
-                return await _userRepository.UpdateUserAsync(updateRequest);
+                return await _mediator.Send(new UpdateUserCommand(updateRequest.UserId, 
+                    updateRequest.AmountOfMoney));
             }
-
             catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError,
