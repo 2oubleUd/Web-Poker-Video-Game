@@ -23,12 +23,6 @@ builder.Services.AddScoped(sp => new HttpClient {
     BaseAddress = new Uri(builder.Configuration.GetSection("ConnectionStrings:ApiConnection").Value)
 });
 
-// Add services to have an ability to use Api function through Web Application
-//builder.Services.AddHttpClient<IPlayerService, PlayerService>(client =>
-//{
-//    client.BaseAddress = new Uri("https://localhost:7116/");
-//});
-
 builder.Services.AddHttpClient();
 
 builder.Services.AddTransient<IPlayerService, PlayerService>();
@@ -38,7 +32,6 @@ builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<GameService>();
 builder.Services.AddTransient<ICardService, CardService>();
 builder.Services.AddTransient<IRankingService, RankingService>();
-//builder.Services.AddTransient<GameHistoryService>();
 builder.Services.AddTransient<PokerViewModel>();
 
 builder.Services.AddMudServices();

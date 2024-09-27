@@ -3,37 +3,19 @@
   "WorkspaceRootPath": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\Web-Poker-Video-Game\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4F2A58D5-0A16-4137-BC04-63AADF0AAE74}|..\\PokerVideoGame.Api\\PokerVideoGame.Api.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\pokervideogame.api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8B863CA5-A541-48D5-AD84-61860BC37C44}|..\\WebPokerVideoGame.App2\\WebPokerVideoGame.App.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\webpokervideogame.app2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4F2A58D5-0A16-4137-BC04-63AADF0AAE74}|..\\PokerVideoGame.Api\\PokerVideoGame.Api.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\pokervideogame.api\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4F2A58D5-0A16-4137-BC04-63AADF0AAE74}|..\\PokerVideoGame.Api\\PokerVideoGame.Api.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\pokervideogame.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4F2A58D5-0A16-4137-BC04-63AADF0AAE74}|..\\PokerVideoGame.Api\\PokerVideoGame.Api.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\pokervideogame.api\\queries\\getuserquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8B863CA5-A541-48D5-AD84-61860BC37C44}|..\\WebPokerVideoGame.App2\\WebPokerVideoGame.App.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\webpokervideogame.app2\\pages\\account\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4F2A58D5-0A16-4137-BC04-63AADF0AAE74}|..\\PokerVideoGame.Api\\PokerVideoGame.Api.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\pokervideogame.api\\handlers\\registernewuserhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8B863CA5-A541-48D5-AD84-61860BC37C44}|..\\WebPokerVideoGame.App2\\WebPokerVideoGame.App.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\webpokervideogame.app2\\pages\\account\\loginconfirmation.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4F2A58D5-0A16-4137-BC04-63AADF0AAE74}|..\\PokerVideoGame.Api\\PokerVideoGame.Api.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\pokervideogame.api\\handlers\\getuserhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{490706A5-B63D-4FEC-992E-7889FBD9960F}|..\\PokerVideoGame.Models\\PokerVideoGame.Models.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\pokervideogame.models\\data\\dtos\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F2A58D5-0A16-4137-BC04-63AADF0AAE74}|..\\PokerVideoGame.Api\\PokerVideoGame.Api.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\pokervideogame.api\\commands\\logincommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F2A58D5-0A16-4137-BC04-63AADF0AAE74}|..\\PokerVideoGame.Api\\PokerVideoGame.Api.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\pokervideogame.api\\handlers\\loginhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F2A58D5-0A16-4137-BC04-63AADF0AAE74}|..\\PokerVideoGame.Api\\PokerVideoGame.Api.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\pokervideogame.api\\handlers\\updateuserhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{490706A5-B63D-4FEC-992E-7889FBD9960F}|..\\PokerVideoGame.Models\\PokerVideoGame.Models.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\pokervideogame.models\\data\\settings\\jwttokenresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4F2A58D5-0A16-4137-BC04-63AADF0AAE74}|..\\PokerVideoGame.Api\\PokerVideoGame.Api.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\pokervideogame.api\\commands\\registernewusercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4F2A58D5-0A16-4137-BC04-63AADF0AAE74}|..\\PokerVideoGame.Api\\PokerVideoGame.Api.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\pokervideogame.api\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -43,106 +25,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 7,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "..\\PokerVideoGame.Api\\Controllers\\UserController.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Controllers\\UserController.cs",
-              "RelativeToolTip": "..\\PokerVideoGame.Api\\Controllers\\UserController.cs",
-              "ViewState": "AQIAAIkAAAAAAAAAAAAWwJYAAAAxAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-15T13:45:48.602Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "LoginCommand.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Commands\\LoginCommand.cs",
-              "RelativeDocumentMoniker": "..\\PokerVideoGame.Api\\Commands\\LoginCommand.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Commands\\LoginCommand.cs",
-              "RelativeToolTip": "..\\PokerVideoGame.Api\\Commands\\LoginCommand.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-15T18:45:39.026Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "LoginHandler.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Handlers\\LoginHandler.cs",
-              "RelativeDocumentMoniker": "..\\PokerVideoGame.Api\\Handlers\\LoginHandler.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Handlers\\LoginHandler.cs",
-              "RelativeToolTip": "..\\PokerVideoGame.Api\\Handlers\\LoginHandler.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAAwBgAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-15T18:49:34.401Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "LoginDto.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Models\\Data\\Dtos\\LoginDto.cs",
-              "RelativeDocumentMoniker": "..\\PokerVideoGame.Models\\Data\\Dtos\\LoginDto.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Models\\Data\\Dtos\\LoginDto.cs",
-              "RelativeToolTip": "..\\PokerVideoGame.Models\\Data\\Dtos\\LoginDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAsAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-15T18:55:18.048Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "GetUserHandler.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Handlers\\GetUserHandler.cs",
-              "RelativeDocumentMoniker": "..\\PokerVideoGame.Api\\Handlers\\GetUserHandler.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Handlers\\GetUserHandler.cs",
-              "RelativeToolTip": "..\\PokerVideoGame.Api\\Handlers\\GetUserHandler.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABIAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-15T13:51:28.64Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "GetUserQuery.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Queries\\GetUserQuery.cs",
-              "RelativeDocumentMoniker": "..\\PokerVideoGame.Api\\Queries\\GetUserQuery.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Queries\\GetUserQuery.cs",
-              "RelativeToolTip": "..\\PokerVideoGame.Api\\Queries\\GetUserQuery.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAuwAcAAAAYAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-15T13:53:43.752Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UserRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Repositories\\UserRepository.cs",
-              "RelativeDocumentMoniker": "..\\PokerVideoGame.Api\\Repositories\\UserRepository.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Repositories\\UserRepository.cs",
-              "RelativeToolTip": "..\\PokerVideoGame.Api\\Repositories\\UserRepository.cs",
-              "ViewState": "AQIAAHoAAAAAAAAAAAAtwIcAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-15T13:53:13.665Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
@@ -157,54 +41,67 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "JwtTokenResponseDto.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Models\\Data\\Settings\\JwtTokenResponseDto.cs",
-              "RelativeDocumentMoniker": "..\\PokerVideoGame.Models\\Data\\Settings\\JwtTokenResponseDto.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Models\\Data\\Settings\\JwtTokenResponseDto.cs",
-              "RelativeToolTip": "..\\PokerVideoGame.Models\\Data\\Settings\\JwtTokenResponseDto.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAvAAAA",
+              "DocumentIndex": 4,
+              "Title": "Startup.cs",
+              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Startup.cs",
+              "RelativeDocumentMoniker": "..\\PokerVideoGame.Api\\Startup.cs",
+              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Startup.cs",
+              "RelativeToolTip": "..\\PokerVideoGame.Api\\Startup.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAEcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-15T18:46:52.172Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "UpdateUserHandler.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Handlers\\UpdateUserHandler.cs",
-              "RelativeDocumentMoniker": "..\\PokerVideoGame.Api\\Handlers\\UpdateUserHandler.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Handlers\\UpdateUserHandler.cs",
-              "RelativeToolTip": "..\\PokerVideoGame.Api\\Handlers\\UpdateUserHandler.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAADgvxkAAAA7AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-15T18:17:28.368Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "RegisterNewUserCommand.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Commands\\RegisterNewUserCommand.cs",
-              "RelativeDocumentMoniker": "..\\PokerVideoGame.Api\\Commands\\RegisterNewUserCommand.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Commands\\RegisterNewUserCommand.cs",
-              "RelativeToolTip": "..\\PokerVideoGame.Api\\Commands\\RegisterNewUserCommand.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-15T18:15:59.3Z",
+              "WhenOpened": "2024-09-27T10:05:32.445Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "RegisterNewUserHandler.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Handlers\\RegisterNewUserHandler.cs",
-              "RelativeDocumentMoniker": "..\\PokerVideoGame.Api\\Handlers\\RegisterNewUserHandler.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Handlers\\RegisterNewUserHandler.cs",
-              "RelativeToolTip": "..\\PokerVideoGame.Api\\Handlers\\RegisterNewUserHandler.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAuwB4AAAABAAAA",
+              "Title": "LoginConfirmation.razor",
+              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Pages\\Account\\LoginConfirmation.razor",
+              "RelativeDocumentMoniker": "..\\WebPokerVideoGame.App2\\Pages\\Account\\LoginConfirmation.razor",
+              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Pages\\Account\\LoginConfirmation.razor",
+              "RelativeToolTip": "..\\WebPokerVideoGame.App2\\Pages\\Account\\LoginConfirmation.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-27T10:05:23.743Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Login.razor",
+              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Pages\\Account\\Login.razor",
+              "RelativeDocumentMoniker": "..\\WebPokerVideoGame.App2\\Pages\\Account\\Login.razor",
+              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Pages\\Account\\Login.razor",
+              "RelativeToolTip": "..\\WebPokerVideoGame.App2\\Pages\\Account\\Login.razor",
+              "ViewState": "AQIAAFwAAAAAAAAAAAAAAGcAAABCAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-27T10:05:13.938Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Program.cs",
+              "RelativeDocumentMoniker": "..\\PokerVideoGame.Api\\Program.cs",
+              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\PokerVideoGame.Api\\Program.cs",
+              "RelativeToolTip": "..\\PokerVideoGame.Api\\Program.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAAABwAAABQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-15T17:44:51.49Z",
+              "WhenOpened": "2024-09-27T10:03:13.671Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Program.cs",
+              "RelativeDocumentMoniker": "..\\WebPokerVideoGame.App2\\Program.cs",
+              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Program.cs",
+              "RelativeToolTip": "..\\WebPokerVideoGame.App2\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-27T10:01:26.381Z",
               "EditorCaption": ""
             }
           ]
