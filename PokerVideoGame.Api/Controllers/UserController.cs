@@ -88,6 +88,7 @@ namespace PokerVideoGame.Api.Controllers
         }
 
         [HttpGet("rankings")]
+        [Authorize]
         public async Task<IActionResult> GetAllUsersAsync()
         {
             var result = await _mediator.Send(new GetUsersListQuery());

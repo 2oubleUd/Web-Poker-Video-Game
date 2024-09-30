@@ -28,26 +28,21 @@
                         </MudChip>
                     </div>
                 }
-
                 <MudTextField @bind-Value="model.Email"
                               For="@(() => model.Email)"
                               Immediate="true"
                               Label="Email" />
-
                 <MudTextField @bind-Value="model.Password"
                               For="@(() => model.Password)"
                               Immediate="true"
                               Label="Password" InputType="InputType.Password" />
             </MudCardContent>
         </MudForm>
-
         <MudCardActions>
             <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="LoginAsync">Login</MudButton>
         </MudCardActions>
-        
     </MudCard>
 </div>
-
 
 @code {
     [CascadingParameter]
@@ -107,7 +102,6 @@
             {
                 ApiErrorMessage = "Unable to do login";
             }
-            
         }
     }
 }
