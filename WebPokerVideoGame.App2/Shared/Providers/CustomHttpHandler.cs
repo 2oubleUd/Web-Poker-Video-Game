@@ -11,24 +11,24 @@ using WebPokerVideoGame.App.ViewModels.Accounts;
 
 
 
+
 namespace WebPokerVideoGame.App.Shared.Providers
 {
     public class CustomHttpHandler : DelegatingHandler
     {
         private readonly ILocalStorageService _localStorageService;
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly HttpClient _httpClient;
         private readonly AuthenticationStateProvider _authStateProvider;
+        private readonly NavigationManager _navigationManager;
 
         public CustomHttpHandler(ILocalStorageService localStorageService, IHttpClientFactory httpClientFactory,
-            AuthenticationStateProvider authStateProvider, HttpClient httpClient)
+            AuthenticationStateProvider authStateProvider, NavigationManager navigationManager)
         {
             _localStorageService = localStorageService;
             _httpClientFactory = httpClientFactory;
             _authStateProvider = authStateProvider;
-            _httpClient = httpClient;
+            _navigationManager = navigationManager;
         }
-        // to do: check where I should use SendAsync
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             if (request.RequestUri.AbsolutePath.ToLower().Contains("login") ||
@@ -71,11 +71,8 @@ namespace WebPokerVideoGame.App.Shared.Providers
             var jsonPayload = JsonSerializer.Serialize(renewTokenRequest);
             var requestContent = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
             
-
-
-            // to do: clean code
             var httpClient = _httpClientFactory.CreateClient("Dot7Api");
-            var refreshTokenResponse = await _httpClient.PostAsync("api/user/renew-tokens", requestContent);
+            var refreshTokenResponse = await httpClient.PostAsync("api/user/renew-tokens", requestContent);
 
             if(refreshTokenResponse.StatusCode == HttpStatusCode.OK)
             {
@@ -93,14 +90,14 @@ namespace WebPokerVideoGame.App.Shared.Providers
             return originalResponse;
         }
 
-        // to do: IMPLEMENT LOGOUT
         public async Task LogoutAsync()
         {
             await _localStorageService.RemoveItemAsync("jwt-access-token");
             await _localStorageService.RemoveItemAsync("refresh-token");
 
-            // Notify the authentication state provider to update the authentication state
             (_authStateProvider as CustomAuthProvider).NotifyAuthState();
+
+            _navigationManager.NavigateTo("/login");
 
         }
     }

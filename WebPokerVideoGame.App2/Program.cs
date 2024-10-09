@@ -13,21 +13,17 @@ using Blazored.Toast;
 using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
+
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
-// coonection to API by ApiConection field form appsettings.json
-builder.Services.AddScoped(sp => new HttpClient { 
-    BaseAddress = new Uri(builder.Configuration.GetSection("ConnectionStrings:ApiConnection").Value)
-});
-
-builder.Services.AddHttpClient();
+builder.Services.AddHttpClient("Dot7Api", options =>
+{
+    options.BaseAddress = new Uri(builder.Configuration.GetSection("ConnectionStrings:ApiConnection").Value);
+}).AddHttpMessageHandler<CustomHttpHandler>();
 
 builder.Services.AddTransient<IPlayerService, PlayerService>();
 builder.Services.AddTransient<IUserService, UserService>();
-
 
 builder.Services.AddTransient<GameService>();
 builder.Services.AddTransient<ICardService, CardService>();
@@ -42,6 +38,8 @@ builder.Services.AddBlazoredModal();
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthProvider>();
 builder.Services.AddAuthorizationCore();
+
+builder.Services.AddScoped<CustomHttpHandler>();
 
 builder.Services.AddOidcAuthentication(options =>
 {
