@@ -7,16 +7,14 @@ using PokerVideoGame.Models.Data.Settings;
 using ServiceStack.Text;
 using Web_Poker_Video_Game.Services;
 
-namespace PokerVideoGame.Api.Models
+namespace PokerVideoGame.Api.Data
 {
     public class AppDbContext : IdentityDbContext
     {
-        private readonly IWebHostEnvironment _env;
-        private List<Card> cards;
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
-            
+
         }
 
         public DbSet<User> User { get; set; }

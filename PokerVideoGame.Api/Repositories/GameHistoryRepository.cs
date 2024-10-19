@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PokerVideoGame.Models;
 
-namespace PokerVideoGame.Api.Models
+namespace PokerVideoGame.Api.Repositories
 {
     public class GameHistoryRepository //: IGameHistoryRepository
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using PokerVideoGame.Api.Models;
+using PokerVideoGame.Api.Repositories;
 using PokerVideoGame.Models;
 
 namespace PokerVideoGame.Api.Controllers

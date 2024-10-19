@@ -2,8 +2,9 @@
 @using System.Text;
 @using Microsoft.AspNetCore.Components.Authorization
 @using WebPokerVideoGame.App.Shared.Providers;
+
 @inherits LayoutComponentBase
-@inject HttpClient _httpClient;
+
 @inject IHttpClientFactory _httpClientFactory
 @inject AuthenticationStateProvider _authStateProvider
 @inject ILocalStorageService _localStorageService
@@ -62,7 +63,6 @@
 </BlazoredToasts>
 
 @code{
-
     bool _drawerOpen = true;
     private MudTheme _theme = new();
 
@@ -101,7 +101,7 @@
         var requestContent = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
 
         var httpClient = _httpClientFactory.CreateClient("Dot7Api");
-        var response = await _httpClient.PostAsync("api/user/logout", requestContent);
+        var response = await httpClient.PostAsync("api/user/logout", requestContent);
 
         await _localStorageService.RemoveItemAsync("refresh-token");
         await _localStorageService.RemoveItemAsync("jwt-access-token");

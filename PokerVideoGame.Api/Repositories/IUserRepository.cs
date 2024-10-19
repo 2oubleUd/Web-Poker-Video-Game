@@ -2,7 +2,7 @@
 using PokerVideoGame.Models.Data.Entites;
 using PokerVideoGame.Models.Data.Settings;
 
-namespace PokerVideoGame.Api.Models
+namespace PokerVideoGame.Api.Repositories
 {
     public interface IUserRepository
     {

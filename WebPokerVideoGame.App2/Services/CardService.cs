@@ -5,22 +5,22 @@ using WebPokerVideoGame.App.Interfaces;
 
 public class CardService : ICardService
 {
-    private readonly HttpClient _httpClient;
+    private IHttpClientFactory _httpClientFactory;
 
-    public CardService(HttpClient httpClient)
+    public CardService(IHttpClientFactory httpClientFactory)
     {
-        _httpClient = httpClient;
+        _httpClientFactory = httpClientFactory;
     }
 
     public async Task<IEnumerable<Card>> GetDeckOfCardsAsync()
     {
         try
         {
-            return await _httpClient.GetFromJsonAsync<Card[]>("api/card/get-deck");
+            var httpClient = _httpClientFactory.CreateClient("Dot7Api");
+            return await httpClient.GetFromJsonAsync<Card[]>("api/card/get-deck");
         }
-        catch (Exception ex) // to do: write handling Error 404
+        catch (Exception ex)
         {
-            
             Console.WriteLine($"Error fetching deck of cards: {ex.Message} ");
             throw;
         }

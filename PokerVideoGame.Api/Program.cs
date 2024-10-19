@@ -1,13 +1,16 @@
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Bot.Connector.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PokerVideoGame.Api.Controllers;
-using PokerVideoGame.Api.Models;
+using PokerVideoGame.Api.Data;
+using PokerVideoGame.Api.Repositories;
 using PokerVideoGame.Models.Data.Settings;
 using System.Configuration;
 using System.Data.Common;
+using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +19,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Add MediatR
+builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -42,6 +48,25 @@ builder.Services.AddCors(options =>
 
 builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection(nameof(TokenSettings)));
 
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        var tokenSettings = builder.Configuration.GetSection(nameof(TokenSettings)).Get<TokenSettings>();
+        options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = tokenSettings.Issuer,
+
+            ValidateAudience = true,
+            ValidAudience = tokenSettings.Audience,
+
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenSettings.SecretKey)),
+
+            ClockSkew = TimeSpan.Zero
+        };
+    });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -52,12 +77,15 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors("BlazorCors");
+app.UseCors("BlazorCors");  
 
 app.UseAuthentication();
-app.UseAuthorization();
-
 app.UseRouting(); // If you want to explicitly enable endpoint routing
+app.UseAuthorization();
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+});
 
 app.MapControllers();
 
