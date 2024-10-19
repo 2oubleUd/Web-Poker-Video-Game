@@ -9,9 +9,6 @@ using System.Text;
 using System.Text.Json;
 using WebPokerVideoGame.App.ViewModels.Accounts;
 
-
-
-
 namespace WebPokerVideoGame.App.Shared.Providers
 {
     public class CustomHttpHandler : DelegatingHandler

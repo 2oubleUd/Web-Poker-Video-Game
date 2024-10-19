@@ -12,23 +12,24 @@ namespace WebPokerVideoGame.App.Services
 {
     public class UserService : IUserService
     {
-        private readonly HttpClient _httpClient;
+        private readonly IHttpClientFactory _httpClientFactory;
         
-        public UserService(HttpClient httpClient) 
+        public UserService(IHttpClientFactory httpClientFactory) 
         {
-            _httpClient = httpClient;
+            _httpClientFactory = httpClientFactory;
         }
 
         public async Task<IEnumerable<User>> GetUsersAsync()
         {
             try
             {
-                return await _httpClient.GetFromJsonAsync<User[]>("api/user/rankings");
+                var httpClient = _httpClientFactory.CreateClient("Dot7Api");
+                return await httpClient.GetFromJsonAsync<User[]>("api/user/rankings");
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error fetching players: {ex.Message}");
-                throw; // Rethrow the exception to propagate it to the calling code
+                throw; 
             }
         }
 
@@ -36,7 +37,8 @@ namespace WebPokerVideoGame.App.Services
         {
             try
             {
-                return await _httpClient.GetFromJsonAsync<User>($"api/user/current/{userId}");
+                var httpClient = _httpClientFactory.CreateClient("Dot7Api");
+                return await httpClient.GetFromJsonAsync<User>($"api/user/current/{userId}");
             }
             catch (Exception ex)
             {
@@ -56,7 +58,8 @@ namespace WebPokerVideoGame.App.Services
                 var updatedUser = JsonSerializer.Serialize(user);
                 var requestUpdatedUser = new StringContent(updatedUser, Encoding.UTF8, "application/json");
 
-                var response = await _httpClient.PutAsync("api/user/account", requestUpdatedUser);
+                var httpClient = _httpClientFactory.CreateClient("Dot7Api");
+                var response = await httpClient.PutAsync("api/user/account", requestUpdatedUser);
             }
             catch(HttpRequestException ex)
             {

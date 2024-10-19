@@ -6,10 +6,10 @@ namespace WebPokerVideoGame.App.Interfaces
 {
     public interface IUserService
     {
-        Task<IEnumerable<User>> GetUsersAsync();
+        public Task<IEnumerable<User>> GetUsersAsync();
 
-        Task<User> GetUserAsync(int userId);
+        public Task<User> GetUserAsync(int userId);
 
-        Task UpdateUsersAccountBalance(List<Claim> claims, int newValue);
+        public Task UpdateUsersAccountBalance(List<Claim> claims, int newValue);
     }
 }

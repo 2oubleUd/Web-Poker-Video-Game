@@ -34,12 +34,6 @@ namespace PokerVideoGame.Api.Controllers
             _httpContextAccessor = httpContextAccessor;
 
             _configuration = configuration;
-
-            Console.WriteLine("User Id: " +
-            _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier));
-            Console.WriteLine("Username: " +
-                _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.Name));
-            
             _mediator = mediator;
         }
 
@@ -66,6 +60,7 @@ namespace PokerVideoGame.Api.Controllers
         }
 
         [HttpGet("get-user-id")]
+        [Authorize]
         public IActionResult GetUserId()
         {
             var result = _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -74,8 +69,9 @@ namespace PokerVideoGame.Api.Controllers
         }
 
         [HttpGet("current/{userId:int}")]
+        [Authorize]
         public async Task<IActionResult> GetCurrentUser(int userId)
-        {
+            {
             var user = await _mediator.Send(new GetUserQuery() { Id = userId });
                 
             if (user != null)
@@ -134,8 +130,6 @@ namespace PokerVideoGame.Api.Controllers
         public async Task<IActionResult> LoginAsync(LoginDto payload)
         {
             var result = await _mediator.Send(new LoginCommand(payload.Email, payload.Password));
-
-            //var result = await _userRepository.LoginAsync(payload);
             
             if(result.IsLoginSuccess)
             {
@@ -147,6 +141,7 @@ namespace PokerVideoGame.Api.Controllers
         }
 
         [HttpPost("logout")]
+        [Authorize]
         public async Task<IActionResult> LogoutAsync(LogoutRequestDto logoutRequestDto)
         {
             await _userRepository.LogoutUserAsync(logoutRequestDto);
@@ -155,6 +150,7 @@ namespace PokerVideoGame.Api.Controllers
         }
 
         [HttpPut("account")]
+        [Authorize]
         public async Task<ActionResult<User>> PutUserAsync(UpdateUserMoneyDto updateRequest)
         {
             try

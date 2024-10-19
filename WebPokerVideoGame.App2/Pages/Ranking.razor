@@ -6,8 +6,7 @@
 @using WebPokerVideoGame.App.Services;
 @using WebPokerVideoGame.App.Interfaces;
 
-@inject IHttpClientFactory _httpClientFactory;
-@inject NavigationManager NavigationManager
+@inject IUserService _userService
 
 <header>
     <style>
@@ -43,14 +42,11 @@
 </body>
 
 @code {
-    [Inject] public IUserService UserService { get; set; }
-
     public IEnumerable<User> ListOfUsers { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        var httpClient = _httpClientFactory.CreateClient("Dot7Api");
-        ListOfUsers = await httpClient.GetFromJsonAsync<User[]>("api/user/rankings");
+        ListOfUsers = await _userService.GetUsersAsync();
     }
 
 }
