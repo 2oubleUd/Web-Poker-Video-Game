@@ -6,8 +6,8 @@ namespace PokerVideoGame.Api.Repositories
 {
     public interface IUserRepository
     {
-        public Task<(bool IsUserRegistered, string Message)> RegisterNewUserAsync(UserRegistrationDto userRegistration);
-        bool CheckUserUniqueEmail(string email);
+        Task<(bool IsUserRegistered, string Message)> RegisterNewUserAsync(UserRegistrationDto userRegistration);
+        Task<bool> CheckUserUniqueEmailAsync(string email);
         Task<(bool IsLoginSuccess, JwtTokenResponseDto tokenResponse)> LoginAsync(LoginDto loginPayload);
         Task<(string ErrorMessage, JwtTokenResponseDto jwtTokenRespone)> RenewTokenAsync(RenewTokenRequestDto renewTokenRequest);
         Task LogoutUserAsync(LogoutRequestDto logoutUserDto);

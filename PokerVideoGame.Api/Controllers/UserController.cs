@@ -54,7 +54,7 @@ namespace PokerVideoGame.Api.Controllers
         [HttpGet("unique-user-email")]
         public IActionResult CheckUserUniqueEmail(string email)
         {
-            var result = _userRepository.CheckUserUniqueEmail(email);
+            var result = _userRepository.CheckUserUniqueEmailAsync(email);
 
             return Ok(result);
         }

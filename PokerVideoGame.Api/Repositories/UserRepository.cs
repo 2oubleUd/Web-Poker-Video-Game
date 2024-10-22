@@ -59,7 +59,7 @@ namespace PokerVideoGame.Api.Repositories
 
         public async Task<(bool IsUserRegistered, string Message)> RegisterNewUserAsync(UserRegistrationDto userRegistration)
         {
-            var isUserExist = _appDbContext.User.Any(x => x.Email.ToLower() == userRegistration.Email.ToLower());
+            var isUserExist = await CheckUserUniqueEmailAsync(userRegistration.Email);
 
             if (isUserExist)
             {
@@ -74,10 +74,9 @@ namespace PokerVideoGame.Api.Repositories
             return (true, "New user registered successfuly");
         }
 
-        public bool CheckUserUniqueEmail(string email)
+        public async Task<bool> CheckUserUniqueEmailAsync(string email)
         {
             var userAlreadyExists = _appDbContext.User.Any(x => x.Email.ToLower() == email.ToLower());
-
             return !userAlreadyExists;
         }
 
@@ -96,7 +95,7 @@ namespace PokerVideoGame.Api.Repositories
             var securityToken = new JwtSecurityToken(
                 issuer: _tokenSettings.Issuer,
                 audience: _tokenSettings.Audience,
-                expires: DateTime.Now.AddHours(1),
+                expires: DateTime.Now.AddMinutes(1),
                 signingCredentials: credentials,
                 claims: claims);
 
@@ -114,7 +113,7 @@ namespace PokerVideoGame.Api.Repositories
 
             var refreshToken = new UserRefreshToken
             {
-                ExpirationDate = DateTime.UtcNow.AddMinutes(1),
+                ExpirationDate = DateTime.UtcNow.AddDays(3),
                 Token = token,
                 UserId = userId
             };
