@@ -2,6 +2,8 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: white;
+    background-image: url(../images/upscaled.jpg); background-size: cover; background-repeat: no-repeat;
 }
 
 h1:focus {

@@ -119,11 +119,9 @@ namespace PokerVideoGame.Api.Repositories
             };
 
             _appDbContext.userRefreshToken.Add(refreshToken);
-
             await _appDbContext.SaveChangesAsync();
 
             return token;
-
         }
 
         public async Task<(bool IsLoginSuccess, JwtTokenResponseDto tokenResponse)> LoginAsync(LoginDto loginPayload)
@@ -148,7 +146,6 @@ namespace PokerVideoGame.Api.Repositories
             }
 
             string jwtAccessToken = GenerateJwtToken(user);
-
             string refreshToken = await GenerateRefreshToken(user.Id);
 
             var result = new JwtTokenResponseDto
@@ -202,10 +199,11 @@ namespace PokerVideoGame.Api.Repositories
 
         public async Task<(string ErrorMessage, JwtTokenResponseDto jwtTokenRespone)> RenewTokenAsync(RenewTokenRequestDto renewTokenRequest)
         {
+            // to do: get exsisting jwt refresh token
             var existingRefreshToken = await _appDbContext.userRefreshToken
-                .Where(x => x.UserId == renewTokenRequest.UserId
-                && x.Token == renewTokenRequest.RefreshToken &&
-                x.ExpirationDate > DateTime.Now).FirstOrDefaultAsync();
+                .Where(x => x.UserId == renewTokenRequest.UserId &&
+                x.Token == renewTokenRequest.RefreshToken &&
+                x.ExpirationDate > DateTime.UtcNow).FirstOrDefaultAsync();
 
             if (existingRefreshToken == null)
             {

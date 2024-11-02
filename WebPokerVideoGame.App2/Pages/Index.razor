@@ -3,72 +3,64 @@
 
 <PageTitle>Index</PageTitle>
 
-<head>
-    <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+<MudContainer Class="mt-16 px-8" MaxWidth="MaxWidth.False">
+    <MudGrid>
+        <MudItem Class="mb-4" xs="12" sm="4" md="4">
+            <MudPaper Elevation="2" Class="pa-4" Style="height: 200px">
+                <MudText Typo="Typo.h4" Class="mt-4">
+                    Player name
+                </MudText>
+            </MudPaper>
+        </MudItem>
 
-        .carousel-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
-    </style>
-</head>
+        <MudItem xs="12" sm="8">
+            <MudPaper Elevation="2" Class="pa-4" Style="height: 100%">
 
-<body>
-    @* TO DO: add here carousel or something to not scare average users *@
+                <MudCarousel ShowBullets="@bullets" EnableSwipeGesture="@enableSwipeGesture" AutoCycle="@autocycle" TData="object">
 
-    <h1>Welcome in Web Poker Video Game</h1>
+                    <MudCarouselItem Transition="transition">
+                        <div class="d-flex" style="height:100%">
+                            <img src="https://png.pngtree.com/background/20230827/original/pngtree-illustration-of-3d-roulette-and-poker-chips-in-motion-on-a-picture-image_4840161.jpg" />
 
-    <div class="alert alert-warning" role="alert">
-        Here will be some nice carousel showing photos of the upcoming poker events
-    </div>
+                        </div>
+                    </MudCarouselItem>
 
-    Let's lose some money today!
+                    <MudCarouselItem Transition="transition">
+                        <div class="d-flex" style="height:100%">
+                            <img src="https://png.pngtree.com/background/20230827/original/pngtree-illustration-of-3d-roulette-and-poker-chips-in-motion-on-a-picture-image_4840161.jpg" />
+                        </div>
+                    </MudCarouselItem>
 
-    <h3>Carousel</h3>
+                    <MudCarouselItem Transition="transition">
+                        <div class="d-flex" style="height:100%">
+                            <img src="" />
+                        </div>
+                    </MudCarouselItem>
 
-    <div class="carousel-container">
-        <div id="@carouselName" class="carousel slide" data-bs-ride="carousel" data-bs-wrap="true" data-bs-interval="2000" data-bs-pause="false">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active"> @* to do: fix dimensions of carousel items, add dimensions to separate file*@
-                    <img src="https://picsum.photos/id/196/1920/1080" class="d-block mx-auto" alt="..." style="height: 50vh; width: 100vw"/>
-                </div>
-                <div class="carousel-item">
-                    <img src="https://picsum.photos/id/1057/1920/1080" class="d-block mx-auto" alt="..." style="height: 50vh; width: 100vw">
-                </div>
-                <div class="carousel-item">
-                    <img src="https://picsum.photos/id/1067/1920/1080" class="d-block mx-auto" alt="..." style="height: 50vh; width: 100vw">
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-    </div>
-</body>
+                </MudCarousel>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+
+    @* <MudPaper Class="d-flex flex-column align-items-center" Style="background-color: Background.darkslateblue; min-height: 50vh">
+    <MudText Typo="Typo.h2" Class="mt-4">Welcome to Poker Video Game</MudText>
+    </MudPaper> *@
+
+
+</MudContainer>
+
 
 @code {
+    private bool arrows = true;
+    private bool bullets = true;
+    private bool enableSwipeGesture = true;
+    private bool autocycle = true;
+    private Transition transition = Transition.Slide;
+
     const string carouselName = "carouselExampleIndicators";
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        object[] args = { carouselName };
-        await JSRuntime.InvokeVoidAsync("startCarousel", args); 
+
     }
 }

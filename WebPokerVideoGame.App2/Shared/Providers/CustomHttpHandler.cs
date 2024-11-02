@@ -78,7 +78,6 @@ namespace WebPokerVideoGame.App.Shared.Providers
                 await _localStorageService.SetItemAsync<string>("refresh-token", regeneratedToken.RefreshToken);
                 (_authStateProvider as CustomAuthProvider).NotifyAuthState();
 
-
                 originalRequest.Headers.Remove("Authorization");
                 originalRequest.Headers.Add("Authorization", $"Bearer {regeneratedToken.AccessToken}");
                 return await base.SendAsync(originalRequest, cancellationToken);

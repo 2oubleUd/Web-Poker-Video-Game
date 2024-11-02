@@ -6,7 +6,7 @@
 @inject NavigationManager navigationManager;
 
 <div class="ma-6 d-flex justify-center">
-    <MudChip Color="Color.Primary">
+    <MudChip T="string" Color="Color.Primary">
         <h3>Registration</h3>
     </MudChip>
 </div>
@@ -18,7 +18,7 @@
             @if(!string.IsNullOrEmpty(ApiErrorMessages))
                 {
                     <div class="ma-6 d-flex justify-center">
-                        <MudChip Color="Color.Error">
+                        <MudChip T="string" Color="Color.Error">
                             <p>@ApiErrorMessages</p>
                         </MudChip>
                     </div>

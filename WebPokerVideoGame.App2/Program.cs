@@ -10,7 +10,6 @@ using WebPokerVideoGame.App.Interfaces;
 using WebPokerVideoGame.App.ViewModels;
 using Blazored.Modal;
 using Blazored.Toast;
-using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 

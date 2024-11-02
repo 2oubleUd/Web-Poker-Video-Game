@@ -9,12 +9,11 @@
 @inject AuthenticationStateProvider _authStateProvider
 @inject ILocalStorageService _localStorageService
 @inject NavigationManager _navigationManager
- 
-<MudThemeProvider/>
-<MudDialogProvider/>
-<MudDialog />
-<MudText Class="ma-4"></MudText>
-<MudSnackbarProvider/>
+
+<MudThemeProvider />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
 
 <MudLayout>
     <MudAppBar Elevation="1" Style="background-image: linear-gradient( 109.6deg,  rgba(0,182,255,1) 11.2%, rgba(102,51,153,1) 91.1% );">
@@ -25,7 +24,7 @@
         </AuthorizeView>
         Web Poker Video Game
         <MudLink Class="ml-6" Color="Color.Inherit" Href="/">Home</MudLink>
-        <MudSpacer/>
+        <MudSpacer />
         <AuthorizeView>
             <Authorized>
                 <span>@UserDisplayName(context.User.Claims.ToList())</span>
@@ -37,32 +36,37 @@
             </NotAuthorized>
         </AuthorizeView>
     </MudAppBar>
-    
+
     <AuthorizeView>
         <Authorized>
-             <MudDrawer @bind-Open="@_drawerOpen">
-                <MyNavMenu/>
+            <MudDrawer @bind-Open="@_drawerOpen" Elevation="2">
+                <MudDrawerHeader>
+                    <MudText Typo="Typo.h5">MENU</MudText>
+                </MudDrawerHeader>
+                <MyNavMenu />
             </MudDrawer>
         </Authorized>
     </AuthorizeView>
 
     <MudMainContent>
-        @Body
+        <MudContainer>
+            @Body
+        </MudContainer>
     </MudMainContent>
 
 </MudLayout>
 
 <BlazoredToasts Position="Blazored.Toast.Configuration.ToastPosition.BottomRight"
-    Timeout="4"
-    IconType="Blazored.Toast.Configuration.IconType.FontAwesome"
-    SuccessClass="success-toast-override"
-    SuccessIcon="fa fa-thumbs-up"
-    ErrorIcon="fa fa-bug"
-    WarningIcon="fa fa-warning"
-    InfoIcon="fa fa-info-circle">
+                Timeout="4"
+                IconType="Blazored.Toast.Configuration.IconType.FontAwesome"
+                SuccessClass="success-toast-override"
+                SuccessIcon="fa fa-thumbs-up"
+                ErrorIcon="fa fa-bug"
+                WarningIcon="fa fa-warning"
+                InfoIcon="fa fa-info-circle">
 </BlazoredToasts>
 
-@code{
+@code {
     bool _drawerOpen = true;
     private MudTheme _theme = new();
 
@@ -83,7 +87,7 @@
     {
         var firstName = claims.Where(x => x.Type == "FirstName").Select(x => x.Value).FirstOrDefault();
         var lastName = claims.Where(x => x.Type == "LastName").Select(x => x.Value).FirstOrDefault();
-        if(!string.IsNullOrEmpty(firstName) || !string.IsNullOrEmpty(lastName))
+        if (!string.IsNullOrEmpty(firstName) || !string.IsNullOrEmpty(lastName))
         {
             return $"{firstName} {lastName}";
         }

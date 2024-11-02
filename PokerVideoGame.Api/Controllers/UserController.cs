@@ -123,7 +123,8 @@ namespace PokerVideoGame.Api.Controllers
                 return BadRequest(result.ErrorMessage);
             }
 
-            return Ok(result.jwtTokenRespone);
+            return Ok(result.jwtTokenRespone); // IActionResult zwraca kody odpowiedzi i jak masz np
+            // return OK(cos_tam); to znaczy że zwrcany jest kod 200 OK i obiekt w formacie JSON
         }
 
         [HttpPost("login")]
