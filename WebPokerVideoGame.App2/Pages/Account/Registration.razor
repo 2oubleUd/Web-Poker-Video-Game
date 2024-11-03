@@ -5,17 +5,22 @@
 @inject HttpClient _http;
 @inject NavigationManager navigationManager;
 
-<div class="ma-6 d-flex justify-center">
+@* <div class="ma-6 d-flex justify-center">
     <MudChip T="string" Color="Color.Primary">
         <h3>Registration</h3>
     </MudChip>
-</div>
+</div> *@
 
-<div class="ma-6 d-flex justify-center" >
-    <MudCard Width="500px">
-    <MudForm Model="model" @ref="validationForm" Validation="@validationModel.ValidateValue">
-        <MudCardContent>
-            @if(!string.IsNullOrEmpty(ApiErrorMessages))
+<div class="ma-6 d-flex justify-center">
+    <MudCard Width="40%" Outlined="true" Square="false" Style="background-color: #2C2C2C; color: white;">
+
+        <div class="mt-6 mb-6 text-center">
+            <MudText Typo="Typo.h3" Color="Color.Default">Register</MudText>
+        </div>
+
+        <MudForm Model="model" @ref="validationForm" Validation="@validationModel.ValidateValue">
+            <MudCardContent>
+                @if (!string.IsNullOrEmpty(ApiErrorMessages))
                 {
                     <div class="ma-6 d-flex justify-center">
                         <MudChip T="string" Color="Color.Error">
@@ -23,38 +28,41 @@
                         </MudChip>
                     </div>
                 }
-                <MudTextField @bind-Value="model.FirstName"
-                          For="@(() => model.FirstName)"
-                          Immediate="true"
-                          Label="First Name" />
 
-            <MudTextField @bind-Value="model.LastName"
-                          For="@(() => model.LastName)"
-                          Immediate="true"
-                          Label="Last Name" />
+                <div class="pl-12 pr-12 ma-4">
+                    <MudTextField @bind-Value="model.FirstName"
+                                  For="@(() => model.FirstName)"
+                                  Immediate="true"
+                                  Label="First Name" />
 
-            <MudTextField @bind-Value="model.Email"
-                          For="@(() => model.Email)"
-                          Immediate="true"
-                          Label="Email" />
+                    <MudTextField @bind-Value="model.LastName"
+                                  For="@(() => model.LastName)"
+                                  Immediate="true"
+                                  Label="Last Name" />
 
-            <MudTextField @bind-Value="model.Password"
-                          For="@(() => model.Password)"
-                          Immediate="true"
-                          Label="Password" InputType="InputType.Password" />
+                    <MudTextField @bind-Value="model.Email"
+                                  For="@(() => model.Email)"
+                                  Immediate="true"
+                                  Label="Email" />
 
-            <MudTextField @bind-Value="model.ConfirmPassword"
-                          For="@(() => model.ConfirmPassword)"
-                          Immediate="true"
-                          Label="Confirm Password" InputType="InputType.Password" />
+                    <MudTextField @bind-Value="model.Password"
+                                  For="@(() => model.Password)"
+                                  Immediate="true"
+                                  Label="Password" InputType="InputType.Password" />
 
-        </MudCardContent>
-    </MudForm>
+                    <MudTextField @bind-Value="model.ConfirmPassword"
+                                  For="@(() => model.ConfirmPassword)"
+                                  Immediate="true"
+                                  Label="Confirm Password" InputType="InputType.Password" />
+                </div>
 
-    <MudCardActions>
-        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="RegisterAsync">Register</MudButton>
-    </MudCardActions>
-</MudCard>
+            </MudCardContent>
+        </MudForm>
+
+        <MudCardActions>
+            <MudButton Variant="Variant.Filled" Color="Color.Success" Class="ml-auto" OnClick="RegisterAsync">Register</MudButton>
+        </MudCardActions>
+    </MudCard>
 
 </div>
 
@@ -85,28 +93,28 @@
     {
         await validationForm.Validate();
 
-        if(validationForm.IsValid)
+        if (validationForm.IsValid)
         {
             var jsonPayload = JsonSerializer.Serialize(model);
             var requestContent = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
 
             var response = await _http.PostAsync("api/user/register", requestContent);
 
-            if(response.StatusCode == HttpStatusCode.BadRequest)
+            if (response.StatusCode == HttpStatusCode.BadRequest)
             {
                 var errors = await response.Content.ReadFromJsonAsync<Dictionary<string, List<string>>>();
-                if(errors.Count > 0)
+                if (errors.Count > 0)
                 {
-                    foreach(var item in errors)
+                    foreach (var item in errors)
                     {
-                        foreach(var errorMessage in item.Value)
+                        foreach (var errorMessage in item.Value)
                         {
                             ApiErrorMessages = $"{ApiErrorMessages} {errorMessage}";
                         }
                     }
                 }
             }
-            else if(response.StatusCode == HttpStatusCode.OK)
+            else if (response.StatusCode == HttpStatusCode.OK)
             {
                 navigationManager.NavigateTo("/registration-confirmation");
             }

@@ -10,16 +10,16 @@
 @inject AuthenticationStateProvider _authStateProvider;
 @inject NavigationManager _navigationManager;
 
-<div class="mb-6 mt-16 d-flex justify-center">
+@* <div class="mb-6 mt-16 d-flex justify-center">
     <MudChip T="string" Color="Color.Primary">
         <h3>Login</h3>
     </MudChip>
-</div>
+</div> *@
 
-<div class="ma-6 d-flex justify-center">
-    <MudCard Width="500px" Style="background-color: #2C2C2C; color: white;">
+<div class="ma-6 pa-6 d-flex justify-center">
+    <MudCard Width="40%" Outlined="true" Square="false" Style="background-color: #2C2C2C; color: white;">
         <div class="mt-6 mb-6 text-center">
-            <MudText Typo="Typo.h2" Color="Color.Default">Login</MudText>
+            <MudText Typo="Typo.h3" Color="Color.Default">Login</MudText>
         </div>
         
         <MudForm Model="model" @ref="validationForm" Validation="@validationModel.ValidateValue">
@@ -32,18 +32,21 @@
                         </MudChip>
                     </div>
                 }
-                <MudTextField @bind-Value="model.Email"
-                              For="@(() => model.Email)"
-                              Immediate="true"
-                              Label="Email"/>
-                <MudTextField @bind-Value="model.Password"
-                              For="@(() => model.Password)"
-                              Immediate="true"
-                              Label="Password" InputType="InputType.Password" />
+                <div class="pl-12 pr-12">
+                    <MudTextField @bind-Value="model.Email"
+                                  For="@(() => model.Email)"
+                                  Immediate="true"
+                                  Label="Email" InputType="InputType.Email" Style="color: white" />
+                    <MudTextField @bind-Value="model.Password"
+                                  For="@(() => model.Password)"
+                                  Immediate="true"
+                                  Label="Password" InputType="InputType.Password" Style="color: white"/>
+                </div>
+                
             </MudCardContent>
         </MudForm>
-        <MudCardActions>
-            <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto" OnClick="LoginAsync">Login</MudButton>
+        <MudCardActions Class="ma-6 pa-2">
+            <MudButton Variant="Variant.Filled" Color="Color.Success" Class="ml-auto" OnClick="LoginAsync">Login</MudButton>
         </MudCardActions>
     </MudCard>
 </div>

@@ -10,36 +10,35 @@
 
 <header>
     <style>
-        h2{
+        h2 {
             text-align: center;
             margin-bottom: 10px;
+            color: white;
         }
     </style>
 </header>
 
-<body>
-    <h2>Ranking</h2>
+<h2>Ranking</h2>
 
-    @if (ListOfUsers != null)
-    {
-        <div class="ma-1 d-flex justify-center">
-            <MudCard Width="80%">
-                <MudDataGrid Items="@ListOfUsers">
-                    <Columns>
-                        <PropertyColumn Property="x => x.FirstName" />
-                        <PropertyColumn Property="x => x.LastName" />
-                        <PropertyColumn Property="x => x.Email" />
-                        <PropertyColumn Property="x => x.AccountBalance" />
-                    </Columns>
-                </MudDataGrid>
-            </MudCard>
-        </div>
-    }
-    else
-    {
-        <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
-    }
-</body>
+@if (ListOfUsers != null)
+{
+    <div class="ma-1 d-flex justify-center">
+        <MudCard Width="80%" Style="background-color: #2C2C2C; color: white">
+            <MudDataGrid Items="@ListOfUsers">
+                <Columns>
+                    <PropertyColumn Property="x => x.FirstName" />
+                    <PropertyColumn Property="x => x.LastName" />
+                    <PropertyColumn Property="x => x.Email" />
+                    <PropertyColumn Property="x => x.AccountBalance" />
+                </Columns>
+            </MudDataGrid>
+        </MudCard>
+    </div>
+}
+else
+{
+    <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+}
 
 @code {
     public IEnumerable<User> ListOfUsers { get; set; }

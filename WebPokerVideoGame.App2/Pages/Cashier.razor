@@ -12,7 +12,7 @@
 
 <head>
     <style>
-        body{
+        body {
             text-align: center;
             height: 100%;
         }
@@ -23,56 +23,54 @@
             -webkit-align-items: flex-end;
             -webkit-justify-content: center;
         }
+
         .payments {
             position: absolute;
             bottom: 1rem%;
-       }
+        }
 
         payment-logos:target {
             position: absolute;
             top: 0;
             display: block;
             align-items: center;
-       }
+        }
 
-        .more-credits{
+        .more-credits {
             display: inline-block;
             margin: 30px;
         }
 
-        .form-outline{
+        .form-outline {
             margin: 10px;
         }
 
     </style>
 </head>
 
-<body>
-    <h2>Cashier</h2>
 
-    <br/>
+<h2>Cashier</h2>
 
-    <h5>Here you can add more credits to your account</h5>
+<br />
 
-    <AuthorizeView>
-        <div class="more-credits">
-@*             <MudNumericField Value="@user.AccountBalance" ValueChanged="(int newValue)=>AddMoneyAsync(context.User.Claims.ToList(),newValue)" Immediate="true" Label="Add" For="@(()=> user.AccountBalance)"></MudNumericField>
- *@
-            <MudNumericField @bind-Value="newValue" Label="Standard" Variant="Variant.Text" Min="0" Max="1000" />
+<h5>Here you can add more credits to your account</h5>
 
-            <MudButton Color="Color.Secondary" OnClick="()=>AddMoneyAsync(context.User.Claims.ToList(), newValue)">Add Credits</MudButton>
+<AuthorizeView>
+    <div class="more-credits">
+        @*             <MudNumericField Value="@user.AccountBalance" ValueChanged="(int newValue)=>AddMoneyAsync(context.User.Claims.ToList(),newValue)" Immediate="true" Label="Add" For="@(()=> user.AccountBalance)"></MudNumericField>
+        *@
+        <MudNumericField @bind-Value="newValue" Label="Standard" Variant="Variant.Text" Min="0" Max="1000" />
 
-        </div>
-    </AuthorizeView>
+        <MudButton Color="Color.Secondary" OnClick="()=>AddMoneyAsync(context.User.Claims.ToList(), newValue)">Add Credits</MudButton>
 
-    <div class="payment-logos">
-        <img src="/images/billing.jpg" width="40%" height="20%" /> 
     </div>
+</AuthorizeView>
 
-    <!-- to do: Add toast after adding money successfuly-->
+<div class="payment-logos">
+    <img src="/images/billing.jpg" width="40%" height="20%" />
+</div>
 
-</body>
-
+<!-- to do: Add toast after adding money successfuly-->
 @code {
     public UpdateUserMoneyDto user { get; set; }
     public int newValue { get; set; }
@@ -81,7 +79,7 @@
     {
         await userService.UpdateUsersAccountBalance(claims, newValue);
 
-        toastService.ShowSuccess("Succesfuly added money to your account!");       
+        toastService.ShowSuccess("Succesfuly added money to your account!");
 
     }
 }

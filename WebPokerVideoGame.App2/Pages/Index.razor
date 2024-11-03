@@ -2,52 +2,52 @@
 @inject IJSRuntime JSRuntime
 
 <PageTitle>Index</PageTitle>
+    <MudContainer Class="mt-16 px-8" MaxWidth="MaxWidth.False">
+        <MudGrid>
+            <MudItem Class="mb-4" xs="12" sm="4" md="4">
+                <MudPaper Elevation="2" Class="pa-4" Style="height: 200px">
+                    <MudText Typo="Typo.h4" Class="mt-4">
+                        Player name
+                    </MudText>
+                </MudPaper>
+            </MudItem>
 
-<MudContainer Class="mt-16 px-8" MaxWidth="MaxWidth.False">
-    <MudGrid>
-        <MudItem Class="mb-4" xs="12" sm="4" md="4">
-            <MudPaper Elevation="2" Class="pa-4" Style="height: 200px">
-                <MudText Typo="Typo.h4" Class="mt-4">
-                    Player name
-                </MudText>
-            </MudPaper>
-        </MudItem>
+            <MudItem xs="12" sm="8">
+                <MudPaper Elevation="2" Class="pa-4" Style="height: 100%">
 
-        <MudItem xs="12" sm="8">
-            <MudPaper Elevation="2" Class="pa-4" Style="height: 100%">
+                    <MudCarousel ShowBullets="@bullets" EnableSwipeGesture="@enableSwipeGesture" AutoCycle="@autocycle" TData="object">
 
-                <MudCarousel ShowBullets="@bullets" EnableSwipeGesture="@enableSwipeGesture" AutoCycle="@autocycle" TData="object">
+                        <MudCarouselItem Transition="transition">
+                            <div class="d-flex" style="height:100%">
+                                <img src="https://png.pngtree.com/background/20230827/original/pngtree-illustration-of-3d-roulette-and-poker-chips-in-motion-on-a-picture-image_4840161.jpg" />
 
-                    <MudCarouselItem Transition="transition">
-                        <div class="d-flex" style="height:100%">
-                            <img src="https://png.pngtree.com/background/20230827/original/pngtree-illustration-of-3d-roulette-and-poker-chips-in-motion-on-a-picture-image_4840161.jpg" />
+                            </div>
+                        </MudCarouselItem>
 
-                        </div>
-                    </MudCarouselItem>
+                        <MudCarouselItem Transition="transition">
+                            <div class="d-flex" style="height:100%">
+                                <img src="https://png.pngtree.com/background/20230827/original/pngtree-illustration-of-3d-roulette-and-poker-chips-in-motion-on-a-picture-image_4840161.jpg" />
+                            </div>
+                        </MudCarouselItem>
 
-                    <MudCarouselItem Transition="transition">
-                        <div class="d-flex" style="height:100%">
-                            <img src="https://png.pngtree.com/background/20230827/original/pngtree-illustration-of-3d-roulette-and-poker-chips-in-motion-on-a-picture-image_4840161.jpg" />
-                        </div>
-                    </MudCarouselItem>
+                        <MudCarouselItem Transition="transition">
+                            <div class="d-flex" style="height:100%">
+                                <img src="" />
+                            </div>
+                        </MudCarouselItem>
 
-                    <MudCarouselItem Transition="transition">
-                        <div class="d-flex" style="height:100%">
-                            <img src="" />
-                        </div>
-                    </MudCarouselItem>
+                    </MudCarousel>
+                </MudPaper>
+            </MudItem>
+        </MudGrid>
 
-                </MudCarousel>
-            </MudPaper>
-        </MudItem>
-    </MudGrid>
-
-    @* <MudPaper Class="d-flex flex-column align-items-center" Style="background-color: Background.darkslateblue; min-height: 50vh">
-    <MudText Typo="Typo.h2" Class="mt-4">Welcome to Poker Video Game</MudText>
-    </MudPaper> *@
+        @* <MudPaper Class="d-flex flex-column align-items-center" Style="background-color: Background.darkslateblue; min-height: 50vh">
+        <MudText Typo="Typo.h2" Class="mt-4">Welcome to Poker Video Game</MudText>
+        </MudPaper> *@
 
 
-</MudContainer>
+    </MudContainer>
+
 
 
 @code {
