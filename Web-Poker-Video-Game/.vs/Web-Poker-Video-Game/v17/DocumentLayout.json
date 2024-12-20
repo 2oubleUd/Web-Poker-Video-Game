@@ -3,25 +3,31 @@
   "WorkspaceRootPath": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\Web-Poker-Video-Game\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8B863CA5-A541-48D5-AD84-61860BC37C44}|..\\WebPokerVideoGame.App2\\WebPokerVideoGame.App.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\webpokervideogame.app2\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{8B863CA5-A541-48D5-AD84-61860BC37C44}|..\\WebPokerVideoGame.App2\\WebPokerVideoGame.App.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\webpokervideogame.app2\\pages\\game.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B863CA5-A541-48D5-AD84-61860BC37C44}|..\\WebPokerVideoGame.App2\\WebPokerVideoGame.App.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\webpokervideogame.app2\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{8B863CA5-A541-48D5-AD84-61860BC37C44}|..\\WebPokerVideoGame.App2\\WebPokerVideoGame.App.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\webpokervideogame.app2\\pages\\account\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8B863CA5-A541-48D5-AD84-61860BC37C44}|..\\WebPokerVideoGame.App2\\WebPokerVideoGame.App.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\webpokervideogame.app2\\shared\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8B863CA5-A541-48D5-AD84-61860BC37C44}|..\\WebPokerVideoGame.App2\\WebPokerVideoGame.App.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\webpokervideogame.app2\\shared\\mynavmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8B863CA5-A541-48D5-AD84-61860BC37C44}|..\\WebPokerVideoGame.App2\\WebPokerVideoGame.App.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\webpokervideogame.app2\\pages\\account\\login.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{8B863CA5-A541-48D5-AD84-61860BC37C44}|..\\WebPokerVideoGame.App2\\WebPokerVideoGame.App.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\webpokervideogame.app2\\services\\playerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8B863CA5-A541-48D5-AD84-61860BC37C44}|..\\WebPokerVideoGame.App2\\WebPokerVideoGame.App.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\webpokervideogame.app2\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{8B863CA5-A541-48D5-AD84-61860BC37C44}|..\\WebPokerVideoGame.App2\\WebPokerVideoGame.App.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\webpokervideogame.app2\\shared\\providers\\customauthprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B863CA5-A541-48D5-AD84-61860BC37C44}|..\\WebPokerVideoGame.App2\\WebPokerVideoGame.App.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\webpokervideogame.app2\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B863CA5-A541-48D5-AD84-61860BC37C44}|..\\WebPokerVideoGame.App2\\WebPokerVideoGame.App.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\webpokervideogame.app2\\wwwroot\\index.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8B863CA5-A541-48D5-AD84-61860BC37C44}|..\\WebPokerVideoGame.App2\\WebPokerVideoGame.App.csproj|c:\\users\\mikolaj\\source\\repos\\web-poker-video-game\\webpokervideogame.app2\\shared\\mynavmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -41,7 +47,7 @@
               "RelativeDocumentMoniker": "..\\WebPokerVideoGame.App2\\Shared\\MainLayout.razor",
               "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Shared\\MainLayout.razor",
               "RelativeToolTip": "..\\WebPokerVideoGame.App2\\Shared\\MainLayout.razor",
-              "ViewState": "AQIAAFsAAAAAAAAAAAAqwHAAAAAIAAAA",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAACMAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-11-03T14:44:19.383Z",
               "IsPinned": true,
@@ -62,58 +68,79 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "index.html",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\wwwroot\\index.html",
-              "RelativeDocumentMoniker": "..\\WebPokerVideoGame.App2\\wwwroot\\index.html",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\wwwroot\\index.html",
-              "RelativeToolTip": "..\\WebPokerVideoGame.App2\\wwwroot\\index.html",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAAADIAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2024-11-03T15:21:07.1Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "App.razor",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\App.razor",
-              "RelativeDocumentMoniker": "..\\WebPokerVideoGame.App2\\App.razor",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\App.razor",
-              "RelativeToolTip": "..\\WebPokerVideoGame.App2\\App.razor",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAA0AAAA",
+              "Title": "Game.razor",
+              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Pages\\Game.razor",
+              "RelativeDocumentMoniker": "..\\WebPokerVideoGame.App2\\Pages\\Game.razor",
+              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Pages\\Game.razor*",
+              "RelativeToolTip": "..\\WebPokerVideoGame.App2\\Pages\\Game.razor*",
+              "ViewState": "AgIAAGMAAAAAAAAAAAAAAH4AAABSAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-03T15:20:48.28Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CustomAuthProvider.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Shared\\Providers\\CustomAuthProvider.cs",
-              "RelativeDocumentMoniker": "..\\WebPokerVideoGame.App2\\Shared\\Providers\\CustomAuthProvider.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Shared\\Providers\\CustomAuthProvider.cs",
-              "RelativeToolTip": "..\\WebPokerVideoGame.App2\\Shared\\Providers\\CustomAuthProvider.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAAwBoAAABWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-03T15:16:19.214Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UserService.cs",
-              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Services\\UserService.cs",
-              "RelativeDocumentMoniker": "..\\WebPokerVideoGame.App2\\Services\\UserService.cs",
-              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Services\\UserService.cs",
-              "RelativeToolTip": "..\\WebPokerVideoGame.App2\\Services\\UserService.cs",
-              "ViewState": "AQIAACwAAAAAAAAAAAAgwD0AAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-03T15:15:22.318Z",
+              "WhenOpened": "2024-12-02T16:58:08.588Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "PlayerService.cs",
+              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Services\\PlayerService.cs",
+              "RelativeDocumentMoniker": "..\\WebPokerVideoGame.App2\\Services\\PlayerService.cs",
+              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Services\\PlayerService.cs",
+              "RelativeToolTip": "..\\WebPokerVideoGame.App2\\Services\\PlayerService.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAQwBcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-30T22:48:27.371Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "index.html",
+              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\wwwroot\\index.html",
+              "RelativeDocumentMoniker": "..\\WebPokerVideoGame.App2\\wwwroot\\index.html",
+              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\wwwroot\\index.html",
+              "RelativeToolTip": "..\\WebPokerVideoGame.App2\\wwwroot\\index.html",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2024-11-03T15:21:07.1Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "App.razor",
+              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\App.razor",
+              "RelativeDocumentMoniker": "..\\WebPokerVideoGame.App2\\App.razor",
+              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\App.razor",
+              "RelativeToolTip": "..\\WebPokerVideoGame.App2\\App.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-11-03T15:20:48.28Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CustomAuthProvider.cs",
+              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Shared\\Providers\\CustomAuthProvider.cs",
+              "RelativeDocumentMoniker": "..\\WebPokerVideoGame.App2\\Shared\\Providers\\CustomAuthProvider.cs",
+              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Shared\\Providers\\CustomAuthProvider.cs",
+              "RelativeToolTip": "..\\WebPokerVideoGame.App2\\Shared\\Providers\\CustomAuthProvider.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwBoAAABWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-03T15:16:19.214Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "..\\WebPokerVideoGame.App2\\Services\\UserService.cs",
+              "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Services\\UserService.cs",
+              "RelativeToolTip": "..\\WebPokerVideoGame.App2\\Services\\UserService.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAgwD0AAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-03T15:15:22.318Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "MyNavMenu.razor",
               "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Shared\\MyNavMenu.razor",
               "RelativeDocumentMoniker": "..\\WebPokerVideoGame.App2\\Shared\\MyNavMenu.razor",
@@ -121,18 +148,17 @@
               "RelativeToolTip": "..\\WebPokerVideoGame.App2\\Shared\\MyNavMenu.razor",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-03T14:50:18.161Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-03T14:50:18.161Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "Login.razor",
               "DocumentMoniker": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Pages\\Account\\Login.razor",
               "RelativeDocumentMoniker": "..\\WebPokerVideoGame.App2\\Pages\\Account\\Login.razor",
               "ToolTip": "C:\\Users\\Mikolaj\\source\\repos\\Web-Poker-Video-Game\\WebPokerVideoGame.App2\\Pages\\Account\\Login.razor",
               "RelativeToolTip": "..\\WebPokerVideoGame.App2\\Pages\\Account\\Login.razor",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABEAAAAAAAAA",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-11-03T14:48:28.093Z",
               "EditorCaption": ""

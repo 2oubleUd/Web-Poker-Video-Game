@@ -108,7 +108,6 @@
             <div class="col-md-2 m-3" style="display: inline-block">
                 <div class="d-flex justify-content-center">
                     <img class="imageThumbnail" src="@($"data:image/png;base64,{@Convert.ToBase64String(table[4].ImageData)}")" alt="PNG Image" />
-
                 </div>
 
                 <div class="text-center card-header mb-4 mt-4">
@@ -125,7 +124,7 @@
             </div>
 
             <div class="col-md-3 mt-4 ml-6">
-                <button class="btn btn-primary" disabled=@dealing @onclick="ChangeWageAsync">ADD COIN</button>
+                <button class="btn btn-primary" disabled=@(!startGame || dealing ) @onclick="ChangeWageAsync">ADD COIN</button>
             </div>
         </div>
     }
